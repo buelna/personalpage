@@ -1,0 +1,65 @@
+<?php
+
+namespace PersonalPage\ProyectosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Areas
+ *
+ * @ORM\Table(name="Areas")
+ * @ORM\Entity
+ */
+class Areas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idArea", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idarea;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Area", type="string", length=50, nullable=false)
+     */
+    private $area;
+
+
+
+    /**
+     * Get idarea
+     *
+     * @return integer 
+     */
+    public function getIdarea()
+    {
+        return $this->idarea;
+    }
+
+    /**
+     * Set area
+     *
+     * @param string $area
+     * @return Areas
+     */
+    public function setArea($area)
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * Get area
+     *
+     * @return string 
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
+}

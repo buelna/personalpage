@@ -1,0 +1,7 @@
+parameters:
+#    personal_page_publicaciones.example.class: PersonalPage\PublicacionesBundle\Example
+
+services:
+#    personal_page_publicaciones.example:
+#        class: %personal_page_publicaciones.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

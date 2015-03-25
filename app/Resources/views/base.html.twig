@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}CAII</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('caii.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/personalpageproyectos/css/foundation.css') }}" />
+    </head>
+
+    <body>
+    	<div class="fondo">
+	    	<div class="fixed" >
+				<nav class="top-bar" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="">CAII</a></h1>
+						</li>
+						<li class="toggle-topbar menu-icon"><a href="#">CAII</a></li>
+					</ul>
+					<section class="top-bar-section">
+						<ul class="left">
+							{% block ListaMenu %}{% endblock %}
+						</ul>
+					</section>
+					<section class="right">
+						{% block selector %}{% endblock %}
+					</section>
+				</nav>
+			</div>
+			<div style="background: white;">
+				<div class="row" style="background: white;"><br/><br/></div>
+				<div class="row" style="background: white;">
+					<div class="small-2 columns">
+						{% block logo %}{% endblock %}
+					</div>
+					<div class="small-8 columns">
+						{% block banner %}{% endblock %}
+					</div>
+					<div class="small-2 columns" align="rigth">
+						{% block logo2 %}{% endblock %}				
+					</div>
+				</div>
+				<hr>
+				<div class="row" >
+					<div class="small-3 columns">
+						{#<!-- <img src="{{ asset(miembro.fotoURL) }}" height="180" width="110"> -->#}
+						{% block Imagen %}{% endblock %}
+					</div>
+					<div class="small-9 columns">
+						<h1>{% block Nombre %}{% endblock %}</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						{% block Informacion %}{% endblock %}
+					</div>
+				</div><br>
+				<div class="row">
+					<div class="small-12 columns">
+						{% block Contenido %}{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+	  	<script src="{{asset('bundles/personalpageproyectos/js/foundation.min.js')}}"></script>
+		<script src="{{asset('bundles/personalpageproyectos/js/foundation/foundation.js')}}"></script>
+		<script src="{{asset('bundles/personalpageproyectos/js/foundation/foundation.dropdown.js')}}"></script>
+		<script src="{{asset('bundles/personalpageproyectos/js/foundation/foundation.tab.js')}}"></script>
+	  	<script src="{{asset('bundles/personalpageproyectos/js/vendor/jquery.js')}}"></script>
+		<script src="{{asset('bundles/personalpageproyectos/js/foundation/foundation.js')}}"></script>
+	  	<script src="{{asset('bundles/personalpageproyectos/js/foundation/foundation.topbar.js')}}"></script>
+	  	<script>
+	    	$(document).foundation();
+	  	</script>
+    </body>
+</html>

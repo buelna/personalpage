@@ -1,0 +1,18 @@
+{# src/PersonalPage/ProyectosBundle/Resources/views/Default/Inicio.html.twig #}
+{% extends '::base.html.twig' %}
+{% block Imagen %}Imagen del miembro{% endblock %}
+{% block Informacion %}Informacion basica del investigado{% endblock %}
+{% block Menu %}
+	<ul>
+		<li>
+			<a href="{{ path('areas', { 'id':"1"})}}">Areas de interes</a>
+		</li>
+		<li>
+			<a href="{{ path('proyectos', { 'id':"1"})}}">Proyectos</a>
+		</li>
+		<li>
+			<a href="{{ path('publicaciones', { 'id':"1"})}}">Publicaciones/Conferencias</a>
+		</li>
+	</ul>
+{% endblock %}
+{% block Contenido %}Areas de interes del investigador{% endblock %}

@@ -1,0 +1,45 @@
+<?php
+
+namespace PersonalPage\ProyectosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Miembroarea
+ *
+ * @ORM\Table(name="MiembroArea", indexes={@ORM\Index(name="fk_idArea_1", columns={"idArea"}), @ORM\Index(name="fk_idMiembro_1", columns={"idMiembro"})})
+ * @ORM\Entity
+ */
+class Miembroarea
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Miembro
+     *
+     * @ORM\ManyToOne(targetEntity="Miembro")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idMiembro", referencedColumnName="id")
+     * })
+     */
+    private $idmiembro;
+
+    /**
+     * @var \Areas
+     *
+     * @ORM\ManyToOne(targetEntity="Areas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idArea", referencedColumnName="idArea")
+     * })
+     */
+    private $idarea;
+
+
+}

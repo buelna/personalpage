@@ -1,0 +1,28 @@
+{# src/PersonalPage/ProyectosBundle/Resources/views/Default/Areas.html.twig #}
+{% extends '::menu.html.twig' %}
+{% block masmenu %}{% endblock %}
+{% block Contenido %}
+
+{% endblock %}
+{% block selector %}
+		<footer>
+			{% set locale = app.request.locale %}
+			{% if locale == 'es' %}
+			<a href="{{ path('areas', { '_locale': 'en', 'id': miembro['id'] }) }}"><img src="{{ asset('us.jpg') }}" height="40" width="40" >  </a>
+			{% elseif locale == 'en' %}
+			<a href="{{ path('areas', { '_locale': 'es', 'id': miembro['id'] }) }}"><img src="{{ asset('es.jpg') }}" height="40" width="40" >  </a>
+			{% endif %}
+		</footer>
+{% endblock %}
+{% block Nombre %}
+	{{miembro['nombre'] ~ " " ~ miembro['paterno'] ~ " " ~ miembro['materno']}}
+{% endblock %}
+{% block Informacion %}
+<div style="text-align: justify">
+	<span>{{miembro['descripcion']}}</span><br><br>
+</div>
+	{#<span><strong>{% trans %}Correo electronico{% endtrans %}:<a href=mailto:{{miembro.getEmail()}}> {{miembro.getEmail()}}</a></strong></span>#}
+{% endblock %}
+{% block Imagen %}
+<img src="{{ miembro['fotoUrl'] }}" height="180" width="110">
+{% endblock %}

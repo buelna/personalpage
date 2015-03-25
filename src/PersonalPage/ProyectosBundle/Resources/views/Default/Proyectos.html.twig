@@ -1,0 +1,55 @@
+{# src/PersonalPage/ProyectosBundle/Resources/views/Default/Proyectos.html.twig #}
+{% extends '::menu.html.twig' %}
+{% block masmenu %}{% endblock %}
+{% block Contenido %}
+	{#}
+		las variables recibidas como parametro son:
+		-miembro 	contiene la informacion peronal del miembro
+		-proyectos 	contiene los proyectos en los que trabajó
+		-todos 		contiene datos de los demas miembros que trabajaron en sus proyectos
+	#}
+	<h2>{% trans %}Proyectos{% endtrans %}</h2>
+	{% set b=0 %}
+	{% for proyecto in proyectos %}
+		{% set b=1 %}
+	{% endfor %}
+	{#<span>{% trans %}Proyectos pasados{% endtrans %}:</span>#}<br><br>
+	{% if b==1 %}
+		<ul>
+		{% for proyecto in proyectos %}
+
+			<li>
+					{# nombre del proyecto #}
+						{{ proyecto['nombre'] }},
+					{# autores o miembros que trabajaron en el proyecto #}
+						{{proyecto['miembro']}}
+						{% for otro in proyecto['colaboradores'] %}
+							{#{% if otro.getIdproyecto().getId()==proyecto.getIdproyecto().getId() and proyecto.getIdmiembro.getId()!=otro.getIdmiembro().getId() %}#}
+							,
+								 {{otro}}
+							{#{% endif %}#}
+						{% endfor %},
+					{# periodo en el que se llevo a cabo el proyecto #}
+						
+						{#{{proyecto['fechaini'] | date('M-d-Y')}} -
+						{% set fecha=proyecto['fechafin'] %}
+						{% if fecha > proyecto['fechaini'] %}
+						{{fecha | date('M-d-Y') }}</td>
+						{% else %}
+							Actualidad
+						{% endif %}#}
+			</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<span>{% trans %}Actualmente no se cuenta con ningun proyecto que mostrar{% endtrans %}</span><br>
+	{% endif %}
+{% endblock %}
+{% block selector %}
+	{% set locale = app.request.locale %}
+	{% if locale == 'es' %}
+	<a href="{{ path('proyectos', { '_locale': 'en', 'id': miembro['id'] }) }}"><img src="{{ asset('us.jpg') }}" height="40" width="40" > </a>
+	{% elseif locale == 'en' %}
+	<a href="{{ path('proyectos', { '_locale': 'es', 'id': miembro['id'] }) }}"><img src="{{ asset('es.jpg') }}" height="40" width="40" ></a>
+	{% endif %}
+{% endblock %}

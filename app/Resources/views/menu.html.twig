@@ -1,0 +1,27 @@
+{# src/PersonalPage/ProyectosBundle/Resources/views/Default/menu.html.twig #}
+{% extends '::base.html.twig' %}
+{% block logo %}
+	<a href="{{path('catalogo')}}">
+		<img src="{{ asset('logoCAII.png') }}" >
+	</a>
+{% endblock %}
+{% block banner %}
+	<img src="{{ asset('banner.jpg') }}">
+{% endblock %}
+{% block logo2 %}
+	<a href="http://www.itmexicali.edu.mx">
+		<img src="{{ asset('logoITM.png') }}"  >
+	</a>
+{% endblock %}
+{% block ListaMenu %}
+	<li>
+		<a href="{{ path('areas', { 'id':miembro['id']})}}">{% trans %}Principal{% endtrans %}</a>
+	</li>
+	<li>
+		<a href="{{ path('proyectos', { 'id':miembro['id']})}}">{% trans %}Proyectos{% endtrans %}</a>
+	</li>
+	<li>
+		<a href="{{ path('publicaciones', { 'id':miembro['id']})}}">{% trans %}Publicaciones y Conferencias{% endtrans %}</a>
+	</li>
+{% endblock %}
+{% block MasMenu %}{% endblock %}

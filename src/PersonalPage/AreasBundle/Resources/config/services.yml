@@ -1,0 +1,7 @@
+parameters:
+#    personal_page_areas.example.class: PersonalPage\AreasBundle\Example
+
+services:
+#    personal_page_areas.example:
+#        class: %personal_page_areas.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

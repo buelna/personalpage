@@ -1,0 +1,71 @@
+personal_page_proyectos:
+    resource: "@PersonalPageProyectosBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: en|es
+
+personal_page_areas:
+    resource: "@PersonalPageAreasBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: en|es
+
+personal_page_publicaciones:
+    resource: "@PersonalPagePublicacionesBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: en|es
+catalogo:
+    pattern: /
+    defaults: {  _controller: FrameworkBundle:Redirect:redirect,route: inicio,id: 1, permanent: true }
+inicio:
+    pattern: /{id}/
+    defaults: { _controller: FrameworkBundle:Redirect:redirect,route: areas, permanent: true }
+    requirements:
+        _locale: en|es
+areas:
+    pattern: /{_locale}/{id}/principal/
+    defaults: { _controller: PersonalPageProyectosBundle:Miembros:Areas }
+    requirements:
+        _locale: en|es
+proyectos:
+    pattern: /{_locale}/{id}/proyectos/
+    defaults: { _controller: PersonalPageProyectosBundle:Miembros:Proyectos }
+    requirements:
+        _locale: en|es
+publicaciones:
+    pattern: /{_locale}/{id}/publicaciones/
+    defaults: { _controller: PersonalPageProyectosBundle:Miembros:Publicaciones }
+    requirements:
+        _locale: en|es
+_servicioAreas:
+    pattern:  /{_locale}/{id}/info/json/
+    defaults: { _controller: PersonalPageProyectosBundle:Servicios:Areas}
+    requirements:
+      _method:  GET
+      _locale: en|es
+_servicioProyectos:
+    pattern:  /{_locale}/{id}/proyectos/json/
+    defaults: { _controller: PersonalPageProyectosBundle:Servicios:Proyectos}
+    requirements:
+      _method:  GET
+      _locale: en|es
+_servicioPublicaciones:
+    pattern:  /{_locale}/{id}/publicaciones/json/
+    defaults: { _controller: PersonalPageProyectosBundle:Servicios:Publicaciones}
+    requirements:
+      _method:  GET
+      _locale: en|es
+_infoCaii:
+    pattern:  /{_locale}/caii/json/
+    defaults: { _controller: PersonalPageProyectosBundle:Servicios:PublicacionesCaii}
+    requirements:
+      _method:  GET
+      _locale: en|es
+_infoMiembro:
+    pattern:  /{_locale}/{id}/json/
+    defaults: { _controller: PersonalPageProyectosBundle:Servicios:Info}
+    requirements:
+      _method:  GET
+      _locale: en|es
+

@@ -1,0 +1,28 @@
+<?php
+namespace PersonalPage\ProyectosBundle\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+class MiembrosController extends Controller
+{
+	public function CatalogoAction()
+	{
+		return $this->render('PersonalPageProyectosBundle:Default:Catalogo.html.twig');
+	}
+	public function AreasAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$miembro = $em->getRepository('PersonalPageProyectosBundle:Miembro')->find($id);
+		return $this->render('PersonalPageProyectosBundle:Default:Areas.html.twig',array('miembro' => $miembro));
+	}
+	public function ProyectosAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$miembro = $em->getRepository('PersonalPageProyectosBundle:Miembro')->find($id);
+		return $this->render('PersonalPageProyectosBundle:Default:Proyectos.html.twig',array('miembro' => $miembro));
+	}
+	public function PublicacionesAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$miembro = $em->getRepository('PersonalPageProyectosBundle:Miembro')->find($id);
+		return $this->render('PersonalPageProyectosBundle:Default:Publicaciones.html.twig',array('miembro' => $miembro));
+	}
+}

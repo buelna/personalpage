@@ -1,0 +1,35 @@
+<?php
+namespace PersonalPage\AreasBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+/**
+ *	@ORM\Entity
+ *	@ORM\Table(name="Area")
+ */
+class Area
+{
+	/** 
+	 * 	@ORM\Id
+	 * 	@ORM\Column(type="integer") 
+	 * 	@ORM\GeneratedValue
+	 */
+	protected $idArea;
+	/** @ORM\Column(type="string", length=50) */
+	protected $Area;
+
+	public function getIdArea()
+	{
+		return $this->idArea;
+	}
+	public function setArea($area)
+	{
+		$this->Area = $area;
+	}
+	public function getArea()
+	{
+		return $this->Area;
+	}
+	public function __toString()
+	{
+		return $this->getArea();
+	}
+}

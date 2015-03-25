@@ -1,0 +1,185 @@
+{# src/PersonalPage/ProyectosBundle/Resources/views/Default/Inicio.html.twig #}
+{% extends '::menu.html.twig' %}
+{% block masmenu %}{% endblock %}
+{% block Contenido %}
+	{#
+		las variables recibidas como parametro son:
+		-miembro 		datos personales del miembro
+		-tipos			contiene los tipos de publicaciones que se encuentran registradas 
+		-publicaciones 	contiene los datos que relacionan a los miembros con las publicaciones
+	#}
+	<h2>{% trans %}Publicaciones y Conferencias{% endtrans %}</h2>
+	<br><br>
+	{% set c = 0 %}
+	{% for tipo in tipos %}
+		{% set b = 0 %}{# for para validar si hay publicaciones del miembro que se esta mostrando, del tipo que se mostrara #}
+		{% for publicacion in publicaciones %}
+			{% if tipo['id'] == publicacion['idTipo'] and publicacion['idMiembro'] == miembro['id'] %}
+				{% set b = 1 %}
+			{% endif %}
+		{% endfor %}
+		{% if b == 1 %}
+			{% set c = 1 %}
+			{# se define el titulo que se pondra en cada iteracion y selecciona la lista a mostrar #}
+			{% set list = 0 %}
+			{% if tipo['nombre'] == "Libros" or tipo['nombre'] == "Books" %}
+				{% set list = 1 %}
+			{% endif %}
+			{% if tipo['nombre'] == "Capítulos de libros" or tipo['nombre'] == "Book chapters" %}
+				{% set list = 2 %}
+			{% endif %}
+			{% if tipo['nombre'] == "Artículos" or tipo['nombre'] == "Articles" or tipo['nombre'] == "Articulos en congresos internacionales" or tipo['nombre'] == "International conference's articles" or tipo['nombre'] == "Articulos en congresos nacionales" or tipo['nombre'] == "National conference's articles" or tipo['nombre'] == "Revistas" or tipo['nombre'] == "Journals" %}
+				{% set list = 3 %}
+			{% endif %}
+			{% if tipo['nombre'] == "Reportes técnicos" or tipo['nombre'] == "Technical Reports" %}
+				{% set list = 4 %}
+			{% endif %}
+			{% if tipo['nombre'] == "Tesis" or tipo['nombre'] == "Thesis" %}
+				{% set list = 5 %}
+			{% endif %}
+			{# se muestran las publicaciones del tipo correspondiente #}
+			<ul>
+				{% set i = 0 %}
+				{% set mostrar = 1 %}
+				{% for publicacion in publicaciones %}
+					{% if tipo['id'] == publicacion['idTipo'] and publicacion['idMiembro'] == miembro['id'] %}
+						{% if (app.request.locale == 'en' and publicacion['english'] == 'true') or app.request.locale == 'es'%}
+							{% set ingles = 1 %}
+						{% else %}
+							{% set ingles = 0 %}
+						{% endif %}
+						{% set i = i + 1 %}
+						{% if ingles == 1 %}
+							{# datos a mostrar para los libros en formato IEEE para referenciar libros #}
+							{% if list == 1 %}
+								{% if  mostrar == 1 %}
+									<h3>{{tipo['nombre']}}</h3>
+									{% set mostrar = 0 %}
+								{% endif %}
+								<li>
+								{# nombres del autor o autores del libro #}
+								{% for miembrop in publicacion['autores'] %}
+									{{miembrop}},
+								{% endfor %}
+								{#  Titulo del libro#}
+									<i>{{publicacion['titulo']}}.</i>
+								{#  Editorial #}
+									Ed. {{publicacion['ciudad']}}: {{publicacion['editorial']}},
+								{#  Año de la publicacion #}
+								{#	{{publicacion['fecha'] | date('Y')}}#}.
+								</li>
+							{% endif %}
+							{# datos a mostrar para los capitulos de libro en formato IEEE para referenciar libros #}
+							{% if list == 2 %}
+								{% if  mostrar == 1 %}
+									<h3>{{tipo['nombre']}}</h3>
+									{% set mostrar = 0 %}
+								{% endif %}
+								<li>
+								{# nombres del autor o autores del capitulo de libro #}
+								{% for miembrop in publicacion['autores'] %}
+									{{miembrop}},
+								{% endfor %}
+								{# Nombre capitulo #}
+									<i>"{{publicacion['capitulo']}}".</i> {% trans %}en{% endtrans %}
+								{#  Titulo del libro#}
+									<i>{{publicacion['titulo']}}.</i>
+								{#  Editorial #}
+									Ed. {{publicacion['ciudad']}}: {{publicacion['editorial']}},
+								{#  Año de la publicacion #}
+								{#	{{publicacion['decha'] | date('Y')}},
+								{# Paginas #}
+									pp. {{publicacion['paginas']}}.
+								</li>
+							{% endif %}
+							{# datos a mostrar para los articulos en formato IEEE para referenciar articulos #}
+							{% if list == 3 %}
+								{% if  mostrar == 1 %}
+									<h3>{{tipo['nombre']}}</h3>
+									{% set mostrar = 0 %}
+								{% endif %}
+								<li>
+								{# nombres del autor o autores del articulo #}
+								{% for miembrop in publicacion['autores'] %}
+									{{miembrop}},
+								{% endfor %}
+								{# Titulo articulo #}
+									<i>"{{publicacion['titulo']}}"</i>,
+								{#  titulo revista#}
+									<i>{{publicacion['journal']}},</i>
+								{# ciudad #}
+									{{publicacion['ciudad']}},
+								{# volumen #}
+									vol. {{publicacion['volumen']}},
+								{#  paginas #}
+									{% if publicacion['paginas'] != 0 %}
+										pp. {{publicacion['paginas']}},
+									{% endif %}
+								{#  mes y año #}
+								{#	{{publicacion['fecha'] | date('M')}}, {{publicacion['fecha'] | date('Y')}}.
+								{# doi #}
+									{% if publicacion['doi'] != "" %}
+										doi: {{publicacion['doi']}}.
+									{% endif %}
+								</li>
+							{% endif %}
+							{# datos a mostrar para los reportes tecnicos en formato IEEE para referenciar reportes tecnicos #}
+							{% if list == 4 %}
+								{% if  mostrar == 1 %}
+									<h3>{{tipo['nombre']}}</h3>
+									{% set mostrar = 0 %}
+								{% endif %}
+								<li>
+								{# nombres del autor o autores del libro #}
+								{% for miembrop in publicacion['autores'] %}
+									{{miembrop}},
+								{% endfor %}
+								{#  Titulo del reporte#}
+									<i>{{publicacion['titulo']}}.</i>
+								{#  ciudad #}
+									{{publicacion['ciudad']}},
+								{# numero de reporte (id) #}
+									{{publicacion['id']}},
+								{#  Año de la publicacion #}
+									{#{{publicacion['fecha'] | date('M-Y')}}#}.
+								</li>
+							{% endif %}
+							{% if list == 5 %}
+								{% if  mostrar == 1 %}
+									<h3>{{tipo['nombre']}}</h3>
+									{% set mostrar = 0 %}
+								{% endif %}
+								<li>
+								{# nombres del autor o autores del libro #}
+								{% for miembrop in publicacion['autores'] %}
+									{{miembrop}},
+								{% endfor %}
+								{#  Titulo del reporte#}
+									<i>{{publicacion['titulo']}}.</i>
+								{#  ciudad #}
+									{{publicacion['ciudad']}},
+								{#  Año de la publicacion #}
+									{#{{publicacion['fecha'] | date('M-Y')}}#}.
+								</li>
+							{% endif %}
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+			</ul>
+			{# termina la seccion para mostrar las publicaciones #}
+		{% endif %}
+	{% endfor %}
+	{% if c==0 %}
+		<span>{% trans %}Actualmente no se cuenta con ninguna publicación que mostrar{% endtrans %}</span><br>
+	{% endif %}
+{% endblock %}
+{% block selector %}
+		<footer>
+			{% set locale = app.request.locale %}
+			{% if locale == 'es' %}
+			<a href="{{ path('publicaciones', { '_locale': 'en', 'id': miembro['id'] }) }}"><img src="{{ asset('us.jpg') }}" height="40" width="40" > </a>
+			{% elseif locale == 'en' %}
+			<a href="{{ path('publicaciones', { '_locale': 'es', 'id': miembro['id'] }) }}"><img src="{{ asset('es.jpg') }}" height="40" width="40" ></a>
+			{% endif %}
+		</footer>
+{% endblock %}

@@ -1,0 +1,26 @@
+{# src/PersonalPage/ProyectosBundle/Resources/views/Default/menu.html.twig #}
+{% extends '::base.html.twig' %}
+{% block logo %} 
+	<img src="{{ asset('caii.png') }}" height="100" width="100" >
+{% endblock %}
+{% block ListaMenu %}
+<ul>
+	<li>
+		<a href="{{ path('areas', { 'id':miembro.getid()})}}">Áreas de interés</a>
+	</li>
+	<li>
+		<a href="{{ path('proyectos', { 'id':miembro.getId()})}}">Proyectos</a>
+	</li>
+	<li>
+		<a href="{{ path('publicaciones', { 'id':miembro.getId()})}}">Publicaciones/Conferencias</a>
+	</li>
+</ul>
+{% endblock %}
+{% block MasMenu %}{% endblock %}
+{% block Nombre %}
+	{{miembro.getNombre() ~ " " ~ miembro.getApellidop() ~ " " ~ miembro.getApellidom()}}
+{% endblock %}
+{% block Informacion %}
+	<span>{{miembro.getAlumDecripcion()}}</span><br><br>
+	<span><strong>Correo electronico: {{miembro.getEmail()}}</strong></span>
+{% endblock %}

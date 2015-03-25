@@ -1,0 +1,31 @@
+{# src/PersonalPage/ProyectosBundle/Resources/views/Default/Catalogo.html.twig #}
+{% extends '::catalogobase.html.twig' %}
+{% block logo %}
+	<img src="{{ asset('logoCAII.png') }}" height="150" width="150" >
+{% endblock %}
+{% block logo2 %}
+	<img src="{{ asset('logoITM.png') }}" height="100" width="100" >
+{% endblock %}
+{% block Contenido %}
+	<h2>Miembros</h2>
+	<table>
+	<tr>
+		<th>Fotografia</th><th>Nombre</th><th>Descripción</th>
+	</tr>
+	{% for miembro in miembros %}
+		<tr>
+			<td>
+				<a href="{{ path('areas', { 'id':miembro.getid()})}}">
+					<img src="{{ asset(miembro.fotoURL) }}" height="180" width="110">
+				</a>
+			</td>
+			<td>
+				<a href="{{ path('areas', { 'id':miembro.getid()})}}">
+					{{miembro.getNombre() ~ " " ~ miembro.getApellidop() ~ " " ~ miembro.getApellidom()}}
+				</a>
+			</td>
+			<td>{{miembro.getAlumDescripcion()}}</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endblock %}

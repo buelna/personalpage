@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="es" datatype="plaintext" original="file.ext">
+		<body>
+			<trans-unit id="1">
+				<source>Áreas de interés</source>
+				<target>Areas of interest</target>
+			</trans-unit>
+			<trans-unit id="2">
+				<source>Áreas de interés y enfoque de proyectos de investigación y desarrollo</source>
+				<target>Areas of interest and focus of research and development projects</target>
+			</trans-unit>
+			<trans-unit id="3">
+				<source>Actualmente no se cuenta con áreas registradas para</source>
+				<target>Currently there are no registered areas for</target>
+			</trans-unit>
+			<trans-unit id="4">
+				<source>Proyectos</source>
+				<target>Projects</target>
+			</trans-unit>
+			<trans-unit id="5">
+				<source>Proyectos pasados</source>
+				<target>Past projects</target>
+			</trans-unit>
+			<trans-unit id="6">
+				<source>Actualmente no se cuenta con ningun proyecto que mostrar</source>
+				<target>Currently there are no projects to show</target>
+			</trans-unit>
+			<trans-unit id="7">
+				<source>Publicaciones y Conferencias</source>
+				<target>Publications and Conferences</target>
+			</trans-unit>
+			<trans-unit id="8">
+				<source>Publicaciones y conferencias realizadas</source>
+				<target>Publications and conferences conducted</target>
+			</trans-unit>
+			<trans-unit id="9">
+				<source>Actualmente no se cuenta con ninguna publicación que mostrar</source>
+				<target>Currently there is no registered publications or conferences to show</target>
+			</trans-unit>
+			<trans-unit id="10">
+				<source>Correo electronico</source>
+				<target>E-mail</target>
+			</trans-unit>
+			<trans-unit id="11">
+				<source>Investigación</source>
+				<target>Research</target>
+			</trans-unit>
+			<trans-unit id="12">
+				<source>Principal</source>
+				<target>Main</target>
+			</trans-unit>
+			<trans-unit id="13">
+				<source>Áreas de investigacion y enfoque de proyectos de desarrollo</source>
+				<target>Research areas and focus of development projects</target>
+			</trans-unit>
+			<trans-unit id="14">
+				<source>en</source>
+				<target>in</target>
+			</trans-unit>
+			<trans-unit id="15">
+				<source>Publicaciones</source>
+				<target>Publications</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

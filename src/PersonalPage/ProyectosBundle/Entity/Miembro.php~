@@ -1,0 +1,88 @@
+<?php
+
+namespace PersonalPage\ProyectosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Miembro
+ *
+ * @ORM\Table(name="Miembro")
+ * @ORM\Entity
+ */
+class Miembro
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=45, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellidoP", type="string", length=45, nullable=false)
+     */
+    private $apellidop;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellidoM", type="string", length=45, nullable=false)
+     */
+    private $apellidom;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer", nullable=false)
+     */
+    private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link_Pagina", type="string", length=45, nullable=false)
+     */
+    private $linkPagina;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fotoURL", type="string", length=45, nullable=false)
+     */
+    private $fotourl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="alum_Decripcion", type="string", length=45, nullable=false)
+     */
+    private $alumDecripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=50, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="estudios", type="string", length=80, nullable=true)
+     */
+    private $estudios;
+
+
+}

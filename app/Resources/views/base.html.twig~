@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}|CAII</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('caii.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/personalpageproyectos/css/foundation.css') }}" />
+    </head>
+    <body>
+	<div class="row">
+	  <div class="small-3 columns">{% block Imagen %}{% endblock %}</div>
+	  <div class="small-9 columns">{% block Informacion %}{% endblock %}</div>
+	</div>
+	<div class="row">
+	  <div class="small-3 columns">
+		<ul>
+			<li>
+				<a href="{{ path('areas', { 'id':miembro.id})}}">Areas de interes</a>
+			</li>
+			<li>
+				<a href="{{ path('proyectos', { 'id':miembro.id})}}">Proyectos</a>
+			</li>
+			<li>
+				<a href="{{ path('publicaciones', { 'id':miembro.id})}}">Publicaciones/Conferencias</a>
+			</li>
+		</ul>
+		{% block Menu %}{% endblock %}
+	</div>
+	  <div class="small-9 columns">{% block Contenido %}{% endblock %}</div>
+	</div>
+        
+	
+	
+    </body>
+</html>
