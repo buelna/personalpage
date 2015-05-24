@@ -110,7 +110,7 @@ class __TwigTemplate_689740f51266cd404116d568be1d8b281e3ef979b95b957758b9f57ed44
     public function block_Imagen($context, array $blocks = array())
     {
         // line 27
-        echo "<img src=\"";
+        echo "<img src=\"http://caii.itmexicali.edu.mx/uploads/images/miembros/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : $this->getContext($context, "miembro")), "fotoUrl", array(), "array"), "html", null, true);
         echo "\" height=\"180\" width=\"110\">
 ";

@@ -53,13 +53,8 @@ class ServiciosController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		//variables con las que se contara en la vista para mostrar la informacion
 		$miembro = $em->getRepository('PersonalPageProyectosBundle:Miembro')->find($id);//información personal del miembro
-		//$url=$this->getRequest()->getHttpHost();
-		//$url=$this->getRequest()->getBasePath();
 		$url="http://caii.itmexicali.edu.mx/".$miembro->getFotoUrl();
-		//$pat=$this->container->get('templating.helper.assets')->getUrl($miembro->getFotoUrl());
-		//$url=$this->getRequest()->getScheme()."://".$this->getRequest()->getHttpHost().$pat;
 		$info = array("id" => $id,"nombre" => $miembro->getNombre(),"paterno" => $miembro->getApellidop(),"materno" => $miembro->getApellidom(),"descripcion" => $miembro->getAlumDescripcion(),"fotoUrl" => $url);
-		
 		$response = new Response();
 		$response->setContent(json_encode($info));
 		$response->headers->set('Content-Type', 'application/json');
@@ -160,45 +155,157 @@ class ServiciosController extends Controller
 		$response->headers->set('Content-Type', 'application/json');
 		return $response;
 	}
-	public function PublicacionesCaiiAction()//carga la pagina personal del usuario en la vista de publicaciones y conferencias
+	public function PublicacionesCaiiAction(Request $request)//carga la pagina personal del usuario en la vista de publicaciones y conferencias
 	{
 		$em = $this->getDoctrine()->getManager();
-		//variables con las que se contara en la vista para mostrar la informacion
-		$miembrosp = $em->getRepository('PersonalPageProyectosBundle:Miembropublicacion')->findAll();//datos que relacionan al miembro con sus publicaciones
-		$publicaciones = $em->getRepository('PersonalPageProyectosBundle:Publicacion')->findAll();//datos que relacionan al miembro con sus publicaciones
-		
-		$publications=array();
+        $dql = $em->createQueryBuilder();
+
+        $localeLang = $request->attributes->get('_locale', $request->getLocale());
+        
+        if($localeLang=='es')
+        {
+            //Query para tipos de publicacion 
+            $dql->select('TipoPublicacion.nombre','TipoPublicacion.id')
+                ->from('PublicacionesBundle:Publicacion', 'Publicacion')
+                ->Join('Publicacion.TipoPublicacion', 'TipoPublicacion')
+                ->orderBy('TipoPublicacion.prioridad', 'ASC')
+                ->groupBy('Publicacion.TipoPublicacion');
+            $tipos =$dql->getQuery()->getResult();
+
+            //Nombre de los publicaciones
+            $publicaciones = $em->getRepository('PublicacionesBundle:TipoPublicacion')->findAll();
+
+            //Nombre de los publicaciones
+            $publicacionesid = $em->getRepository('PublicacionesBundle:Publicacion')->findAll();
+
+            //Query para las publicaciones ordenadas por fecha
+            $repository = $this->getDoctrine()
+                        ->getRepository('PublicacionesBundle:Publicacion');
+            $dql = $repository->createQueryBuilder('p')
+                    ->select('p')
+                    ->orderBy('p.fecha', 'DESC');
+            $entities =$dql->getQuery()->getResult();
+                    
+
+            //Query miembros-publicacion
+            $dql->select('MiembroPublicacion.id i', 
+                         'Miembro.nombre nombreMiembro, Miembro.apellidoP', 
+                         'Publicacion.id idpublicacion')
+                ->from('MiembroBundle:MiembroPublicacion', 'MiembroPublicacion')
+                ->Join('MiembroPublicacion.idMiembro', 'Miembro')
+                ->Join('MiembroPublicacion.idPublicacion', 'Publicacion')
+                ->groupBy('MiembroPublicacion.id')
+                ->orderBy('MiembroPublicacion.id');
+
+            $miembros=$dql->getQuery()->getResult();
+        }
+        else{
+
+            //Query para tipos de publicacion 
+            $dql->select('TipoPublicacion.nombre','TipoPublicacion.id')
+                ->from('PublicacionesBundle:Publicacion', 'Publicacion')
+                ->Join('Publicacion.TipoPublicacion', 'TipoPublicacion')
+                ->Where('Publicacion.idiomaIngles = 1')
+                ->orderBy('TipoPublicacion.prioridad', 'ASC')
+                ->groupBy('Publicacion.TipoPublicacion');
+            $tipos =$dql->getQuery()->getResult();
+
+            //Nombre de los publicaciones
+            $publicaciones = $em->getRepository('PublicacionesBundle:TipoPublicacion')->findAll();
+
+            //Nombre de los publicaciones
+            $publicacionesid = $em->getRepository('PublicacionesBundle:Publicacion')->findAll();
+
+            //Query para las publicaciones ordenadas por fecha
+            $repository = $this->getDoctrine()
+                        ->getRepository('PublicacionesBundle:Publicacion');
+            $dql = $repository->createQueryBuilder('p')
+                    ->select('p')
+                    ->where('p.idiomaIngles=1')
+                    ->orderBy('p.fecha', 'DESC');
+            $entities =$dql->getQuery()->getResult();
+                    
+
+            //Query miembros-publicacion
+            $dql->select('MiembroPublicacion.id i', 
+                         'Miembro.nombre nombreMiembro, Miembro.apellidoP', 
+                         'Publicacion.id idpublicacion')
+                ->from('MiembroBundle:MiembroPublicacion', 'MiembroPublicacion')
+                ->Join('MiembroPublicacion.idMiembro', 'Miembro')
+                ->Join('MiembroPublicacion.idPublicacion', 'Publicacion')
+                ->groupBy('MiembroPublicacion.id')
+                ->orderBy('MiembroPublicacion.id');
+
+            $miembros=$dql->getQuery()->getResult();
+
+
+        }
+        $publications=array();
 		$i=0;
-		foreach ($publicaciones as $publicacion) {
-			$autores=array();
-			$k=0;
-			foreach ($miembrosp as $miembrop) {
-				if ($publicacion->getId() == $miembrop->getIdpublicacion()->getId())
-				{	
-					$autores[$k]=$miembrop->getIdmiembro()->getNombre()." ". $miembrop->getIdmiembro()->getApellidop();
-					$k++;
-				}
-			}
-			$publications[$i]=array(
-				"type"=>$publicacion->getIdtipo()->getNombre(),
-				"title"=>$publicacion->getTitulo(),
-				"chapter"=>$publicacion->getCapitulo(),
-				"city"=>$publicacion->getCiudad(),
-				"editorial"=>$publicacion->getEditorial(),
-				"date"=>$publicacion->getFecha(),
-				"pages"=>$publicacion->getPaginas(),
-				"doi"=>$publicacion->getDoi(),
-				"volume"=>$publicacion->getVolumen(),
-				"journal"=>$publicacion->getJournal(),
-				"english"=>$publicacion->getIdiomaIngles(),
-				"authors"=>$autores
-				);
-
-			$i++;
-		}
-
+        foreach ($publicaciones as $publicacion) {
+        	$publications[$i]= array(
+        		"id" => $publicacion.getId(),
+        		"nombre" => $publicacion.getNombre(),
+        		"prioridad" => $publicacion.getPrioridad()
+        		);
+        	$i++;
+        }
+        $publicationsid=array();
+		$i=0;
+        foreach ($publicacionesid as $publicacion) {
+        	$publicationsid[$i]= array(
+        		"id" => $publicacion.getId(),
+        		"TipoPublicacion" => $publicacion.getTipoPublicacion(),
+        		"Doi" => $publicacion.getDoi(),
+        		"Paginas" => $publicacion.getPaginas(),
+        		"Titulo" => $publicacion.getTitulo(),
+        		"TituloLibro" => $publicacion.getTituloLibro(),
+        		"Fecha" => $publicacion.getFecha(),
+        		"Enlace" => $publicacion.getEnlace(),
+        		"TipoReporte" => $publicacion.getTipoReporte(),
+        		"Ciudad" => $publicacion.getCiudad(),
+        		"Congreso" => $publicacion.getCongreso();
+        		"Issn" => $publicacion.getIssn(),
+        		"Capitulo" => $publicacion.getCapitulo();
+        		"Isbn" => $publicacion.getIsbn(),
+        		"Mostrar" => $publicacion.getMostrar(),
+        		"Journal" => $publicacion.getjournal(),
+        		"Volumen" => $publicacion.getVolumen(),
+        		"Editorial" => $publicacion.getEditorial(),
+        		"Serie" => $publicacion.getSerie(),
+        		"Edicion" => $publicacion.getEdicion(),
+        		"Escuela" => $publicacion.getEscuela(),
+        		"TipoTesis" => $publicacion.getTipoTesis(),
+        		"IdiomaIngles" => $publicacion.getIdiomaIngles()
+        		);
+        	$i++;
+        }
+        $publications = array(
+            'entities' => $entities,
+            'tipos' => $tipos,
+            'miembros'=>$miembros,
+            'publicaciones'=>$publications,
+            'publicacionesid'=>$publicationsid,
+        );
 		$response = new Response();
 		$response->setContent(json_encode($publications));
+		$response->headers->set('Content-Type', 'application/json');
+		return $response;
+	}
+	public function investigadoresAction() 
+	{
+		$em = $this->getDoctrine()->getManager();
+		$miembros = $em->getRepository('PersonalPageProyectosBundle:Miembro')->findAll();//información personal del miembro
+		$data = array();
+		$i = 0;
+		foreach ($miembros as $miembro) 
+		{
+			$url="http://caii.itmexicali.edu.mx/".$miembro->getFotoUrl();
+			$data[$i] = array("id" => $miembro->getId(),"nombre" => $miembro->getNombre(),"paterno" => $miembro->getApellidop(),"materno" => $miembro->getApellidom(),"pagina" => $miembro->getLinkPagina(),"fotoUrl" => $url);
+			$i = $i + 1;
+		}
+		$response = new Response();
+		$response->setContent(json_encode($data));
 		$response->headers->set('Content-Type', 'application/json');
 		return $response;
 	}

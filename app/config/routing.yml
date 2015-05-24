@@ -68,4 +68,8 @@ _infoMiembro:
     requirements:
       _method:  GET
       _locale: en|es
-
+_investigadores:
+    pattern:  /investigadores/json/
+    defaults: { _controller: PersonalPageProyectosBundle:Servicios:Investigadores}
+    requirements:
+      _method:  GET

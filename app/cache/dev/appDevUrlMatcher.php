@@ -257,6 +257,21 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
         not__infoMiembro:
 
+        // _investigadores
+        if (rtrim($pathinfo, '/') === '/investigadores/json') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not__investigadores;
+            }
+
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', '_investigadores');
+            }
+
+            return array (  '_controller' => 'PersonalPage\\ProyectosBundle\\Controller\\ServiciosController::InvestigadoresAction',  '_route' => '_investigadores',);
+        }
+        not__investigadores:
+
         // _welcome
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
