@@ -41,30 +41,58 @@ class MiembrosController extends Controller
 		}
 		return $this->render('PersonalPageProyectosBundle:Default:Proyectos.html.twig',array('miembro' => $miembro,'proyectos'=>$p));
 	}
-	public function PublicacionesAction($id)//carga la pagina personal del usuario en la vista de publicaciones y conferencias
+	public function PublicacionesAction($id,Request $request)//carga la pagina personal del usuario en la vista de publicaciones y conferencias
 	{
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'http://caii.itmexicali.edu.mx/'.locale_get_default().'/'.$id.'/publicaciones/json/');
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$response = curl_exec($ch);
-		$info = (Array)json_decode($response);
-		$miembro=(Array)$info['miembro'];
-		$publicaciones=(Array)$info['publicaciones'];
-		$i=0;
-		$t=array();
-		$p=array();
-		foreach ($publicaciones as $publicacion) {
-			$p[$i]=(Array)$publicacion;
-			$i++;
-		}
-		$tipos=(array)$info['tipos'];
-		$i=0;
-		foreach ($tipos as $tipo) {
-			$t[$i]=(Array)$tipo;
-			$i++;
-		}
-		return $this->render('PersonalPageProyectosBundle:Default:Publicaciones.html.twig',array('miembro' => $miembro, 'publicaciones' => $p,'tipos' => $t));
+		$localeLang = $request->attributes->get('_locale', $request->getLocale());
+        curl_setopt($ch, CURLOPT_URL, 'caii.itmexicali.edu.mx/'.$localeLang.'/'.$id.'/publicaciones/json/');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $response = curl_exec($ch);
+        $data = (Array)json_decode($response);
+        $miembro = (Array)$data["miembro"];
+        $entities=(Array)$data["entities"];
+        $tipos=(Array)$data["tipos"];
+        $miembros=(Array)$data["miembros"];
+        $publicaciones=(Array)$data["publicaciones"];
+        $publicacionesid=(Array)$data["publicacionesid"];
+        $p=array();
+        $i=0;
+        foreach ($entities as $entity) {
+            $p[$i]=(Array)$entity;
+            $i++;
+        }
+        $entities=$p;
+        $p=array();
+        $i=0;
+        foreach ($tipos as $entity) {
+            $p[$i]=(Array)$entity;
+            $i++;
+        }
+        $tipos=$p;
+        $p=array();
+        $i=0;
+        foreach ($miembros as $entity) {
+            $p[$i]=(Array)$entity;
+            $i++;
+        }
+        $miembros=$p;
+        $p=array();
+        $i=0;
+        foreach ($publicaciones as $entity) {
+            $p[$i]=(Array)$entity;
+            $i++;
+        }
+        $publicaciones=$p;
+        $p=array();
+        $i=0;
+        foreach ($publicacionesid as $entity) {
+            $p[$i]=(Array)$entity;
+            $i++;
+        }
+        $publicacionesid=$p;
+		return $this->render('PersonalPageProyectosBundle:Default:Publicaciones.html.twig', array("entities"=>$entities,"tipos"=>$tipos,"miembros"=>$miembros,"publicaciones"=>$publicaciones,"publicacionesid"=>$publicacionesid,"miembro"=>$miembro));
 	}
 
 }
