@@ -48,8 +48,8 @@
 {% block selector %}
 	{% set locale = app.request.locale %}
 	{% if locale == 'es' %}
-	<a href="{{ path('proyectos', { '_locale': 'en', 'id': miembro['id'] }) }}"><img src="{{ asset('us.jpg') }}" height="40" width="40" > </a>
+	<a href="{{ path('proyectos', { '_locale': 'en', 'id': miembro['link'] }) }}"><img src="{{ asset('us.jpg') }}" height="40" width="40" > </a>
 	{% elseif locale == 'en' %}
-	<a href="{{ path('proyectos', { '_locale': 'es', 'id': miembro['id'] }) }}"><img src="{{ asset('es.jpg') }}" height="40" width="40" ></a>
+	<a href="{{ path('proyectos', { '_locale': 'es', 'id': miembro['link'] }) }}"><img src="{{ asset('es.jpg') }}" height="40" width="40" ></a>
 	{% endif %}
 {% endblock %}

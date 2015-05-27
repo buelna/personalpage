@@ -17,7 +17,7 @@ personal_page_publicaciones:
         _locale: en|es
 catalogo:
     pattern: /
-    defaults: {  _controller: FrameworkBundle:Redirect:redirect,route: inicio,id: 1, permanent: true }
+    defaults: {  _controller: FrameworkBundle:Redirect:redirect,route: inicio,id: adiaz, permanent: true }
 inicio:
     pattern: /{id}/
     defaults: { _controller: FrameworkBundle:Redirect:redirect,route: areas, permanent: true }

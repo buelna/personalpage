@@ -15,13 +15,13 @@
 {% endblock %}
 {% block ListaMenu %}
 	<li>
-		<a href="{{ path('areas', { 'id':miembro['id']})}}">{% trans %}Principal{% endtrans %}</a>
+		<a href="{{ path('areas', { 'id':miembro['link']})}}">{% trans %}Principal{% endtrans %}</a>
 	</li>
 	<li>
-		<a href="{{ path('proyectos', { 'id':miembro['id']})}}">{% trans %}Proyectos{% endtrans %}</a>
+		<a href="{{ path('proyectos', { 'id':miembro['link']})}}">{% trans %}Proyectos{% endtrans %}</a>
 	</li>
 	<li>
-		<a href="{{ path('publicaciones', { 'id':miembro['id']})}}">{% trans %}Publicaciones y Conferencias{% endtrans %}</a>
+		<a href="{{ path('publicaciones', { 'id':miembro['link']})}}">{% trans %}Publicaciones y Conferencias{% endtrans %}</a>
 	</li>
 {% endblock %}
 {% block MasMenu %}{% endblock %}

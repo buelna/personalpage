@@ -23,10 +23,8 @@
 	        {% for publicacionid in publicacionesid %}    
 	            {% if entity.id == publicacionid.id %}
 	                    {% if publicacion.nombre == publicacionid.tipoPublicacion %}
-
 	                        <li>
-	                            <cite>                  
-	                        
+	                            <cite>
 	                            {% for member in miembros %}
 	                                {% if member.idpublicacion == entity.id %}
 	                                   {{ member.nombreMiembro|first}}. {{ member.apellidoP}}, 
@@ -70,9 +68,9 @@
 		<footer>
 			{% set locale = app.request.locale %}
 			{% if locale == 'es' %}
-			<a href="{{ path('publicaciones', { '_locale': 'en', 'id': miembro['id'] }) }}"><img src="{{ asset('us.jpg') }}" height="40" width="40" > </a>
+			<a href="{{ path('publicaciones', { '_locale': 'en', 'id': miembro['link'] }) }}"><img src="{{ asset('us.jpg') }}" height="40" width="40" > </a>
 			{% elseif locale == 'en' %}
-			<a href="{{ path('publicaciones', { '_locale': 'es', 'id': miembro['id'] }) }}"><img src="{{ asset('es.jpg') }}" height="40" width="40" ></a>
+			<a href="{{ path('publicaciones', { '_locale': 'es', 'id': miembro['link'] }) }}"><img src="{{ asset('es.jpg') }}" height="40" width="40" ></a>
 			{% endif %}
 		</footer>
 {% endblock %}

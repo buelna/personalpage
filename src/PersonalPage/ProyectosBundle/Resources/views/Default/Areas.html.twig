@@ -8,9 +8,9 @@
 		<footer>
 			{% set locale = app.request.locale %}
 			{% if locale == 'es' %}
-			<a href="{{ path('areas', { '_locale': 'en', 'id': miembro['id'] }) }}"><img src="{{ asset('us.jpg') }}" height="40" width="40" >  </a>
+			<a href="{{ path('areas', { '_locale': 'en', 'id': miembro['link'] }) }}"><img src="{{ asset('us.jpg') }}" height="40" width="40" >  </a>
 			{% elseif locale == 'en' %}
-			<a href="{{ path('areas', { '_locale': 'es', 'id': miembro['id'] }) }}"><img src="{{ asset('es.jpg') }}" height="40" width="40" >  </a>
+			<a href="{{ path('areas', { '_locale': 'es', 'id': miembro['link'] }) }}"><img src="{{ asset('es.jpg') }}" height="40" width="40" >  </a>
 			{% endif %}
 		</footer>
 {% endblock %}
@@ -19,10 +19,17 @@
 {% endblock %}
 {% block Informacion %}
 <div style="text-align: justify">
+	{% if miembro['link'] == '' %}
+		Recurso no encontrado o inexistente
+	{% endif %}
 	<span>{{miembro['descripcion']}}</span><br><br>
 </div>
-	{#<span><strong>{% trans %}Correo electronico{% endtrans %}:<a href=mailto:{{miembro.getEmail()}}> {{miembro.getEmail()}}</a></strong></span>#}
+
 {% endblock %}
 {% block Imagen %}
-<img src="http://caii.itmexicali.edu.mx/uploads/images/miembros/{{ miembro['fotoUrl'] }}" height="180" width="110">
+	{% if miembro['fotoUrl'] %}
+		<img src="http://caii.itmexicali.edu.mx/uploads/images/miembros/{{ miembro['fotoUrl'] }}" height="180" width="110">
+	{% else %}
+		<img src="{{asset('bundles/img/miembros/unknown-user.gif')}}" height="180" width="110">
+	{% endif %}
 {% endblock %}
