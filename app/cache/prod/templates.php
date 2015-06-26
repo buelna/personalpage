@@ -84,12 +84,9 @@
   'PersonalPageProyectosBundle:Default:Areas.html.twig~' => '/var/www/personalpage/src/PersonalPage/ProyectosBundle/Resources/views/Default/Areas.html.twig~',
   'PersonalPageProyectosBundle:Default:Areas.html.twig' => '/var/www/personalpage/src/PersonalPage/ProyectosBundle/Resources/views/Default/Areas.html.twig',
   'PersonalPageProyectosBundle:Default:Proyectos.html.twig' => '/var/www/personalpage/src/PersonalPage/ProyectosBundle/Resources/views/Default/Proyectos.html.twig',
-  'PersonalPageProyectosBundle:Default:index.html.twig' => '/var/www/personalpage/src/PersonalPage/ProyectosBundle/Resources/views/Default/index.html.twig',
   'PersonalPageProyectosBundle:Default:Publicaciones.html.twig' => '/var/www/personalpage/src/PersonalPage/ProyectosBundle/Resources/views/Default/Publicaciones.html.twig',
   '::catalogobase.html.twig' => '/var/www/personalpage/app/Resources/views/catalogobase.html.twig',
   '::base.html.twig' => '/var/www/personalpage/app/Resources/views/base.html.twig',
-  '::menu.html (copy).twig' => '/var/www/personalpage/app/Resources/views/menu.html (copy).twig',
   '::menu.html.twig' => '/var/www/personalpage/app/Resources/views/menu.html.twig',
-  '::base.html (copy).twig' => '/var/www/personalpage/app/Resources/views/base.html (copy).twig',
   '::base.html.twig~' => '/var/www/personalpage/app/Resources/views/base.html.twig~',
 );

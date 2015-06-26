@@ -22,7 +22,7 @@
         "stof/doctrine-extensions-bundle": "@dev",
         "doctrine/data-fixtures": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "gedmo/doctrine-extensions":    "dev-master"
+        "gedmo/doctrine-extensions": "2.3.*@dev"
     },
     "scripts": {
         "post-install-cmd": [
