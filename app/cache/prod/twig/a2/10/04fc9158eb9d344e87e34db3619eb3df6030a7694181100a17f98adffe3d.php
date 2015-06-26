@@ -40,9 +40,7 @@ class __TwigTemplate_a21004fc9158eb9d344e87e34db3619eb3df6030a7694181100a17f98ad
     public function block_logo($context, array $blocks = array())
     {
         // line 4
-        echo "\t<a href=\"";
-        echo $this->env->getExtension('routing')->getPath("catalogo");
-        echo "\">
+        echo "\t<a href=\"caii.itmexicali.edu.mx\">
 \t\t<img src=\"";
         // line 5
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("logoCAII.png"), "html", null, true);
@@ -81,7 +79,7 @@ class __TwigTemplate_a21004fc9158eb9d344e87e34db3619eb3df6030a7694181100a17f98ad
         echo "\t<li>
 \t\t<a href=\"";
         // line 18
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("areas", array("id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array"))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("areas", array("id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array"))), "html", null, true);
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Principal", array(), "messages");
         echo "</a>
@@ -89,7 +87,7 @@ class __TwigTemplate_a21004fc9158eb9d344e87e34db3619eb3df6030a7694181100a17f98ad
 \t<li>
 \t\t<a href=\"";
         // line 21
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("proyectos", array("id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array"))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("proyectos", array("id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array"))), "html", null, true);
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Proyectos", array(), "messages");
         echo "</a>
@@ -97,7 +95,7 @@ class __TwigTemplate_a21004fc9158eb9d344e87e34db3619eb3df6030a7694181100a17f98ad
 \t<li>
 \t\t<a href=\"";
         // line 24
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("publicaciones", array("id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array"))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("publicaciones", array("id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array"))), "html", null, true);
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Publicaciones y Conferencias", array(), "messages");
         echo "</a>
@@ -122,6 +120,6 @@ class __TwigTemplate_a21004fc9158eb9d344e87e34db3619eb3df6030a7694181100a17f98ad
 
     public function getDebugInfo()
     {
-        return array (  109 => 27,  100 => 24,  92 => 21,  84 => 18,  81 => 17,  78 => 16,  71 => 13,  68 => 12,  65 => 11,  58 => 9,  55 => 8,  48 => 5,  43 => 4,  40 => 3,  11 => 2,);
+        return array (  107 => 27,  98 => 24,  90 => 21,  82 => 18,  79 => 17,  76 => 16,  69 => 13,  66 => 12,  63 => 11,  56 => 9,  53 => 8,  46 => 5,  43 => 4,  40 => 3,  11 => 2,);
     }
 }

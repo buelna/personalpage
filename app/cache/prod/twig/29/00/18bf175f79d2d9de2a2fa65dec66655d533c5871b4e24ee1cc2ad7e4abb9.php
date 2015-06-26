@@ -53,468 +53,236 @@ class __TwigTemplate_290018bf175f79d2d9de2a2fa65dec66655d533c5871b4e24ee1cc2ad7e
         // line 13
         $context["c"] = 0;
         // line 14
-        echo "\t";
+        echo "\t\t";
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["tipos"]) ? $context["tipos"] : null));
-        foreach ($context['_seq'] as $context["_key"] => $context["tipo"]) {
+        $context['_seq'] = twig_ensure_traversable((isset($context["publicaciones"]) ? $context["publicaciones"] : null));
+        foreach ($context['_seq'] as $context["_key"] => $context["publicacion"]) {
             // line 15
             echo "\t\t";
-            $context["b"] = 0;
-            // line 16
-            echo "\t\t";
             $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["publicaciones"]) ? $context["publicaciones"] : null));
-            foreach ($context['_seq'] as $context["_key"] => $context["publicacion"]) {
-                // line 17
-                echo "\t\t\t";
-                if ((($this->getAttribute($context["tipo"], "id", array(), "array") == $this->getAttribute($context["publicacion"], "idTipo", array(), "array")) && ($this->getAttribute($context["publicacion"], "idMiembro", array(), "array") == $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array")))) {
-                    // line 18
-                    echo "\t\t\t\t";
-                    $context["b"] = 1;
-                    // line 19
-                    echo "\t\t\t";
+            $context['_seq'] = twig_ensure_traversable((isset($context["tipos"]) ? $context["tipos"] : null));
+            foreach ($context['_seq'] as $context["_key"] => $context["tipo"]) {
+                // line 16
+                echo "\t\t    ";
+                if (($this->getAttribute($context["publicacion"], "id", array()) == $this->getAttribute($context["tipo"], "id", array()))) {
+                    // line 17
+                    echo "\t\t        <h3>";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "nombre", array()), "html", null, true);
+                    echo "</h3>
+\t\t    ";
                 }
-                // line 20
+                // line 19
                 echo "\t\t";
             }
             $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['publicacion'], $context['_parent'], $context['loop']);
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['tipo'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
+            echo "        
+\t<ul >
+\t    ";
             // line 21
-            echo "\t\t";
-            if (((isset($context["b"]) ? $context["b"] : null) == 1)) {
+            $context['_parent'] = (array) $context;
+            $context['_seq'] = twig_ensure_traversable((isset($context["entities"]) ? $context["entities"] : null));
+            foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
                 // line 22
-                echo "\t\t\t";
+                echo "\t    \t";
                 $context["c"] = 1;
                 // line 23
-                echo "\t\t\t";
-                // line 24
-                echo "\t\t\t";
-                $context["list"] = 0;
-                // line 25
-                echo "\t\t\t";
-                if ((($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Libros") || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Books"))) {
-                    // line 26
-                    echo "\t\t\t\t";
-                    $context["list"] = 1;
-                    // line 27
-                    echo "\t\t\t";
-                }
-                // line 28
-                echo "\t\t\t";
-                if ((($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Capítulos de libros") || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Book chapters"))) {
-                    // line 29
-                    echo "\t\t\t\t";
-                    $context["list"] = 2;
-                    // line 30
-                    echo "\t\t\t";
-                }
-                // line 31
-                echo "\t\t\t";
-                if ((((((((($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Artículos") || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Articles")) || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Articulos en congresos internacionales")) || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "International conference's articles")) || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Articulos en congresos nacionales")) || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "National conference's articles")) || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Revistas")) || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Journals"))) {
-                    // line 32
-                    echo "\t\t\t\t";
-                    $context["list"] = 3;
-                    // line 33
-                    echo "\t\t\t";
-                }
-                // line 34
-                echo "\t\t\t";
-                if ((($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Reportes técnicos") || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Technical Reports"))) {
-                    // line 35
-                    echo "\t\t\t\t";
-                    $context["list"] = 4;
-                    // line 36
-                    echo "\t\t\t";
-                }
-                // line 37
-                echo "\t\t\t";
-                if ((($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Tesis") || ($this->getAttribute($context["tipo"], "nombre", array(), "array") == "Thesis"))) {
-                    // line 38
-                    echo "\t\t\t\t";
-                    $context["list"] = 5;
-                    // line 39
-                    echo "\t\t\t";
-                }
-                // line 40
-                echo "\t\t\t";
-                // line 41
-                echo "\t\t\t<ul>
-\t\t\t\t";
-                // line 42
-                $context["i"] = 0;
-                // line 43
-                echo "\t\t\t\t";
-                $context["mostrar"] = 1;
-                // line 44
-                echo "\t\t\t\t";
+                echo "\t        ";
                 $context['_parent'] = (array) $context;
-                $context['_seq'] = twig_ensure_traversable((isset($context["publicaciones"]) ? $context["publicaciones"] : null));
-                foreach ($context['_seq'] as $context["_key"] => $context["publicacion"]) {
-                    // line 45
-                    echo "\t\t\t\t\t";
-                    if ((($this->getAttribute($context["tipo"], "id", array(), "array") == $this->getAttribute($context["publicacion"], "idTipo", array(), "array")) && ($this->getAttribute($context["publicacion"], "idMiembro", array(), "array") == $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array")))) {
-                        // line 46
-                        echo "\t\t\t\t\t\t";
-                        if (((($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "request", array()), "locale", array()) == "en") && ($this->getAttribute($context["publicacion"], "english", array(), "array") == "true")) || ($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "request", array()), "locale", array()) == "es"))) {
+                $context['_seq'] = twig_ensure_traversable((isset($context["publicacionesid"]) ? $context["publicacionesid"] : null));
+                foreach ($context['_seq'] as $context["_key"] => $context["publicacionid"]) {
+                    echo "    
+\t            ";
+                    // line 24
+                    if (($this->getAttribute($context["entity"], "id", array()) == $this->getAttribute($context["publicacionid"], "id", array()))) {
+                        // line 25
+                        echo "\t                    ";
+                        if (($this->getAttribute($context["publicacion"], "nombre", array()) == $this->getAttribute($context["publicacionid"], "tipoPublicacion", array()))) {
+                            // line 26
+                            echo "\t                        <li>
+\t                            <cite>
+\t                            ";
+                            // line 28
+                            $context['_parent'] = (array) $context;
+                            $context['_seq'] = twig_ensure_traversable((isset($context["miembros"]) ? $context["miembros"] : null));
+                            foreach ($context['_seq'] as $context["_key"] => $context["member"]) {
+                                // line 29
+                                echo "\t                                ";
+                                if (($this->getAttribute($context["member"], "idpublicacion", array()) == $this->getAttribute($context["entity"], "id", array()))) {
+                                    // line 30
+                                    echo "\t                                   ";
+                                    echo twig_escape_filter($this->env, twig_first($this->env, $this->getAttribute($context["member"], "nombreMiembro", array())), "html", null, true);
+                                    echo ". ";
+                                    echo twig_escape_filter($this->env, $this->getAttribute($context["member"], "apellidoP", array()), "html", null, true);
+                                    echo ", 
+\t                                ";
+                                }
+                                // line 32
+                                echo "\t                            ";
+                            }
+                            $_parent = $context['_parent'];
+                            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['member'], $context['_parent'], $context['loop']);
+                            $context = array_intersect_key($context, $_parent) + $_parent;
+                            // line 33
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "path", array())) {
+                                // line 34
+                                echo "\t                                <a href=\"http://caii.itmexicali.edu.mx/download/";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "path", array()), "html", null, true);
+                                echo "\">";
+                                if ($this->getAttribute($context["entity"], "titulo", array())) {
+                                    echo "\"";
+                                    echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "titulo", array()), "html", null, true);
+                                    echo "\"";
+                                }
+                                echo "</a>
+
+\t                            ";
+                            } else {
+                                // line 36
+                                echo "  
+\t                                ";
+                                // line 37
+                                if ($this->getAttribute($context["entity"], "titulo", array())) {
+                                    echo "\"";
+                                    echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "titulo", array()), "html", null, true);
+                                    echo "\"";
+                                }
+                                // line 38
+                                echo "\t                            ";
+                            }
+                            // line 39
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "tituloLibro", array())) {
+                                echo ", ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "tituloLibro", array()), "html", null, true);
+                            }
+                            echo "</cite>
+\t                            ";
+                            // line 40
+                            if ($this->getAttribute($context["entity"], "capitulo", array())) {
+                                echo ", ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "capitulo", array()), "html", null, true);
+                            }
+                            // line 41
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "journal", array())) {
+                                echo ", ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "journal", array()), "html", null, true);
+                            }
+                            // line 42
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "volumen", array())) {
+                                echo ", vol. ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "volumen", array()), "html", null, true);
+                            }
+                            // line 43
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "congreso", array())) {
+                                echo ", In proceedings of ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "congreso", array()), "html", null, true);
+                            }
+                            // line 44
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "ciudad", array())) {
+                                echo ", ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "ciudad", array()), "html", null, true);
+                            }
+                            // line 45
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "editorial", array())) {
+                                echo ", Editorial ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "editorial", array()), "html", null, true);
+                            }
+                            // line 46
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "serie", array())) {
+                                echo "No. ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "serie", array()), "html", null, true);
+                            }
                             // line 47
-                            echo "\t\t\t\t\t\t\t";
-                            $context["ingles"] = 1;
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "edicion", array())) {
+                                echo ", Edición. ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "edicion", array()), "html", null, true);
+                            }
                             // line 48
-                            echo "\t\t\t\t\t\t";
-                        } else {
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "tipoReporte", array())) {
+                                echo ", ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "tipoReporte", array()), "html", null, true);
+                            }
                             // line 49
-                            echo "\t\t\t\t\t\t\t";
-                            $context["ingles"] = 0;
+                            echo "\t                           ";
                             // line 50
-                            echo "\t\t\t\t\t\t";
-                        }
-                        // line 51
-                        echo "\t\t\t\t\t\t";
-                        $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
-                        // line 52
-                        echo "\t\t\t\t\t\t";
-                        if (((isset($context["ingles"]) ? $context["ingles"] : null) == 1)) {
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "paginas", array())) {
+                                echo ", pp. ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "paginas", array()), "html", null, true);
+                            }
+                            // line 51
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "issn", array())) {
+                                echo ", ISSN ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "issn", array()), "html", null, true);
+                            }
+                            // line 52
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "isbn", array())) {
+                                echo ", ISBN ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "isbn", array()), "html", null, true);
+                            }
                             // line 53
-                            echo "\t\t\t\t\t\t\t";
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "doi", array())) {
+                                echo ", DOI: <a href=\"http://dx.doi.org/";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "doi", array()), "html", null, true);
+                                echo "\">";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "doi", array()), "html", null, true);
+                                echo "</a> ";
+                            }
                             // line 54
-                            echo "\t\t\t\t\t\t\t";
-                            if (((isset($context["list"]) ? $context["list"] : null) == 1)) {
-                                // line 55
-                                echo "\t\t\t\t\t\t\t\t";
-                                if (((isset($context["mostrar"]) ? $context["mostrar"] : null) == 1)) {
-                                    // line 56
-                                    echo "\t\t\t\t\t\t\t\t\t<h3>";
-                                    echo twig_escape_filter($this->env, $this->getAttribute($context["tipo"], "nombre", array(), "array"), "html", null, true);
-                                    echo "</h3>
-\t\t\t\t\t\t\t\t\t";
-                                    // line 57
-                                    $context["mostrar"] = 0;
-                                    // line 58
-                                    echo "\t\t\t\t\t\t\t\t";
-                                }
-                                // line 59
-                                echo "\t\t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t";
-                                // line 61
-                                echo "\t\t\t\t\t\t\t\t";
-                                $context['_parent'] = (array) $context;
-                                $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["publicacion"], "autores", array(), "array"));
-                                foreach ($context['_seq'] as $context["_key"] => $context["miembrop"]) {
-                                    // line 62
-                                    echo "\t\t\t\t\t\t\t\t\t";
-                                    echo twig_escape_filter($this->env, $context["miembrop"], "html", null, true);
-                                    echo ",
-\t\t\t\t\t\t\t\t";
-                                }
-                                $_parent = $context['_parent'];
-                                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['miembrop'], $context['_parent'], $context['loop']);
-                                $context = array_intersect_key($context, $_parent) + $_parent;
-                                // line 64
-                                echo "\t\t\t\t\t\t\t\t";
-                                // line 65
-                                echo "\t\t\t\t\t\t\t\t\t<i>";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "titulo", array(), "array"), "html", null, true);
-                                echo ".</i>
-\t\t\t\t\t\t\t\t";
-                                // line 67
-                                echo "\t\t\t\t\t\t\t\t\tEd. ";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "ciudad", array(), "array"), "html", null, true);
-                                echo ": ";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "editorial", array(), "array"), "html", null, true);
-                                echo ",
-\t\t\t\t\t\t\t\t";
-                                // line 69
-                                echo "\t\t\t\t\t\t\t\t";
-                                echo ".
-\t\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t";
+                            echo "\t                            ";
+                            if ($this->getAttribute($context["entity"], "tipoTesis", array())) {
+                                echo ", ";
+                                echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "tipoTesis", array()), "html", null, true);
                             }
-                            // line 72
-                            echo "\t\t\t\t\t\t\t";
-                            // line 73
-                            echo "\t\t\t\t\t\t\t";
-                            if (((isset($context["list"]) ? $context["list"] : null) == 2)) {
-                                // line 74
-                                echo "\t\t\t\t\t\t\t\t";
-                                if (((isset($context["mostrar"]) ? $context["mostrar"] : null) == 1)) {
-                                    // line 75
-                                    echo "\t\t\t\t\t\t\t\t\t<h3>";
-                                    echo twig_escape_filter($this->env, $this->getAttribute($context["tipo"], "nombre", array(), "array"), "html", null, true);
-                                    echo "</h3>
-\t\t\t\t\t\t\t\t\t";
-                                    // line 76
-                                    $context["mostrar"] = 0;
-                                    // line 77
-                                    echo "\t\t\t\t\t\t\t\t";
-                                }
-                                // line 78
-                                echo "\t\t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t";
-                                // line 80
-                                echo "\t\t\t\t\t\t\t\t";
-                                $context['_parent'] = (array) $context;
-                                $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["publicacion"], "autores", array(), "array"));
-                                foreach ($context['_seq'] as $context["_key"] => $context["miembrop"]) {
-                                    // line 81
-                                    echo "\t\t\t\t\t\t\t\t\t";
-                                    echo twig_escape_filter($this->env, $context["miembrop"], "html", null, true);
-                                    echo ",
-\t\t\t\t\t\t\t\t";
-                                }
-                                $_parent = $context['_parent'];
-                                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['miembrop'], $context['_parent'], $context['loop']);
-                                $context = array_intersect_key($context, $_parent) + $_parent;
-                                // line 83
-                                echo "\t\t\t\t\t\t\t\t";
-                                // line 84
-                                echo "\t\t\t\t\t\t\t\t\t<i>\"";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "capitulo", array(), "array"), "html", null, true);
-                                echo "\".</i> ";
-                                echo $this->env->getExtension('translator')->getTranslator()->trans("en", array(), "messages");
-                                // line 85
-                                echo "\t\t\t\t\t\t\t\t";
-                                // line 86
-                                echo "\t\t\t\t\t\t\t\t\t<i>";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "titulo", array(), "array"), "html", null, true);
-                                echo ".</i>
-\t\t\t\t\t\t\t\t";
-                                // line 88
-                                echo "\t\t\t\t\t\t\t\t\tEd. ";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "ciudad", array(), "array"), "html", null, true);
-                                echo ": ";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "editorial", array(), "array"), "html", null, true);
-                                echo ",
-\t\t\t\t\t\t\t\t";
-                                // line 90
-                                echo "\t\t\t\t\t\t\t\t";
-                                // line 92
-                                echo "\t\t\t\t\t\t\t\t\tpp. ";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "paginas", array(), "array"), "html", null, true);
-                                echo ".
-\t\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t";
-                            }
-                            // line 95
-                            echo "\t\t\t\t\t\t\t";
-                            // line 96
-                            echo "\t\t\t\t\t\t\t";
-                            if (((isset($context["list"]) ? $context["list"] : null) == 3)) {
-                                // line 97
-                                echo "\t\t\t\t\t\t\t\t";
-                                if (((isset($context["mostrar"]) ? $context["mostrar"] : null) == 1)) {
-                                    // line 98
-                                    echo "\t\t\t\t\t\t\t\t\t<h3>";
-                                    echo twig_escape_filter($this->env, $this->getAttribute($context["tipo"], "nombre", array(), "array"), "html", null, true);
-                                    echo "</h3>
-\t\t\t\t\t\t\t\t\t";
-                                    // line 99
-                                    $context["mostrar"] = 0;
-                                    // line 100
-                                    echo "\t\t\t\t\t\t\t\t";
-                                }
-                                // line 101
-                                echo "\t\t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t";
-                                // line 103
-                                echo "\t\t\t\t\t\t\t\t";
-                                $context['_parent'] = (array) $context;
-                                $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["publicacion"], "autores", array(), "array"));
-                                foreach ($context['_seq'] as $context["_key"] => $context["miembrop"]) {
-                                    // line 104
-                                    echo "\t\t\t\t\t\t\t\t\t";
-                                    echo twig_escape_filter($this->env, $context["miembrop"], "html", null, true);
-                                    echo ",
-\t\t\t\t\t\t\t\t";
-                                }
-                                $_parent = $context['_parent'];
-                                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['miembrop'], $context['_parent'], $context['loop']);
-                                $context = array_intersect_key($context, $_parent) + $_parent;
-                                // line 106
-                                echo "\t\t\t\t\t\t\t\t";
-                                // line 107
-                                echo "\t\t\t\t\t\t\t\t\t<i>\"";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "titulo", array(), "array"), "html", null, true);
-                                echo "\"</i>,
-\t\t\t\t\t\t\t\t";
-                                // line 109
-                                echo "\t\t\t\t\t\t\t\t\t<i>";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "journal", array(), "array"), "html", null, true);
-                                echo ",</i>
-\t\t\t\t\t\t\t\t";
-                                // line 111
-                                echo "\t\t\t\t\t\t\t\t\t";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "ciudad", array(), "array"), "html", null, true);
-                                echo ",
-\t\t\t\t\t\t\t\t";
-                                // line 113
-                                echo "\t\t\t\t\t\t\t\t\tvol. ";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "volumen", array(), "array"), "html", null, true);
-                                echo ",
-\t\t\t\t\t\t\t\t";
-                                // line 115
-                                echo "\t\t\t\t\t\t\t\t\t";
-                                if (($this->getAttribute($context["publicacion"], "paginas", array(), "array") != 0)) {
-                                    // line 116
-                                    echo "\t\t\t\t\t\t\t\t\t\tpp. ";
-                                    echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "paginas", array(), "array"), "html", null, true);
-                                    echo ",
-\t\t\t\t\t\t\t\t\t";
-                                }
-                                // line 118
-                                echo "\t\t\t\t\t\t\t\t";
-                                // line 119
-                                echo "\t\t\t\t\t\t\t\t";
-                                // line 121
-                                echo "\t\t\t\t\t\t\t\t\t";
-                                if (($this->getAttribute($context["publicacion"], "doi", array(), "array") != "")) {
-                                    // line 122
-                                    echo "\t\t\t\t\t\t\t\t\t\tdoi: ";
-                                    echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "doi", array(), "array"), "html", null, true);
-                                    echo ".
-\t\t\t\t\t\t\t\t\t";
-                                }
-                                // line 124
-                                echo "\t\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t";
-                            }
-                            // line 126
-                            echo "\t\t\t\t\t\t\t";
-                            // line 127
-                            echo "\t\t\t\t\t\t\t";
-                            if (((isset($context["list"]) ? $context["list"] : null) == 4)) {
-                                // line 128
-                                echo "\t\t\t\t\t\t\t\t";
-                                if (((isset($context["mostrar"]) ? $context["mostrar"] : null) == 1)) {
-                                    // line 129
-                                    echo "\t\t\t\t\t\t\t\t\t<h3>";
-                                    echo twig_escape_filter($this->env, $this->getAttribute($context["tipo"], "nombre", array(), "array"), "html", null, true);
-                                    echo "</h3>
-\t\t\t\t\t\t\t\t\t";
-                                    // line 130
-                                    $context["mostrar"] = 0;
-                                    // line 131
-                                    echo "\t\t\t\t\t\t\t\t";
-                                }
-                                // line 132
-                                echo "\t\t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t";
-                                // line 134
-                                echo "\t\t\t\t\t\t\t\t";
-                                $context['_parent'] = (array) $context;
-                                $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["publicacion"], "autores", array(), "array"));
-                                foreach ($context['_seq'] as $context["_key"] => $context["miembrop"]) {
-                                    // line 135
-                                    echo "\t\t\t\t\t\t\t\t\t";
-                                    echo twig_escape_filter($this->env, $context["miembrop"], "html", null, true);
-                                    echo ",
-\t\t\t\t\t\t\t\t";
-                                }
-                                $_parent = $context['_parent'];
-                                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['miembrop'], $context['_parent'], $context['loop']);
-                                $context = array_intersect_key($context, $_parent) + $_parent;
-                                // line 137
-                                echo "\t\t\t\t\t\t\t\t";
-                                // line 138
-                                echo "\t\t\t\t\t\t\t\t\t<i>";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "titulo", array(), "array"), "html", null, true);
-                                echo ".</i>
-\t\t\t\t\t\t\t\t";
-                                // line 140
-                                echo "\t\t\t\t\t\t\t\t\t";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "ciudad", array(), "array"), "html", null, true);
-                                echo ",
-\t\t\t\t\t\t\t\t";
-                                // line 142
-                                echo "\t\t\t\t\t\t\t\t\t";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "id", array(), "array"), "html", null, true);
-                                echo ",
-\t\t\t\t\t\t\t\t";
-                                // line 144
-                                echo "\t\t\t\t\t\t\t\t\t";
-                                echo ".
-\t\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t";
-                            }
-                            // line 147
-                            echo "\t\t\t\t\t\t\t";
-                            if (((isset($context["list"]) ? $context["list"] : null) == 5)) {
-                                // line 148
-                                echo "\t\t\t\t\t\t\t\t";
-                                if (((isset($context["mostrar"]) ? $context["mostrar"] : null) == 1)) {
-                                    // line 149
-                                    echo "\t\t\t\t\t\t\t\t\t<h3>";
-                                    echo twig_escape_filter($this->env, $this->getAttribute($context["tipo"], "nombre", array(), "array"), "html", null, true);
-                                    echo "</h3>
-\t\t\t\t\t\t\t\t\t";
-                                    // line 150
-                                    $context["mostrar"] = 0;
-                                    // line 151
-                                    echo "\t\t\t\t\t\t\t\t";
-                                }
-                                // line 152
-                                echo "\t\t\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t\t";
-                                // line 154
-                                echo "\t\t\t\t\t\t\t\t";
-                                $context['_parent'] = (array) $context;
-                                $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["publicacion"], "autores", array(), "array"));
-                                foreach ($context['_seq'] as $context["_key"] => $context["miembrop"]) {
-                                    // line 155
-                                    echo "\t\t\t\t\t\t\t\t\t";
-                                    echo twig_escape_filter($this->env, $context["miembrop"], "html", null, true);
-                                    echo ",
-\t\t\t\t\t\t\t\t";
-                                }
-                                $_parent = $context['_parent'];
-                                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['miembrop'], $context['_parent'], $context['loop']);
-                                $context = array_intersect_key($context, $_parent) + $_parent;
-                                // line 157
-                                echo "\t\t\t\t\t\t\t\t";
-                                // line 158
-                                echo "\t\t\t\t\t\t\t\t\t<i>";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "titulo", array(), "array"), "html", null, true);
-                                echo ".</i>
-\t\t\t\t\t\t\t\t";
-                                // line 160
-                                echo "\t\t\t\t\t\t\t\t\t";
-                                echo twig_escape_filter($this->env, $this->getAttribute($context["publicacion"], "ciudad", array(), "array"), "html", null, true);
-                                echo ",
-\t\t\t\t\t\t\t\t";
-                                // line 162
-                                echo "\t\t\t\t\t\t\t\t\t";
-                                echo ".
-\t\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t";
-                            }
-                            // line 165
-                            echo "\t\t\t\t\t\t";
+                            // line 55
+                            echo "\t                           
+\t                        </li>
+\t                    ";
                         }
-                        // line 166
-                        echo "\t\t\t\t\t";
+                        // line 57
+                        echo "   
+\t            ";
                     }
-                    // line 167
-                    echo "\t\t\t\t";
+                    // line 58
+                    echo "        
+\t        ";
                 }
                 $_parent = $context['_parent'];
-                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['publicacion'], $context['_parent'], $context['loop']);
+                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['publicacionid'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 168
-                echo "\t\t\t</ul>
-\t\t\t";
-                // line 170
-                echo "\t\t";
+                // line 60
+                echo "\t    ";
             }
-            // line 171
-            echo "\t";
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 61
+            echo "\t</ul>    
+\t";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['tipo'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['publicacion'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 172
-        echo "\t";
+        // line 62
+        echo "  
+\t";
+        // line 63
         if (((isset($context["c"]) ? $context["c"] : null) == 0)) {
-            // line 173
+            // line 64
             echo "\t\t<span>";
             echo $this->env->getExtension('translator')->getTranslator()->trans("Actualmente no se cuenta con ninguna publicación que mostrar", array(), "messages");
             echo "</span><br>
@@ -522,35 +290,35 @@ class __TwigTemplate_290018bf175f79d2d9de2a2fa65dec66655d533c5871b4e24ee1cc2ad7e
         }
     }
 
-    // line 176
+    // line 67
     public function block_selector($context, array $blocks = array())
     {
-        // line 177
+        // line 68
         echo "\t\t<footer>
 \t\t\t";
-        // line 178
+        // line 69
         $context["locale"] = $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "request", array()), "locale", array());
-        // line 179
+        // line 70
         echo "\t\t\t";
         if (((isset($context["locale"]) ? $context["locale"] : null) == "es")) {
-            // line 180
+            // line 71
             echo "\t\t\t<a href=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("publicaciones", array("_locale" => "en", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array"))), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("publicaciones", array("_locale" => "en", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array"))), "html", null, true);
             echo "\"><img src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("us.jpg"), "html", null, true);
             echo "\" height=\"40\" width=\"40\" > </a>
 \t\t\t";
-        } elseif ((        // line 181
+        } elseif ((        // line 72
 (isset($context["locale"]) ? $context["locale"] : null) == "en")) {
-            // line 182
+            // line 73
             echo "\t\t\t<a href=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("publicaciones", array("_locale" => "es", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array"))), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("publicaciones", array("_locale" => "es", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array"))), "html", null, true);
             echo "\"><img src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("es.jpg"), "html", null, true);
             echo "\" height=\"40\" width=\"40\" ></a>
 \t\t\t";
         }
-        // line 184
+        // line 75
         echo "\t\t</footer>
 ";
     }
@@ -567,6 +335,6 @@ class __TwigTemplate_290018bf175f79d2d9de2a2fa65dec66655d533c5871b4e24ee1cc2ad7e
 
     public function getDebugInfo()
     {
-        return array (  554 => 184,  546 => 182,  544 => 181,  537 => 180,  534 => 179,  532 => 178,  529 => 177,  526 => 176,  518 => 173,  515 => 172,  509 => 171,  506 => 170,  503 => 168,  497 => 167,  494 => 166,  491 => 165,  485 => 162,  480 => 160,  475 => 158,  473 => 157,  464 => 155,  459 => 154,  456 => 152,  453 => 151,  451 => 150,  446 => 149,  443 => 148,  440 => 147,  434 => 144,  429 => 142,  424 => 140,  419 => 138,  417 => 137,  408 => 135,  403 => 134,  400 => 132,  397 => 131,  395 => 130,  390 => 129,  387 => 128,  384 => 127,  382 => 126,  378 => 124,  372 => 122,  369 => 121,  367 => 119,  365 => 118,  359 => 116,  356 => 115,  351 => 113,  346 => 111,  341 => 109,  336 => 107,  334 => 106,  325 => 104,  320 => 103,  317 => 101,  314 => 100,  312 => 99,  307 => 98,  304 => 97,  301 => 96,  299 => 95,  292 => 92,  290 => 90,  283 => 88,  278 => 86,  276 => 85,  271 => 84,  269 => 83,  260 => 81,  255 => 80,  252 => 78,  249 => 77,  247 => 76,  242 => 75,  239 => 74,  236 => 73,  234 => 72,  228 => 69,  221 => 67,  216 => 65,  214 => 64,  205 => 62,  200 => 61,  197 => 59,  194 => 58,  192 => 57,  187 => 56,  184 => 55,  181 => 54,  179 => 53,  176 => 52,  173 => 51,  170 => 50,  167 => 49,  164 => 48,  161 => 47,  158 => 46,  155 => 45,  150 => 44,  147 => 43,  145 => 42,  142 => 41,  140 => 40,  137 => 39,  134 => 38,  131 => 37,  128 => 36,  125 => 35,  122 => 34,  119 => 33,  116 => 32,  113 => 31,  110 => 30,  107 => 29,  104 => 28,  101 => 27,  98 => 26,  95 => 25,  92 => 24,  90 => 23,  87 => 22,  84 => 21,  78 => 20,  75 => 19,  72 => 18,  69 => 17,  64 => 16,  61 => 15,  56 => 14,  54 => 13,  48 => 11,  46 => 5,  43 => 4,  38 => 3,  11 => 2,);
+        return array (  322 => 75,  314 => 73,  312 => 72,  305 => 71,  302 => 70,  300 => 69,  297 => 68,  294 => 67,  286 => 64,  284 => 63,  281 => 62,  274 => 61,  268 => 60,  261 => 58,  257 => 57,  252 => 55,  246 => 54,  237 => 53,  231 => 52,  225 => 51,  219 => 50,  217 => 49,  211 => 48,  205 => 47,  199 => 46,  193 => 45,  187 => 44,  181 => 43,  175 => 42,  169 => 41,  164 => 40,  156 => 39,  153 => 38,  147 => 37,  144 => 36,  131 => 34,  128 => 33,  122 => 32,  114 => 30,  111 => 29,  107 => 28,  103 => 26,  100 => 25,  98 => 24,  91 => 23,  88 => 22,  84 => 21,  75 => 19,  69 => 17,  66 => 16,  61 => 15,  56 => 14,  54 => 13,  48 => 11,  46 => 5,  43 => 4,  38 => 3,  11 => 2,);
     }
 }

@@ -63,7 +63,7 @@ class __TwigTemplate_689740f51266cd404116d568be1d8b281e3ef979b95b957758b9f57ed44
         if (((isset($context["locale"]) ? $context["locale"] : null) == "es")) {
             // line 11
             echo "\t\t\t<a href=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("areas", array("_locale" => "en", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array"))), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("areas", array("_locale" => "en", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array"))), "html", null, true);
             echo "\"><img src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("us.jpg"), "html", null, true);
             echo "\" height=\"40\" width=\"40\" >  </a>
@@ -72,7 +72,7 @@ class __TwigTemplate_689740f51266cd404116d568be1d8b281e3ef979b95b957758b9f57ed44
 (isset($context["locale"]) ? $context["locale"] : null) == "en")) {
             // line 13
             echo "\t\t\t<a href=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("areas", array("_locale" => "es", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array"))), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("areas", array("_locale" => "es", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array"))), "html", null, true);
             echo "\"><img src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("es.jpg"), "html", null, true);
             echo "\" height=\"40\" width=\"40\" >  </a>
@@ -98,22 +98,45 @@ class __TwigTemplate_689740f51266cd404116d568be1d8b281e3ef979b95b957758b9f57ed44
     {
         // line 21
         echo "<div style=\"text-align: justify\">
-\t<span>";
+\t";
         // line 22
+        if (($this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array") == "")) {
+            // line 23
+            echo "\t\tRecurso no encontrado o inexistente
+\t";
+        }
+        // line 25
+        echo "\t<div style=\"margin-top: 15px;margin-left: 10px;margin-right: 10px\">
+\t<p margin=\"15px\">
+\t<span>";
+        // line 27
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "descripcion", array(), "array"), "html", null, true);
         echo "</span><br><br>
+\t</p>
+\t</div>
 </div>
-\t";
+
+";
     }
 
-    // line 26
+    // line 33
     public function block_Imagen($context, array $blocks = array())
     {
-        // line 27
-        echo "<img src=\"";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "fotoUrl", array(), "array"), "html", null, true);
-        echo "\" height=\"180\" width=\"110\">
-";
+        // line 34
+        echo "\t";
+        if ($this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "fotoUrl", array(), "array")) {
+            // line 35
+            echo "\t\t<img src=\"http://caii.itmexicali.edu.mx/uploads/images/miembros/";
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "fotoUrl", array(), "array"), "html", null, true);
+            echo "\" height=\"180\" width=\"110\">
+\t";
+        } else {
+            // line 37
+            echo "\t\t<img src=\"";
+            echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/img/miembros/unknown-user.gif"), "html", null, true);
+            echo "\" height=\"180\" width=\"110\">
+\t";
+        }
     }
 
     public function getTemplateName()
@@ -128,6 +151,6 @@ class __TwigTemplate_689740f51266cd404116d568be1d8b281e3ef979b95b957758b9f57ed44
 
     public function getDebugInfo()
     {
-        return array (  113 => 27,  110 => 26,  103 => 22,  100 => 21,  97 => 20,  90 => 18,  87 => 17,  82 => 15,  74 => 13,  72 => 12,  65 => 11,  62 => 10,  60 => 9,  57 => 8,  54 => 7,  49 => 5,  46 => 4,  41 => 3,  11 => 2,);
+        return array (  135 => 37,  129 => 35,  126 => 34,  123 => 33,  113 => 27,  109 => 25,  105 => 23,  103 => 22,  100 => 21,  97 => 20,  90 => 18,  87 => 17,  82 => 15,  74 => 13,  72 => 12,  65 => 11,  62 => 10,  60 => 9,  57 => 8,  54 => 7,  49 => 5,  46 => 4,  41 => 3,  11 => 2,);
     }
 }

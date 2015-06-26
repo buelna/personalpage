@@ -146,7 +146,7 @@ class __TwigTemplate_66fef7a197d64555581340d7ff43a16f6b116574a61572729e445506285
         if (((isset($context["locale"]) ? $context["locale"] : null) == "es")) {
             // line 51
             echo "\t<a href=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("proyectos", array("_locale" => "en", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array"))), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("proyectos", array("_locale" => "en", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array"))), "html", null, true);
             echo "\"><img src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("us.jpg"), "html", null, true);
             echo "\" height=\"40\" width=\"40\" > </a>
@@ -155,7 +155,7 @@ class __TwigTemplate_66fef7a197d64555581340d7ff43a16f6b116574a61572729e445506285
 (isset($context["locale"]) ? $context["locale"] : null) == "en")) {
             // line 53
             echo "\t<a href=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("proyectos", array("_locale" => "es", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "id", array(), "array"))), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("proyectos", array("_locale" => "es", "id" => $this->getAttribute((isset($context["miembro"]) ? $context["miembro"] : null), "link", array(), "array"))), "html", null, true);
             echo "\"><img src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("es.jpg"), "html", null, true);
             echo "\" height=\"40\" width=\"40\" ></a>

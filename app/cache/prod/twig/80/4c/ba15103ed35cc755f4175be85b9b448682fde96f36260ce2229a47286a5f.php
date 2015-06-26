@@ -45,49 +45,51 @@ class __TwigTemplate_804cba15103ed35cc755f4175be85b9b448682fde96f36260ce2229a472
     </head>
 
     <body>
-    \t<div class=\"fondo\">
-\t    \t<div class=\"fixed\" >
+    \t<div class=\"fondo\" >
+    \t\t<div class=\"row\">
+\t    \t<div class=\"contain-to-grid\" >
 \t\t\t\t<nav class=\"top-bar\" data-topbar>
 \t\t\t\t\t<ul class=\"title-area\">
 \t\t\t\t\t\t<li class=\"name\">
-\t\t\t\t\t\t\t<h1><a href=\"\">CAII</a></h1>
+\t\t\t\t\t\t\t<h1><a href=\"http://caii.itmexicali.edu.mx\">CAII</a></h1>
 \t\t\t\t\t\t</li>
-\t\t\t\t\t\t<li class=\"toggle-topbar menu-icon\"><a href=\"#\">CAII</a></li>
+\t\t\t\t\t\t<li class=\"toggle-topbar menu-icon\"><a href=\"http://caii.itmexicali.edu.mx\">CAII</a></li>
 \t\t\t\t\t</ul>
 \t\t\t\t\t<section class=\"top-bar-section\">
 \t\t\t\t\t\t<ul class=\"left\">
 \t\t\t\t\t\t\t";
-        // line 22
-        $this->displayBlock('ListaMenu', $context, $blocks);
         // line 23
+        $this->displayBlock('ListaMenu', $context, $blocks);
+        // line 24
         echo "\t\t\t\t\t\t</ul>
 \t\t\t\t\t</section>
 \t\t\t\t\t<section class=\"right\">
 \t\t\t\t\t\t";
-        // line 26
-        $this->displayBlock('selector', $context, $blocks);
         // line 27
-        echo "\t\t\t\t\t</section>
+        $this->displayBlock('selector', $context, $blocks);
+        echo " 
+\t\t\t\t\t</section>
 \t\t\t\t</nav>
+\t\t\t</div>
 \t\t\t</div>
 \t\t\t<div style=\"background: white;\">
 \t\t\t\t<div class=\"row\" style=\"background: white;\"><br/><br/></div>
 \t\t\t\t<div class=\"row\" style=\"background: white;\">
 \t\t\t\t\t<div class=\"small-2 columns\">
 \t\t\t\t\t\t";
-        // line 34
+        // line 36
         $this->displayBlock('logo', $context, $blocks);
-        // line 35
+        // line 37
         echo "\t\t\t\t\t</div>
 \t\t\t\t\t<div class=\"small-8 columns\">
 \t\t\t\t\t\t";
-        // line 37
+        // line 39
         $this->displayBlock('banner', $context, $blocks);
-        // line 38
+        // line 40
         echo "\t\t\t\t\t</div>
 \t\t\t\t\t<div class=\"small-2 columns\" align=\"rigth\">
 \t\t\t\t\t\t";
-        // line 40
+        // line 42
         $this->displayBlock('logo2', $context, $blocks);
         echo "\t\t\t\t
 \t\t\t\t\t</div>
@@ -96,14 +98,14 @@ class __TwigTemplate_804cba15103ed35cc755f4175be85b9b448682fde96f36260ce2229a472
 \t\t\t\t<div class=\"row\" >
 \t\t\t\t\t<div class=\"small-3 columns\">
 \t\t\t\t\t\t";
-        // line 47
+        // line 49
         echo "\t\t\t\t\t\t";
         $this->displayBlock('Imagen', $context, $blocks);
-        // line 48
+        // line 50
         echo "\t\t\t\t\t</div>
 \t\t\t\t\t<div class=\"small-9 columns\">
 \t\t\t\t\t\t<h1>";
-        // line 50
+        // line 52
         $this->displayBlock('Nombre', $context, $blocks);
         echo "</h1>
 \t\t\t\t\t</div>
@@ -111,47 +113,47 @@ class __TwigTemplate_804cba15103ed35cc755f4175be85b9b448682fde96f36260ce2229a472
 \t\t\t\t<div class=\"row\">
 \t\t\t\t\t<div class=\"small-12 columns\">
 \t\t\t\t\t\t";
-        // line 55
+        // line 57
         $this->displayBlock('Informacion', $context, $blocks);
-        // line 56
+        // line 58
         echo "\t\t\t\t\t</div>
 \t\t\t\t</div><br>
 \t\t\t\t<div class=\"row\">
 \t\t\t\t\t<div class=\"small-12 columns\">
 \t\t\t\t\t\t";
-        // line 60
+        // line 62
         $this->displayBlock('Contenido', $context, $blocks);
-        // line 61
+        // line 63
         echo "\t\t\t\t\t</div>
 \t\t\t\t</div>
 \t\t\t</div>
 \t\t</div>
 \t  \t<script src=\"";
-        // line 65
+        // line 67
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/personalpageproyectos/js/foundation.min.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 66
+        // line 68
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/personalpageproyectos/js/foundation/foundation.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 67
+        // line 69
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/personalpageproyectos/js/foundation/foundation.dropdown.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 68
+        // line 70
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/personalpageproyectos/js/foundation/foundation.tab.js"), "html", null, true);
         echo "\"></script>
 \t  \t<script src=\"";
-        // line 69
+        // line 71
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/personalpageproyectos/js/vendor/jquery.js"), "html", null, true);
         echo "\"></script>
 \t\t<script src=\"";
-        // line 70
+        // line 72
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/personalpageproyectos/js/foundation/foundation.js"), "html", null, true);
         echo "\"></script>
 \t  \t<script src=\"";
-        // line 71
+        // line 73
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/personalpageproyectos/js/foundation/foundation.topbar.js"), "html", null, true);
         echo "\"></script>
 \t  \t<script>
@@ -167,47 +169,47 @@ class __TwigTemplate_804cba15103ed35cc755f4175be85b9b448682fde96f36260ce2229a472
     {
     }
 
-    // line 22
+    // line 23
     public function block_ListaMenu($context, array $blocks = array())
     {
     }
 
-    // line 26
+    // line 27
     public function block_selector($context, array $blocks = array())
     {
     }
 
-    // line 34
+    // line 36
     public function block_logo($context, array $blocks = array())
     {
     }
 
-    // line 37
+    // line 39
     public function block_banner($context, array $blocks = array())
     {
     }
 
-    // line 40
+    // line 42
     public function block_logo2($context, array $blocks = array())
     {
     }
 
-    // line 47
+    // line 49
     public function block_Imagen($context, array $blocks = array())
     {
     }
 
-    // line 50
+    // line 52
     public function block_Nombre($context, array $blocks = array())
     {
     }
 
-    // line 55
+    // line 57
     public function block_Informacion($context, array $blocks = array())
     {
     }
 
-    // line 60
+    // line 62
     public function block_Contenido($context, array $blocks = array())
     {
     }
@@ -224,6 +226,6 @@ class __TwigTemplate_804cba15103ed35cc755f4175be85b9b448682fde96f36260ce2229a472
 
     public function getDebugInfo()
     {
-        return array (  211 => 60,  206 => 55,  201 => 50,  196 => 47,  191 => 40,  186 => 37,  181 => 34,  176 => 26,  171 => 22,  166 => 5,  155 => 71,  151 => 70,  147 => 69,  143 => 68,  139 => 67,  135 => 66,  131 => 65,  125 => 61,  123 => 60,  117 => 56,  115 => 55,  107 => 50,  103 => 48,  100 => 47,  91 => 40,  87 => 38,  85 => 37,  81 => 35,  79 => 34,  70 => 27,  68 => 26,  63 => 23,  61 => 22,  43 => 7,  39 => 6,  35 => 5,  29 => 1,);
+        return array (  213 => 62,  208 => 57,  203 => 52,  198 => 49,  193 => 42,  188 => 39,  183 => 36,  178 => 27,  173 => 23,  168 => 5,  157 => 73,  153 => 72,  149 => 71,  145 => 70,  141 => 69,  137 => 68,  133 => 67,  127 => 63,  125 => 62,  119 => 58,  117 => 57,  109 => 52,  105 => 50,  102 => 49,  93 => 42,  89 => 40,  87 => 39,  83 => 37,  81 => 36,  69 => 27,  64 => 24,  62 => 23,  43 => 7,  39 => 6,  35 => 5,  29 => 1,);
     }
 }

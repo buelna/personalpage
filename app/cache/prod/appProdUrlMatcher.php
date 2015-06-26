@@ -48,7 +48,7 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return $this->redirect($pathinfo.'/', 'catalogo');
             }
 
-            return array (  '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController::redirectAction',  'route' => 'inicio',  'id' => 1,  'permanent' => true,  '_route' => 'catalogo',);
+            return array (  '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController::redirectAction',  'route' => 'inicio',  'id' => 'adiaz',  'permanent' => true,  '_route' => 'catalogo',);
         }
 
         // inicio
@@ -98,7 +98,7 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return $this->redirect($pathinfo.'/', '_servicioAreas');
             }
 
-            return $this->mergeDefaults(array_replace($matches, array('_route' => '_servicioAreas')), array (  '_controller' => 'PersonalPage\\ProyectosBundle\\Controller\\ServiciosController::AreasAction',));
+            return $this->mergeDefaults(array_replace($matches, array('_route' => '_servicioAreas')), array (  '_controller' => 'PersonalPageProyectosBundle:Servicios:Areas',));
         }
         not__servicioAreas:
 
@@ -113,7 +113,7 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return $this->redirect($pathinfo.'/', '_servicioProyectos');
             }
 
-            return $this->mergeDefaults(array_replace($matches, array('_route' => '_servicioProyectos')), array (  '_controller' => 'PersonalPage\\ProyectosBundle\\Controller\\ServiciosController::ProyectosAction',));
+            return $this->mergeDefaults(array_replace($matches, array('_route' => '_servicioProyectos')), array (  '_controller' => 'PersonalPageProyectosBundle:Servicios:Proyectos',));
         }
         not__servicioProyectos:
 
@@ -128,7 +128,7 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return $this->redirect($pathinfo.'/', '_servicioPublicaciones');
             }
 
-            return $this->mergeDefaults(array_replace($matches, array('_route' => '_servicioPublicaciones')), array (  '_controller' => 'PersonalPage\\ProyectosBundle\\Controller\\ServiciosController::PublicacionesAction',));
+            return $this->mergeDefaults(array_replace($matches, array('_route' => '_servicioPublicaciones')), array (  '_controller' => 'PersonalPageProyectosBundle:Servicios:Publicaciones',));
         }
         not__servicioPublicaciones:
 
@@ -143,7 +143,7 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return $this->redirect($pathinfo.'/', '_infoCaii');
             }
 
-            return $this->mergeDefaults(array_replace($matches, array('_route' => '_infoCaii')), array (  '_controller' => 'PersonalPage\\ProyectosBundle\\Controller\\ServiciosController::PublicacionesCaiiAction',));
+            return $this->mergeDefaults(array_replace($matches, array('_route' => '_infoCaii')), array (  '_controller' => 'PersonalPageProyectosBundle:Servicios:PublicacionesCaii',));
         }
         not__infoCaii:
 
@@ -158,9 +158,24 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return $this->redirect($pathinfo.'/', '_infoMiembro');
             }
 
-            return $this->mergeDefaults(array_replace($matches, array('_route' => '_infoMiembro')), array (  '_controller' => 'PersonalPage\\ProyectosBundle\\Controller\\ServiciosController::InfoAction',));
+            return $this->mergeDefaults(array_replace($matches, array('_route' => '_infoMiembro')), array (  '_controller' => 'PersonalPageProyectosBundle:Servicios:Info',));
         }
         not__infoMiembro:
+
+        // _investigadores
+        if (rtrim($pathinfo, '/') === '/investigadores/json') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not__investigadores;
+            }
+
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', '_investigadores');
+            }
+
+            return array (  '_controller' => 'PersonalPageProyectosBundle:Servicios:Investigadores',  '_route' => '_investigadores',);
+        }
+        not__investigadores:
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
