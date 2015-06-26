@@ -229,7 +229,25 @@ abstract class AbstractProcessTest extends \PHPUnit_Framework_TestCase
             array(null, null),
             array('24.5', 24.5),
             array('input data', 'input data'),
-            // to maintain BC, supposed to be removed in 3.0
+        );
+    }
+
+    /**
+     * @dataProvider provideLegacyInputValues
+     * @group legacy
+     */
+    public function testLegacyValidInput($expected, $value)
+    {
+        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
+
+        $process = $this->getProcess('php -v');
+        $process->setInput($value);
+        $this->assertSame($expected, $process->getInput());
+    }
+
+    public function provideLegacyInputValues()
+    {
+        return array(
             array('stringifiable', new Stringifiable()),
         );
     }
@@ -800,9 +818,6 @@ abstract class AbstractProcessTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($process->isSuccessful());
     }
 
-    /**
-     * @group idle-timeout
-     */
     public function testIdleTimeout()
     {
         $process = $this->getProcess('php -r "sleep(3);"');
@@ -820,34 +835,31 @@ abstract class AbstractProcessTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @group idle-timeout
-     */
     public function testIdleTimeoutNotExceededWhenOutputIsSent()
     {
-        $process = $this->getProcess('php -r "echo \'foo\'; sleep(1); echo \'foo\'; sleep(1); echo \'foo\'; sleep(1); "');
+        $process = $this->getProcess(sprintf('php -r %s', escapeshellarg('$n = 30; while ($n--) {echo "foo\n"; usleep(100000); }')));
         $process->setTimeout(2);
-        $process->setIdleTimeout(1.5);
+        $process->setIdleTimeout(1);
 
         try {
             $process->run();
             $this->fail('A timeout exception was expected.');
         } catch (ProcessTimedOutException $ex) {
-            $this->assertTrue($ex->isGeneralTimeout());
-            $this->assertFalse($ex->isIdleTimeout());
+            $this->assertTrue($ex->isGeneralTimeout(), 'A general timeout is expected.');
+            $this->assertFalse($ex->isIdleTimeout(), 'No idle timeout is expected.');
             $this->assertEquals(2, $ex->getExceededTimeout());
         }
     }
 
     public function testStartAfterATimeout()
     {
-        $process = $this->getProcess('php -r "$n = 1000; while ($n--) {echo \'\'; usleep(1000); }"');
+        $process = $this->getProcess(sprintf('php -r %s', escapeshellarg('$n = 1000; while ($n--) {echo \'\'; usleep(1000); }')));
         $process->setTimeout(0.1);
 
         try {
             $process->run();
-            $this->fail('An exception should have been raised.');
-        } catch (\Exception $e) {
+            $this->fail('A RuntimeException should have been raised.');
+        } catch (RuntimeException $e) {
         }
         $process->start();
         usleep(1000);

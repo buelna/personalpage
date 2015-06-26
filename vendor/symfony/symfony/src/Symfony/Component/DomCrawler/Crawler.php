@@ -45,9 +45,10 @@ class Crawler extends \SplObjectStorage
     /**
      * Constructor.
      *
-     * @param mixed  $node A Node to use as the base for the crawling
+     * @param mixed  $node       A Node to use as the base for the crawling
      * @param string $currentUri The current URI
-     * @param string $baseHref The base href value
+     * @param string $baseHref   The base href value
+     *
      * @api
      */
     public function __construct($node = null, $currentUri = null, $baseHref = null)
@@ -581,15 +582,7 @@ class Crawler extends \SplObjectStorage
 
         $html = '';
         foreach ($this->getNode(0)->childNodes as $child) {
-            if (PHP_VERSION_ID >= 50306) {
-                // node parameter was added to the saveHTML() method in PHP 5.3.6
-                // @see http://php.net/manual/en/domdocument.savehtml.php
-                $html .= $child->ownerDocument->saveHTML($child);
-            } else {
-                $document = new \DOMDocument('1.0', 'UTF-8');
-                $document->appendChild($document->importNode($child, true));
-                $html .= rtrim($document->saveHTML());
-            }
+            $html .= $child->ownerDocument->saveHTML($child);
         }
 
         return $html;
@@ -846,7 +839,7 @@ class Crawler extends \SplObjectStorage
             }
         }
 
-        return sprintf("concat(%s)", implode($parts, ', '));
+        return sprintf('concat(%s)', implode($parts, ', '));
     }
 
     /**
@@ -1026,7 +1019,7 @@ class Crawler extends \SplObjectStorage
      */
     private function findNamespacePrefixes($xpath)
     {
-        if (preg_match_all('/(?P<prefix>[a-z_][a-z_0-9\-\.]*):[^"\/]/i', $xpath, $matches)) {
+        if (preg_match_all('/(?P<prefix>[a-z_][a-z_0-9\-\.]*):[^"\/:]/i', $xpath, $matches)) {
             return array_unique($matches['prefix']);
         }
 

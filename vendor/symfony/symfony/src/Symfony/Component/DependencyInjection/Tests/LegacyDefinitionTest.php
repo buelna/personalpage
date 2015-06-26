@@ -13,8 +13,16 @@ namespace Symfony\Component\DependencyInjection\Tests;
 
 use Symfony\Component\DependencyInjection\Definition;
 
+/**
+ * @group legacy
+ */
 class LegacyDefinitionTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setUp()
+    {
+        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
+    }
+
     public function testSetGetFactoryClass()
     {
         $def = new Definition('stdClass');

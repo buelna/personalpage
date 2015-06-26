@@ -38,7 +38,7 @@ class FlashBagTest extends \PHPUnit_Framework_TestCase
         $this->bag->initialize($this->array);
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         $this->bag = null;
         parent::tearDown();
@@ -134,9 +134,12 @@ class FlashBagTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Symfony\Component\HttpFoundation\Session\Flash\FlashBag::getIterator
+     * @group legacy
      */
-    public function testGetIterator()
+    public function testLegacyGetIterator()
     {
+        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
+
         $flashes = array('hello' => 'world', 'beep' => 'boop', 'notice' => 'nope');
         foreach ($flashes as $key => $val) {
             $this->bag->set($key, $val);
@@ -145,7 +148,7 @@ class FlashBagTest extends \PHPUnit_Framework_TestCase
         $i = 0;
         foreach ($this->bag as $key => $val) {
             $this->assertEquals(array($flashes[$key]), $val);
-            $i++;
+            ++$i;
         }
 
         $this->assertEquals(count($flashes), $i);
