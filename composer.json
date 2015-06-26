@@ -21,7 +21,6 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "stof/doctrine-extensions-bundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
-		"doctrine/data-fixtures": "dev-master",
         "gedmo/doctrine-extensions":    "dev-master"
     },
     "scripts": {
