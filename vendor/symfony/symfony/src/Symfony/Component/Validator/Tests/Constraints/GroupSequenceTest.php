@@ -32,37 +32,22 @@ class GroupSequenceTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array('Group 1', 'Group 2'), $sequence->groups);
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLegacyIterate()
+    public function testIterate()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         $sequence = new GroupSequence(array('Group 1', 'Group 2'));
 
         $this->assertSame(array('Group 1', 'Group 2'), iterator_to_array($sequence));
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLegacyCount()
+    public function testCount()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         $sequence = new GroupSequence(array('Group 1', 'Group 2'));
 
         $this->assertCount(2, $sequence);
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLegacyArrayAccess()
+    public function testArrayAccess()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         $sequence = new GroupSequence(array('Group 1', 'Group 2'));
 
         $this->assertSame('Group 1', $sequence[0]);
@@ -81,24 +66,16 @@ class GroupSequenceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Validator\Exception\OutOfBoundsException
-     * @group legacy
      */
-    public function testLegacyGetExpectsExistingKey()
+    public function testGetExpectsExistingKey()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         $sequence = new GroupSequence(array('Group 1', 'Group 2'));
 
         $sequence[2];
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLegacyUnsetIgnoresNonExistingKeys()
+    public function testUnsetIgnoresNonExistingKeys()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         $sequence = new GroupSequence(array('Group 1', 'Group 2'));
 
         // should not fail

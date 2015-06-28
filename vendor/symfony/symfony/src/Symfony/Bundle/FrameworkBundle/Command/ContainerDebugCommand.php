@@ -50,7 +50,7 @@ class ContainerDebugCommand extends ContainerAwareCommand
                 new InputOption('tags', null, InputOption::VALUE_NONE, 'Displays tagged services for an application'),
                 new InputOption('parameter', null, InputOption::VALUE_REQUIRED, 'Displays a specific parameter for an application'),
                 new InputOption('parameters', null, InputOption::VALUE_NONE, 'Displays parameters for an application'),
-                new InputOption('format', null, InputOption::VALUE_REQUIRED, 'The output format (txt, xml, json, or md)', 'txt'),
+                new InputOption('format', null, InputOption::VALUE_REQUIRED, 'To output description in other formats', 'txt'),
                 new InputOption('raw', null, InputOption::VALUE_NONE, 'To output raw description'),
             ))
             ->setDescription('Displays current services for an application')
@@ -64,7 +64,7 @@ To get specific information about a service, specify its name:
   <info>php %command.full_name% validator</info>
 
 By default, private services are hidden. You can display all services by
-using the <info>--show-private</info> flag:
+using the --show-private flag:
 
   <info>php %command.full_name% --show-private</info>
 
@@ -72,15 +72,15 @@ Use the --tags option to display tagged <comment>public</comment> services group
 
   <info>php %command.full_name% --tags</info>
 
-Find all services with a specific tag by specifying the tag name with the <info>--tag</info> option:
+Find all services with a specific tag by specifying the tag name with the --tag option:
 
   <info>php %command.full_name% --tag=form.type</info>
 
-Use the <info>--parameters</info> option to display all parameters:
+Use the --parameters option to display all parameters:
 
   <info>php %command.full_name% --parameters</info>
 
-Display a specific parameter by specifying his name with the <info>--parameter</info> option:
+Display a specific parameter by specifying his name with the --parameter option:
 
   <info>php %command.full_name% --parameter=kernel.debug</info>
 
@@ -94,10 +94,6 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (false !== strpos($input->getFirstArgument(), ':d')) {
-            $output->writeln('<comment>The use of "container:debug" command is deprecated since version 2.7 and will be removed in 3.0. Use the "debug:container" instead.</comment>');
-        }
-
         $this->validateInput($input);
 
         if ($input->getOption('parameters')) {
@@ -127,7 +123,7 @@ EOF
         $helper->describe($output, $object, $options);
 
         if (!$input->getArgument('name') && $input->isInteractive()) {
-            $output->writeln('To search for a service, re-run this command with a search term. <comment>debug:container log</comment>');
+            $output->writeln('To search for a service, re-run this command with a search term. <comment>container:debug log</comment>');
         }
     }
 
@@ -145,7 +141,7 @@ EOF
         $optionsCount = 0;
         foreach ($options as $option) {
             if ($input->getOption($option)) {
-                ++$optionsCount;
+                $optionsCount++;
             }
         }
 
@@ -166,10 +162,6 @@ EOF
      */
     protected function getContainerBuilder()
     {
-        if ($this->containerBuilder) {
-            return $this->containerBuilder;
-        }
-
         if (!$this->getApplication()->getKernel()->isDebug()) {
             throw new \LogicException(sprintf('Debug information about the container is only available in debug mode.'));
         }
@@ -183,7 +175,7 @@ EOF
         $loader = new XmlFileLoader($container, new FileLocator());
         $loader->load($cachedFile);
 
-        return $this->containerBuilder = $container;
+        return $container;
     }
 
     private function findProperServiceName(InputInterface $input, OutputInterface $output, ContainerBuilder $builder, $name)

@@ -15,6 +15,7 @@ use Symfony\Component\Intl\Data\Bundle\Reader\BundleEntryReaderInterface;
 use Symfony\Component\Intl\Data\Provider\LocaleDataProvider;
 use Symfony\Component\Intl\Data\Provider\RegionDataProvider;
 use Symfony\Component\Intl\Exception\MissingResourceException;
+use Symfony\Component\Intl\Intl;
 
 /**
  * Default implementation of {@link RegionBundleInterface}.
@@ -52,7 +53,7 @@ class RegionBundle extends RegionDataProvider implements RegionBundleInterface
         try {
             return $this->getName($country, $displayLocale);
         } catch (MissingResourceException $e) {
-            return;
+            return null;
         }
     }
 
@@ -64,7 +65,7 @@ class RegionBundle extends RegionDataProvider implements RegionBundleInterface
         try {
             return $this->getNames($displayLocale);
         } catch (MissingResourceException $e) {
-            return;
+            return null;
         }
     }
 
@@ -76,7 +77,7 @@ class RegionBundle extends RegionDataProvider implements RegionBundleInterface
         try {
             return $this->localeProvider->getLocales();
         } catch (MissingResourceException $e) {
-            return;
+            return null;
         }
     }
 }

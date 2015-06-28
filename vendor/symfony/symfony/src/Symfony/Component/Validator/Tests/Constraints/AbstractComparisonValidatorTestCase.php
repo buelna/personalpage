@@ -80,7 +80,6 @@ abstract class AbstractComparisonValidatorTestCase extends AbstractConstraintVal
 
     /**
      * @dataProvider provideAllValidComparisons
-     *
      * @param mixed $dirtyValue
      * @param mixed $comparisonValue
      */
@@ -116,7 +115,6 @@ abstract class AbstractComparisonValidatorTestCase extends AbstractConstraintVal
 
     /**
      * @dataProvider provideAllInvalidComparisons
-     *
      * @param mixed  $dirtyValue
      * @param mixed  $dirtyValueAsString
      * @param mixed  $comparedValue
@@ -165,8 +163,7 @@ abstract class AbstractComparisonValidatorTestCase extends AbstractConstraintVal
     abstract public function provideInvalidComparisons();
 
     /**
-     * @param array $options Options for the constraint
-     *
+     * @param  array      $options Options for the constraint
      * @return Constraint
      */
     abstract protected function createConstraint(array $options);

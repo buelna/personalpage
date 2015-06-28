@@ -11,8 +11,6 @@
 
 namespace Symfony\Component\Templating\Helper;
 
-@trigger_error('The Symfony\Component\Templating\Helper\CoreAssetsHelper is deprecated since version 2.7 and will be removed in 3.0. Use the Asset component instead.', E_USER_DEPRECATED);
-
 use Symfony\Component\Templating\Asset\PackageInterface;
 
 /**
@@ -26,8 +24,6 @@ use Symfony\Component\Templating\Asset\PackageInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Kris Wallsmith <kris@symfony.com>
- *
- * @deprecated since 2.7, will be removed in 3.0. Use the Asset component instead.
  */
 class CoreAssetsHelper extends Helper implements PackageInterface
 {
@@ -109,9 +105,9 @@ class CoreAssetsHelper extends Helper implements PackageInterface
      *
      * Absolute paths (i.e. http://...) are returned unmodified.
      *
-     * @param string           $path        A public path
-     * @param string           $packageName The name of the asset package to use
-     * @param string|bool|null $version     A specific version
+     * @param string              $path        A public path
+     * @param string              $packageName The name of the asset package to use
+     * @param string|bool|null    $version     A specific version
      *
      * @return string A public path which takes into account the base path and URL path
      */

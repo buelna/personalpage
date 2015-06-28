@@ -122,19 +122,19 @@ class SimpleFormTest extends AbstractFormTest
     public function testFalseIsConvertedToNull()
     {
         $mock = $this->getMockBuilder('\stdClass')
-            ->setMethods(array('preSubmit'))
+            ->setMethods(array('preBind'))
             ->getMock();
         $mock->expects($this->once())
-            ->method('preSubmit')
+            ->method('preBind')
             ->with($this->callback(function ($event) {
                 return null === $event->getData();
             }));
 
         $config = new FormConfigBuilder('name', null, $this->dispatcher);
-        $config->addEventListener(FormEvents::PRE_SUBMIT, array($mock, 'preSubmit'));
+        $config->addEventListener(FormEvents::PRE_BIND, array($mock, 'preBind'));
         $form = new Form($config);
 
-        $form->submit(false);
+        $form->bind(false);
 
         $this->assertTrue($form->isValid());
         $this->assertNull($form->getData());
@@ -733,9 +733,6 @@ class SimpleFormTest extends AbstractFormTest
         $this->assertSame($view, $form->createView($parentView));
     }
 
-    /**
-     * @group legacy
-     */
     public function testGetErrorsAsString()
     {
         $this->form->addError(new FormError('Error!'));
@@ -1055,17 +1052,6 @@ class SimpleFormTest extends AbstractFormTest
         $child->setParent($parent);
 
         $child->initialize();
-    }
-
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionMessage Custom resolver "Symfony\Component\Form\Tests\Fixtures\CustomOptionsResolver" must extend "Symfony\Component\OptionsResolver\OptionsResolver".
-     */
-    public function testCustomOptionsResolver()
-    {
-        $fooType = new Fixtures\FooType();
-        $resolver = new Fixtures\CustomOptionsResolver();
-        $fooType->setDefaultOptions($resolver);
     }
 
     protected function createForm()

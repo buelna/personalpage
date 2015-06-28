@@ -11,9 +11,8 @@
 
 namespace Symfony\Bundle\DebugBundle;
 
-use Symfony\Bundle\DebugBundle\DependencyInjection\Compiler\DumpDataCollectorPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\VarDumper;
 
 /**
@@ -30,7 +29,7 @@ class DebugBundle extends Bundle
             // configuration for CLI mode is overridden in HTTP mode on
             // 'kernel.request' event
             VarDumper::setHandler(function ($var) use ($container) {
-                $dumper = $container->get('var_dumper.cli_dumper');
+                $dumper = new CliDumper();
                 $cloner = $container->get('var_dumper.cloner');
                 $handler = function ($var) use ($dumper, $cloner) {
                     $dumper->dump($cloner->cloneVar($var));
@@ -39,15 +38,5 @@ class DebugBundle extends Bundle
                 $handler($var);
             });
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new DumpDataCollectorPass());
     }
 }

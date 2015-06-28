@@ -122,7 +122,6 @@ class ControllerNameParser
      * Attempts to find a bundle that is *similar* to the given bundle name
      *
      * @param string $nonExistentBundleName
-     *
      * @return string
      */
     private function findAlternative($nonExistentBundleName)

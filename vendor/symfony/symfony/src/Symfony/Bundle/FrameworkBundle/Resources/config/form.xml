@@ -154,13 +154,7 @@
         </service>
 
         <!-- HttpFoundationRequestHandler -->
-        <service id="form.type_extension.form.request_handler" class="%form.type_extension.form.request_handler.class%" public="false">
-            <argument type="service" id="form.server_params" />
-        </service>
-
-        <service id="form.server_params" class="Symfony\Component\Form\Util\ServerParams" public="false">
-            <argument type="service" id="request_stack" />
-        </service>
+        <service id="form.type_extension.form.request_handler" class="%form.type_extension.form.request_handler.class%" public="false" />
 
         <!-- FormTypeValidatorExtension -->
         <service id="form.type_extension.form.validator" class="Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension">

@@ -48,14 +48,14 @@ class Cookie
     /**
      * Sets a cookie.
      *
-     * @param string $name         The cookie name
-     * @param string $value        The value of the cookie
-     * @param string $expires      The time the cookie expires
-     * @param string $path         The path on the server in which the cookie will be available on
-     * @param string $domain       The domain that the cookie is available
-     * @param bool   $secure       Indicates that the cookie should only be transmitted over a secure HTTPS connection from the client
-     * @param bool   $httponly     The cookie httponly flag
-     * @param bool   $encodedValue Whether the value is encoded or not
+     * @param string  $name         The cookie name
+     * @param string  $value        The value of the cookie
+     * @param string  $expires      The time the cookie expires
+     * @param string  $path         The path on the server in which the cookie will be available on
+     * @param string  $domain       The domain that the cookie is available
+     * @param bool    $secure       Indicates that the cookie should only be transmitted over a secure HTTPS connection from the client
+     * @param bool    $httponly     The cookie httponly flag
+     * @param bool    $encodedValue Whether the value is encoded or not
      *
      * @api
      */
@@ -69,20 +69,11 @@ class Cookie
             $this->rawValue = urlencode($value);
         }
         $this->name = $name;
+        $this->expires = null === $expires ? null : (int) $expires;
         $this->path = empty($path) ? '/' : $path;
         $this->domain = $domain;
         $this->secure = (bool) $secure;
         $this->httponly = (bool) $httponly;
-
-        if (null !== $expires) {
-            $timestampAsDateTime = \DateTime::createFromFormat('U', $expires);
-            if (false === $timestampAsDateTime) {
-                throw new \UnexpectedValueException(sprintf('The cookie expiration time "%s" is not valid.'), $expires);
-            }
-
-            $this->expires = $timestampAsDateTime->getTimestamp();
-        }
-
     }
 
     /**
@@ -100,6 +91,11 @@ class Cookie
 
         if (null !== $this->expires) {
             $dateTime = \DateTime::createFromFormat('U', $this->expires, new \DateTimeZone('GMT'));
+
+            if ($dateTime === false) {
+                throw new \UnexpectedValueException(sprintf('The cookie expiration time "%s" is not valid.'), $this->expires);
+            }
+
             $cookie .= '; expires='.str_replace('+0000', '', $dateTime->format(self::$dateFormats[0]));
         }
 
@@ -208,7 +204,7 @@ class Cookie
     private static function parseDate($dateValue)
     {
         // trim single quotes around date if present
-        if (($length = strlen($dateValue)) > 1 && "'" === $dateValue[0] && "'" === $dateValue[$length - 1]) {
+        if (($length = strlen($dateValue)) > 1 && "'" === $dateValue[0] && "'" === $dateValue[$length-1]) {
             $dateValue = substr($dateValue, 1, -1);
         }
 
@@ -301,7 +297,7 @@ class Cookie
     /**
      * Returns the secure flag of the cookie.
      *
-     * @return bool The cookie secure flag
+     * @return bool    The cookie secure flag
      *
      * @api
      */
@@ -313,7 +309,7 @@ class Cookie
     /**
      * Returns the httponly flag of the cookie.
      *
-     * @return bool The cookie httponly flag
+     * @return bool    The cookie httponly flag
      *
      * @api
      */
@@ -325,7 +321,7 @@ class Cookie
     /**
      * Returns true if the cookie has expired.
      *
-     * @return bool true if the cookie has expired, false otherwise
+     * @return bool    true if the cookie has expired, false otherwise
      *
      * @api
      */

@@ -96,11 +96,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('', $violations[0]->getPropertyPath());
         $this->assertSame('Bernhard', $violations[0]->getRoot());
         $this->assertSame('Bernhard', $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -133,11 +133,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame($entity, $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -173,11 +173,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('firstName', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame('Bernhard', $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -213,11 +213,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('lastName', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame('Schussek', $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -251,11 +251,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('[key]', $violations[0]->getPropertyPath());
         $this->assertSame($array, $violations[0]->getRoot());
         $this->assertSame($entity, $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -289,11 +289,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('[2][key]', $violations[0]->getPropertyPath());
         $this->assertSame($array, $violations[0]->getRoot());
         $this->assertSame($entity, $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -327,11 +327,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('[key]', $violations[0]->getPropertyPath());
         $this->assertSame($traversable, $violations[0]->getRoot());
         $this->assertSame($entity, $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -367,11 +367,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('[2][key]', $violations[0]->getPropertyPath());
         $this->assertSame($traversable, $violations[0]->getRoot());
         $this->assertSame($entity, $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -406,11 +406,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('reference', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame($entity->reference, $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -448,11 +448,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('reference.value', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame('Foobar', $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -490,11 +490,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('reference.privateValue', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame('Bamboo', $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -555,11 +555,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('reference[key]', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame($entity->reference['key'], $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -595,11 +595,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('reference[2][key]', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame($entity->reference[2]['key'], $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -700,11 +700,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('reference[key]', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame($entity->reference['key'], $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -766,7 +766,7 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         };
 
         $this->metadata->addPropertyConstraint('reference', new Valid(array(
-            'traverse' => true,
+            'deep' => true,
         )));
         $this->referenceMetadata->addConstraint(new Callback(array(
             'callback' => $callback,
@@ -779,11 +779,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('reference[2][key]', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame($entity->reference[2]['key'], $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -828,11 +828,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('firstName', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame('Bernhard', $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -840,12 +840,9 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
      * Cannot be UnsupportedMetadataException for BC with Symfony < 2.5.
      *
      * @expectedException \Symfony\Component\Validator\Exception\ValidatorException
-     * @group legacy
      */
-    public function testLegacyValidatePropertyFailsIfPropertiesNotSupported()
+    public function testValidatePropertyFailsIfPropertiesNotSupported()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         // $metadata does not implement PropertyMetadataContainerInterface
         $metadata = $this->getMock('Symfony\Component\Validator\MetadataInterface');
 
@@ -910,11 +907,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('firstName', $violations[0]->getPropertyPath());
         $this->assertSame($entity, $violations[0]->getRoot());
         $this->assertSame('Bernhard', $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -961,11 +958,11 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $violations);
         $this->assertSame('Message value', $violations[0]->getMessage());
         $this->assertSame('Message %param%', $violations[0]->getMessageTemplate());
-        $this->assertSame(array('%param%' => 'value'), $violations[0]->getParameters());
+        $this->assertSame(array('%param%' => 'value'), $violations[0]->getMessageParameters());
         $this->assertSame('', $violations[0]->getPropertyPath());
         $this->assertSame('Bernhard', $violations[0]->getRoot());
         $this->assertSame('Bernhard', $violations[0]->getInvalidValue());
-        $this->assertNull($violations[0]->getPlural());
+        $this->assertNull($violations[0]->getMessagePluralization());
         $this->assertNull($violations[0]->getCode());
     }
 
@@ -973,12 +970,9 @@ abstract class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
      * Cannot be UnsupportedMetadataException for BC with Symfony < 2.5.
      *
      * @expectedException \Symfony\Component\Validator\Exception\ValidatorException
-     * @group legacy
      */
-    public function testLegacyValidatePropertyValueFailsIfPropertiesNotSupported()
+    public function testValidatePropertyValueFailsIfPropertiesNotSupported()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         // $metadata does not implement PropertyMetadataContainerInterface
         $metadata = $this->getMock('Symfony\Component\Validator\MetadataInterface');
 

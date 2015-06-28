@@ -20,8 +20,7 @@ use Symfony\Component\Console\Output\NullOutput;
  * @author Саша Стаменковић <umpirsky@gmail.com>
  * @author Fabien Potencier <fabien@symfony.com>
  *
- * @deprecated since version 2.5, to be removed in 3.0
- *             Use {@link Table} instead.
+ * @deprecated Deprecated since 2.5, to be removed in 3.0; use Table instead.
  */
 class TableHelper extends Helper
 {
@@ -34,12 +33,8 @@ class TableHelper extends Helper
      */
     private $table;
 
-    public function __construct($triggerDeprecationError = true)
+    public function __construct()
     {
-        if ($triggerDeprecationError) {
-            @trigger_error('The '.__CLASS__.' class is deprecated since version 2.5 and will be removed in 3.0. Use the Symfony\Component\Console\Helper\Table class instead.', E_USER_DEPRECATED);
-        }
-
         $this->table = new Table(new NullOutput());
     }
 
@@ -50,7 +45,7 @@ class TableHelper extends Helper
      *
      * @return TableHelper
      *
-     * @throws \InvalidArgumentException when the table layout is not known
+     * @throws InvalidArgumentException when the table layout is not known
      */
     public function setLayout($layout)
     {
@@ -69,6 +64,7 @@ class TableHelper extends Helper
 
             default:
                 throw new \InvalidArgumentException(sprintf('Invalid table layout "%s".', $layout));
+                break;
         };
 
         return $this;
@@ -224,7 +220,7 @@ class TableHelper extends Helper
     /**
      * Sets cell padding type.
      *
-     * @param int $padType STR_PAD_*
+     * @param int     $padType STR_PAD_*
      *
      * @return TableHelper
      */

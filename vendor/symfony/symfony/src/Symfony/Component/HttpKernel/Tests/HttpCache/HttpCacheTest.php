@@ -12,6 +12,8 @@
 namespace Symfony\Component\HttpKernel\Tests\HttpCache;
 
 use Symfony\Component\HttpKernel\HttpCache\HttpCache;
+use Symfony\Component\HttpKernel\HttpCache\StoreInterface;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -1067,7 +1069,7 @@ class HttpCacheTest extends HttpCacheTestCase
         $this->setNextResponses($responses);
 
         $this->request('GET', '/', array(), array(), true);
-        $this->assertEquals('Hello World! My name is Bobby.', $this->response->getContent());
+        $this->assertEquals("Hello World! My name is Bobby.", $this->response->getContent());
 
         // check for 100 or 99 as the test can be executed after a second change
         $this->assertTrue(in_array($this->response->getTtl(), array(99, 100)));

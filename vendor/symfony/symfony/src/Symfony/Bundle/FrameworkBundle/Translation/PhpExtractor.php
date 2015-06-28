@@ -12,7 +12,6 @@
 namespace Symfony\Bundle\FrameworkBundle\Translation;
 
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Translation\Extractor\AbstractFileExtractor;
 use Symfony\Component\Translation\MessageCatalogue;
 use Symfony\Component\Translation\Extractor\ExtractorInterface;
 
@@ -21,7 +20,7 @@ use Symfony\Component\Translation\Extractor\ExtractorInterface;
  *
  * @author Michel Salib <michelsalib@hotmail.com>
  */
-class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
+class PhpExtractor implements ExtractorInterface
 {
     const MESSAGE_TOKEN = 300;
 
@@ -55,9 +54,11 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
     /**
      * {@inheritdoc}
      */
-    public function extract($resource, MessageCatalogue $catalog)
+    public function extract($directory, MessageCatalogue $catalog)
     {
-        $files = $this->extractFiles($resource);
+        // load any existing translation files
+        $finder = new Finder();
+        $files = $finder->files()->name('*.php')->in($directory);
         foreach ($files as $file) {
             $this->parseTokens(token_get_all(file_get_contents($file)), $catalog);
         }
@@ -102,7 +103,7 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
 
     /**
      * Extracts the message from the iterator while the tokens
-     * match allowed message tokens.
+     * match allowed message tokens
      */
     private function getMessage(\Iterator $tokenIterator)
     {
@@ -147,7 +148,7 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
     {
         $tokenIterator = new \ArrayIterator($tokens);
 
-        for ($key = 0; $key < $tokenIterator->count(); ++$key) {
+        for ($key = 0; $key < $tokenIterator->count(); $key++) {
             foreach ($this->sequences as $sequence) {
                 $message = '';
                 $tokenIterator->seek($key);
@@ -172,29 +173,5 @@ class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
                 }
             }
         }
-    }
-
-    /**
-     * @param string $file
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return bool
-     */
-    protected function canBeExtracted($file)
-    {
-        return $this->isFile($file) && 'php' === pathinfo($file, PATHINFO_EXTENSION);
-    }
-
-    /**
-     * @param string|array $directory
-     *
-     * @return array
-     */
-    protected function extractFromDirectory($directory)
-    {
-        $finder = new Finder();
-
-        return $finder->files()->name('*.php')->in($directory);
     }
 }

@@ -12,10 +12,10 @@
 namespace Symfony\Bridge\Doctrine\Tests\Form\ChoiceList;
 
 use Symfony\Bridge\Doctrine\Form\ChoiceList\ORMQueryBuilderLoader;
-use Symfony\Bridge\Doctrine\Test\DoctrineTestHelper;
+use Symfony\Bridge\Doctrine\Tests\DoctrineOrmTestCase;
 use Doctrine\DBAL\Connection;
 
-class ORMQueryBuilderLoaderTest extends DoctrineTestHelper
+class ORMQueryBuilderLoaderTest extends DoctrineOrmTestCase
 {
     /**
      * @expectedException \Symfony\Component\Form\Exception\UnexpectedTypeException

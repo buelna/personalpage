@@ -60,9 +60,7 @@ class RouterMatchCommand extends ContainerAwareCommand
 The <info>%command.name%</info> shows which routes match a given request and which don't and for what reason:
 
   <info>php %command.full_name% /foo</info>
-  
-or
-
+  or
   <info>php %command.full_name% /foo --method POST --scheme https --host symfony.com --verbose</info>
 
 EOF
@@ -98,7 +96,7 @@ EOF
             } elseif (TraceableUrlMatcher::ROUTE_MATCHES == $trace['level']) {
                 $output->writeln(sprintf('<fg=green>Route "%s" matches</>', $trace['name']));
 
-                $routerDebugcommand = $this->getApplication()->find('debug:router');
+                $routerDebugcommand = $this->getApplication()->find('router:debug');
                 $output->writeln('');
                 $routerDebugcommand->run(new ArrayInput(array('name' => $trace['name'])), $output);
 

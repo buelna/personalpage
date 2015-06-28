@@ -17,16 +17,13 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Loads entities using a {@link QueryBuilder} instance.
- *
- * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @author Bernhard Schussek <bschussek@gmail.com>
+ * Getting Entities through the ORM QueryBuilder
  */
 class ORMQueryBuilderLoader implements EntityLoaderInterface
 {
     /**
      * Contains the query builder that builds the query for fetching the
-     * entities.
+     * entities
      *
      * This property should only be accessed through queryBuilder.
      *
@@ -35,16 +32,11 @@ class ORMQueryBuilderLoader implements EntityLoaderInterface
     private $queryBuilder;
 
     /**
-     * Construct an ORM Query Builder Loader.
+     * Construct an ORM Query Builder Loader
      *
-     * @param QueryBuilder|\Closure $queryBuilder The query builder or a closure
-     *                                            for creating the query builder.
-     *                                            Passing a closure is
-     *                                            deprecated and will not be
-     *                                            supported anymore as of
-     *                                            Symfony 3.0.
-     * @param EntityManager         $manager      Deprecated.
-     * @param string                $class        Deprecated.
+     * @param QueryBuilder|\Closure $queryBuilder
+     * @param EntityManager         $manager
+     * @param string                $class
      *
      * @throws UnexpectedTypeException
      */
@@ -57,14 +49,9 @@ class ORMQueryBuilderLoader implements EntityLoaderInterface
         }
 
         if ($queryBuilder instanceof \Closure) {
-            @trigger_error('Passing a QueryBuilder closure to '.__CLASS__.'::__construct() is deprecated since version 2.7 and will be removed in 3.0.', E_USER_DEPRECATED);
-
             if (!$manager instanceof EntityManager) {
                 throw new UnexpectedTypeException($manager, 'Doctrine\ORM\EntityManager');
             }
-
-            @trigger_error('Passing an EntityManager to '.__CLASS__.'::__construct() is deprecated since version 2.7 and will be removed in 3.0.', E_USER_DEPRECATED);
-            @trigger_error('Passing a class to '.__CLASS__.'::__construct() is deprecated since version 2.7 and will be removed in 3.0.', E_USER_DEPRECATED);
 
             $queryBuilder = $queryBuilder($manager->getRepository($class));
 

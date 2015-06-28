@@ -114,7 +114,6 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
      * ACL entries have the CASCADE option on their foreign key so they will also get deleted
      *
      * @param SecurityIdentityInterface $sid
-     *
      * @throws \InvalidArgumentException
      */
     public function deleteSecurityIdentity(SecurityIdentityInterface $sid)
@@ -152,7 +151,7 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
     }
 
     /**
-     * Implementation of PropertyChangedListener.
+     * Implementation of PropertyChangedListener
      *
      * This allows us to keep track of which values have been changed, so we don't
      * have to do a full introspection when ->updateAcl() is called.
@@ -256,7 +255,7 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
                 if (null === $propertyChanges['parentAcl'][1]) {
                     $sets[] = 'parent_object_identity_id = NULL';
                 } else {
-                    $sets[] = 'parent_object_identity_id = '.(int) $propertyChanges['parentAcl'][1]->getId();
+                    $sets[] = 'parent_object_identity_id = '.intval($propertyChanges['parentAcl'][1]->getId());
                 }
 
                 $this->regenerateAncestorRelations($acl);
@@ -369,7 +368,7 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
      * Updates a user security identity when the user's username changes
      *
      * @param UserSecurityIdentity $usid
-     * @param string               $oldUsername
+     * @param string $oldUsername
      */
     public function updateUserSecurityIdentity(UserSecurityIdentity $usid, $oldUsername)
     {
@@ -379,8 +378,7 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
     /**
      * Constructs the SQL for deleting access control entries.
      *
-     * @param int $oidPK
-     *
+     * @param int     $oidPK
      * @return string
      */
     protected function getDeleteAccessControlEntriesSql($oidPK)
@@ -395,8 +393,7 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
     /**
      * Constructs the SQL for deleting a specific ACE.
      *
-     * @param int $acePK
-     *
+     * @param int     $acePK
      * @return string
      */
     protected function getDeleteAccessControlEntrySql($acePK)
@@ -411,8 +408,7 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
     /**
      * Constructs the SQL for deleting an object identity.
      *
-     * @param int $pk
-     *
+     * @param int     $pk
      * @return string
      */
     protected function getDeleteObjectIdentitySql($pk)
@@ -427,8 +423,7 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
     /**
      * Constructs the SQL for deleting relation entries.
      *
-     * @param int $pk
-     *
+     * @param int     $pk
      * @return string
      */
     protected function getDeleteObjectIdentityRelationsSql($pk)
@@ -443,17 +438,16 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
     /**
      * Constructs the SQL for inserting an ACE.
      *
-     * @param int         $classId
-     * @param int|null    $objectIdentityId
-     * @param string|null $field
-     * @param int         $aceOrder
-     * @param int         $securityIdentityId
-     * @param string      $strategy
-     * @param int         $mask
-     * @param bool        $granting
-     * @param bool        $auditSuccess
-     * @param bool        $auditFailure
-     *
+     * @param int          $classId
+     * @param int|null     $objectIdentityId
+     * @param string|null  $field
+     * @param int          $aceOrder
+     * @param int          $securityIdentityId
+     * @param string       $strategy
+     * @param int          $mask
+     * @param bool         $granting
+     * @param bool         $auditSuccess
+     * @param bool         $auditFailure
      * @return string
      */
     protected function getInsertAccessControlEntrySql($classId, $objectIdentityId, $field, $aceOrder, $securityIdentityId, $strategy, $mask, $granting, $auditSuccess, $auditFailure)
@@ -478,7 +472,7 @@ QUERY;
             $query,
             $this->options['entry_table_name'],
             $classId,
-            null === $objectIdentityId ? 'NULL' : (int) $objectIdentityId,
+            null === $objectIdentityId ? 'NULL' : intval($objectIdentityId),
             null === $field ? 'NULL' : $this->connection->quote($field),
             $aceOrder,
             $securityIdentityId,
@@ -494,7 +488,6 @@ QUERY;
      * Constructs the SQL for inserting a new class type.
      *
      * @param string $classType
-     *
      * @return string
      */
     protected function getInsertClassSql($classType)
@@ -509,9 +502,8 @@ QUERY;
     /**
      * Constructs the SQL for inserting a relation entry.
      *
-     * @param int $objectIdentityId
-     * @param int $ancestorId
-     *
+     * @param int     $objectIdentityId
+     * @param int     $ancestorId
      * @return string
      */
     protected function getInsertObjectIdentityRelationSql($objectIdentityId, $ancestorId)
@@ -527,10 +519,9 @@ QUERY;
     /**
      * Constructs the SQL for inserting an object identity.
      *
-     * @param string $identifier
-     * @param int    $classId
-     * @param bool   $entriesInheriting
-     *
+     * @param string  $identifier
+     * @param int     $classId
+     * @param bool    $entriesInheriting
      * @return string
      */
     protected function getInsertObjectIdentitySql($identifier, $classId, $entriesInheriting)
@@ -553,9 +544,7 @@ QUERY;
      * Constructs the SQL for inserting a security identity.
      *
      * @param SecurityIdentityInterface $sid
-     *
      * @throws \InvalidArgumentException
-     *
      * @return string
      */
     protected function getInsertSecurityIdentitySql(SecurityIdentityInterface $sid)
@@ -581,11 +570,10 @@ QUERY;
     /**
      * Constructs the SQL for selecting an ACE.
      *
-     * @param int    $classId
-     * @param int    $oid
-     * @param string $field
-     * @param int    $order
-     *
+     * @param int     $classId
+     * @param int     $oid
+     * @param string  $field
+     * @param int     $order
      * @return string
      */
     protected function getSelectAccessControlEntryIdSql($classId, $oid, $field, $order)
@@ -596,7 +584,7 @@ QUERY;
             $classId,
             null === $oid ?
                 $this->connection->getDatabasePlatform()->getIsNullExpression('object_identity_id')
-                : 'object_identity_id = '.(int) $oid,
+                : 'object_identity_id = '.intval($oid),
             null === $field ?
                 $this->connection->getDatabasePlatform()->getIsNullExpression('field_name')
                 : 'field_name = '.$this->connection->quote($field),
@@ -609,7 +597,6 @@ QUERY;
      * the passed class type.
      *
      * @param string $classType
-     *
      * @return string
      */
     protected function getSelectClassIdSql($classType)
@@ -625,9 +612,7 @@ QUERY;
      * Constructs the SQL for selecting the primary key of a security identity.
      *
      * @param SecurityIdentityInterface $sid
-     *
      * @throws \InvalidArgumentException
-     *
      * @return string
      */
     protected function getSelectSecurityIdentityIdSql(SecurityIdentityInterface $sid)
@@ -654,9 +639,7 @@ QUERY;
      * Constructs the SQL to delete a security identity.
      *
      * @param SecurityIdentityInterface $sid
-     *
      * @throws \InvalidArgumentException
-     *
      * @return string
      */
     protected function getDeleteSecurityIdentityIdSql(SecurityIdentityInterface $sid)
@@ -670,11 +653,9 @@ QUERY;
     /**
      * Constructs the SQL for updating an object identity.
      *
-     * @param int   $pk
-     * @param array $changes
-     *
+     * @param int     $pk
+     * @param array   $changes
      * @throws \InvalidArgumentException
-     *
      * @return string
      */
     protected function getUpdateObjectIdentitySql($pk, array $changes)
@@ -695,8 +676,7 @@ QUERY;
      * Constructs the SQL for updating a user security identity.
      *
      * @param UserSecurityIdentity $usid
-     * @param string               $oldUsername
-     *
+     * @param string $oldUsername
      * @return string
      */
     protected function getUpdateUserSecurityIdentitySql(UserSecurityIdentity $usid, $oldUsername)
@@ -720,11 +700,9 @@ QUERY;
     /**
      * Constructs the SQL for updating an ACE.
      *
-     * @param int   $pk
-     * @param array $sets
-     *
+     * @param int     $pk
+     * @param array   $sets
      * @throws \InvalidArgumentException
-     *
      * @return string
      */
     protected function getUpdateAccessControlEntrySql($pk, array $sets)
@@ -742,7 +720,7 @@ QUERY;
     }
 
     /**
-     * Creates the ACL for the passed object identity.
+     * Creates the ACL for the passed object identity
      *
      * @param ObjectIdentityInterface $oid
      */
@@ -759,7 +737,6 @@ QUERY;
      * If the type does not yet exist in the database, it will be created.
      *
      * @param string $classType
-     *
      * @return int
      */
     private function createOrRetrieveClassId($classType)
@@ -780,7 +757,6 @@ QUERY;
      * created.
      *
      * @param SecurityIdentityInterface $sid
-     *
      * @return int
      */
     private function createOrRetrieveSecurityIdentityId(SecurityIdentityInterface $sid)
@@ -797,7 +773,7 @@ QUERY;
     /**
      * Deletes all ACEs for the given object identity primary key.
      *
-     * @param int $oidPK
+     * @param int     $oidPK
      */
     private function deleteAccessControlEntries($oidPK)
     {
@@ -807,7 +783,7 @@ QUERY;
     /**
      * Deletes the object identity from the database.
      *
-     * @param int $pk
+     * @param int     $pk
      */
     private function deleteObjectIdentity($pk)
     {
@@ -817,7 +793,7 @@ QUERY;
     /**
      * Deletes all entries from the relations table from the database.
      *
-     * @param int $pk
+     * @param int     $pk
      */
     private function deleteObjectIdentityRelations($pk)
     {
@@ -853,8 +829,9 @@ QUERY;
     {
         $sids = new \SplObjectStorage();
         $classIds = new \SplObjectStorage();
+        $currentIds = array();
         foreach ($changes[1] as $field => $new) {
-            for ($i = 0, $c = count($new); $i < $c; ++$i) {
+            for ($i = 0,$c = count($new); $i<$c; $i++) {
                 $ace = $new[$i];
 
                 if (null === $ace->getId()) {
@@ -879,7 +856,9 @@ QUERY;
 
                     $aceIdProperty = new \ReflectionProperty('Symfony\Component\Security\Acl\Domain\Entry', 'id');
                     $aceIdProperty->setAccessible(true);
-                    $aceIdProperty->setValue($ace, (int) $aceId);
+                    $aceIdProperty->setValue($ace, intval($aceId));
+                } else {
+                    $currentIds[$ace->getId()] = true;
                 }
             }
         }
@@ -895,7 +874,7 @@ QUERY;
     {
         $currentIds = array();
         foreach ($changes[1] as $field => $new) {
-            for ($i = 0, $c = count($new); $i < $c; ++$i) {
+            for ($i = 0, $c = count($new); $i < $c; $i++) {
                 $ace = $new[$i];
 
                 if (null !== $ace->getId()) {
@@ -905,7 +884,7 @@ QUERY;
         }
 
         foreach ($changes[0] as $old) {
-            for ($i = 0, $c = count($old); $i < $c; ++$i) {
+            for ($i = 0, $c = count($old); $i < $c; $i++) {
                 $ace = $old[$i];
 
                 if (!isset($currentIds[$ace->getId()])) {
@@ -928,7 +907,8 @@ QUERY;
 
         $sids = new \SplObjectStorage();
         $classIds = new \SplObjectStorage();
-        for ($i = 0, $c = count($new); $i < $c; ++$i) {
+        $currentIds = array();
+        for ($i = 0,$c = count($new); $i<$c; $i++) {
             $ace = $new[$i];
 
             if (null === $ace->getId()) {
@@ -953,7 +933,9 @@ QUERY;
 
                 $aceIdProperty = new \ReflectionProperty($ace, 'id');
                 $aceIdProperty->setAccessible(true);
-                $aceIdProperty->setValue($ace, (int) $aceId);
+                $aceIdProperty->setValue($ace, intval($aceId));
+            } else {
+                $currentIds[$ace->getId()] = true;
             }
         }
     }
@@ -969,7 +951,7 @@ QUERY;
         list($old, $new) = $changes;
         $currentIds = array();
 
-        for ($i = 0, $c = count($new); $i < $c; ++$i) {
+        for ($i = 0,$c = count($new); $i<$c; $i++) {
             $ace = $new[$i];
 
             if (null !== $ace->getId()) {
@@ -977,7 +959,7 @@ QUERY;
             }
         }
 
-        for ($i = 0, $c = count($old); $i < $c; ++$i) {
+        for ($i = 0, $c = count($old); $i < $c; $i++) {
             $ace = $old[$i];
 
             if (!isset($currentIds[$ace->getId()])) {

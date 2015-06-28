@@ -111,7 +111,7 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
     private $reflClass;
 
     /**
-     * Constructs a metadata for the given class.
+     * Constructs a metadata for the given class
      *
      * @param string $class
      */
@@ -129,16 +129,14 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
     /**
      * {@inheritdoc}
      *
-     * @deprecated since version 2.5, to be removed in 3.0.
+     * @deprecated Deprecated since version 2.5, to be removed in Symfony 3.0.
      */
     public function accept(ValidationVisitorInterface $visitor, $value, $group, $propertyPath, $propagatedGroup = null)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.5 and will be removed in 3.0.', E_USER_DEPRECATED);
-
         if (null === $propagatedGroup && Constraint::DEFAULT_GROUP === $group
                 && ($this->hasGroupSequence() || $this->isGroupSequenceProvider())) {
             if ($this->hasGroupSequence()) {
-                $groups = $this->getGroupSequence()->groups;
+                $groups = $this->getGroupSequence();
             } else {
                 $groups = $value->getGroupSequence();
             }
@@ -197,7 +195,7 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
     }
 
     /**
-     * Returns the name of the default group for this class.
+     * Returns the name of the default group for this class
      *
      * For each class, the group "Default" is an alias for the group
      * "<ClassName>", where <ClassName> is the non-namespaced name of the
@@ -209,7 +207,7 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
      * will validate the group sequence. The constraints assigned to "Default"
      * can still be validated by validating the class in "<ClassName>".
      *
-     * @return string The name of the default group
+     * @return string  The name of the default group
      */
     public function getDefaultGroup()
     {
@@ -373,12 +371,10 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
      *
      * @param MemberMetadata $metadata
      *
-     * @deprecated since version 2.6, to be removed in 3.0.
+     * @deprecated Deprecated since version 2.6, to be removed in 3.0.
      */
     protected function addMemberMetadata(MemberMetadata $metadata)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.6 and will be removed in 3.0. Use the addPropertyMetadata() method instead.', E_USER_DEPRECATED);
-
         $this->addPropertyMetadata($metadata);
     }
 
@@ -389,12 +385,10 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
      *
      * @return bool
      *
-     * @deprecated since version 2.6, to be removed in 3.0. Use {@link hasPropertyMetadata} instead.
+     * @deprecated Deprecated since version 2.6, to be removed in 3.0. Use {@link hasPropertyMetadata} instead.
      */
     public function hasMemberMetadatas($property)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.6 and will be removed in 3.0. Use the hasPropertyMetadata() method instead.', E_USER_DEPRECATED);
-
         return $this->hasPropertyMetadata($property);
     }
 
@@ -405,12 +399,10 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
      *
      * @return MemberMetadata[] An array of MemberMetadata
      *
-     * @deprecated since version 2.6, to be removed in 3.0. Use {@link getPropertyMetadata} instead.
+     * @deprecated Deprecated since version 2.6, to be removed in 3.0. Use {@link getPropertyMetadata} instead.
      */
     public function getMemberMetadatas($property)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.6 and will be removed in 3.0. Use the getPropertyMetadata() method instead.', E_USER_DEPRECATED);
-
         return $this->getPropertyMetadata($property);
     }
 
@@ -479,7 +471,7 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
      */
     public function hasGroupSequence()
     {
-        return $this->groupSequence && count($this->groupSequence->groups) > 0;
+        return count($this->groupSequence) > 0;
     }
 
     /**
@@ -507,7 +499,7 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
     /**
      * Sets whether a group sequence provider should be used.
      *
-     * @param bool $active
+     * @param bool    $active
      *
      * @throws GroupDefinitionException
      */

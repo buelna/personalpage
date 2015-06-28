@@ -12,10 +12,10 @@
 namespace Symfony\Component\Serializer\Exception;
 
 /**
- * UnexpectedValueException.
+ * UnexpectedValueException
  *
  * @author Lukas Kahwe Smith <smith@pooteeweet.org>
  */
-class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
+class UnexpectedValueException extends \UnexpectedValueException implements Exception
 {
 }

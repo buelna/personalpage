@@ -11,8 +11,6 @@
 
 namespace Symfony\Component\Validator;
 
-@trigger_error('The class '.__NAMESPACE__.'\DefaultTranslator is deprecated since version 2.7 and will be removed in 3.0. Use Symfony\Component\Translation\IdentityTranslator instead.', E_USER_DEPRECATED);
-
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Exception\BadMethodCallException;
 use Symfony\Component\Validator\Exception\InvalidArgumentException;
@@ -44,8 +42,6 @@ use Symfony\Component\Validator\Exception\InvalidArgumentException;
  * locales. Instead, it implements a subset of the capabilities of
  * {@link \Symfony\Component\Translation\Translator} and can be used in places
  * where translation is not required by default but should be optional.
- *
- * @deprecated since version 2.7, to be removed in 3.0. Use Symfony\Component\Translation\IdentityTranslator instead.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
@@ -92,7 +88,7 @@ class DefaultTranslator implements TranslatorInterface
      * have the same expressiveness. While Translator supports intervals in
      * message translations, which are needed for languages other than English,
      * this translator does not. You should use Translator or a custom
-     * implementation of {@link \Symfony\Component\Translation\TranslatorInterface} if you need this or similar
+     * implementation of {@link TranslatorInterface} if you need this or similar
      * functionality.
      *
      * Example usage:
@@ -121,11 +117,11 @@ class DefaultTranslator implements TranslatorInterface
      *
      *     // -> These are 3 donkeys.
      *
-     * @param string $id         The message id
-     * @param int    $number     The number to use to find the index of the message
-     * @param array  $parameters An array of parameters for the message
-     * @param string $domain     Ignored
-     * @param string $locale     Ignored
+     * @param string  $id         The message id
+     * @param int     $number     The number to use to find the index of the message
+     * @param array   $parameters An array of parameters for the message
+     * @param string  $domain     Ignored
+     * @param string  $locale     Ignored
      *
      * @return string The translated string
      *

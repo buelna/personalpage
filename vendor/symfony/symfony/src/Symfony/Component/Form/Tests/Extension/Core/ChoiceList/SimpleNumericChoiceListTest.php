@@ -13,9 +13,6 @@ namespace Symfony\Component\Form\Tests\Extension\Core\ChoiceList;
 
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
-/**
- * @group legacy
- */
 class SimpleNumericChoiceListTest extends AbstractChoiceListTest
 {
     public function testGetIndicesForChoicesDealsWithNumericChoices()

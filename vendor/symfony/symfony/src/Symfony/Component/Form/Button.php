@@ -194,7 +194,9 @@ class Button implements \IteratorAggregate, FormInterface
      *
      * This method should not be invoked.
      *
-     * @param mixed $modelData
+     * @param string $modelData
+     *
+     * @throws BadMethodCallException
      */
     public function setData($modelData)
     {
@@ -204,6 +206,8 @@ class Button implements \IteratorAggregate, FormInterface
 
     /**
      * Unsupported method.
+     *
+     * @return null Always returns null.
      */
     public function getData()
     {
@@ -211,6 +215,8 @@ class Button implements \IteratorAggregate, FormInterface
 
     /**
      * Unsupported method.
+     *
+     * @return null Always returns null.
      */
     public function getNormData()
     {
@@ -218,6 +224,8 @@ class Button implements \IteratorAggregate, FormInterface
 
     /**
      * Unsupported method.
+     *
+     * @return null Always returns null.
      */
     public function getViewData()
     {
@@ -265,6 +273,8 @@ class Button implements \IteratorAggregate, FormInterface
 
     /**
      * Unsupported method.
+     *
+     * @return null Always returns null.
      */
     public function getPropertyPath()
     {

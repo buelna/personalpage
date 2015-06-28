@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="{{ _charset }}" />
+        <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}

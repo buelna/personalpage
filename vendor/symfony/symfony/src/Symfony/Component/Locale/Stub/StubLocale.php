@@ -11,8 +11,7 @@
 
 namespace Symfony\Component\Locale\Stub;
 
-@trigger_error('The '.__NAMESPACE__.'\StubLocale class is deprecated since version 2.3 and will be removed in 3.0. Use the Symfony\Component\Intl\Locale\Locale and Symfony\Component\Intl\Intl classes instead.', E_USER_DEPRECATED);
-
+use Symfony\Component\Icu\IcuData;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Intl\Locale\Locale;
 
@@ -21,32 +20,32 @@ use Symfony\Component\Intl\Locale\Locale;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  *
- * @deprecated since version 2.3, to be removed in 3.0.
- *             Use {@link \Symfony\Component\Intl\Locale\Locale} and
+ * @deprecated Deprecated since version 2.3, to be removed in 3.0. Use
+ *             {@link \Symfony\Component\Intl\Locale\Locale} and
  *             {@link \Symfony\Component\Intl\Intl} instead.
  */
 class StubLocale extends Locale
 {
     /**
-     * Caches the currencies.
+     * Caches the currencies
      *
      * @var array
      */
     protected static $currencies;
 
     /**
-     * Caches the currencies names.
+     * Caches the currencies names
      *
      * @var array
      */
     protected static $currenciesNames;
 
     /**
-     * Returns the currencies data.
+     * Returns the currencies data
      *
      * @param string $locale
      *
-     * @return array The currencies data
+     * @return array  The currencies data
      */
     public static function getCurrenciesData($locale)
     {
@@ -58,13 +57,13 @@ class StubLocale extends Locale
     }
 
     /**
-     *  Returns the currencies names for a locale.
+     *  Returns the currencies names for a locale
      *
      * @param string $locale The locale to use for the currencies names
      *
-     * @return array The currencies names with their codes as keys
+     * @return array                     The currencies names with their codes as keys
      *
-     * @throws \InvalidArgumentException When the locale is different than 'en'
+     * @throws \InvalidArgumentException  When the locale is different than 'en'
      */
     public static function getDisplayCurrencies($locale)
     {
@@ -76,9 +75,9 @@ class StubLocale extends Locale
     }
 
     /**
-     * Returns all available currencies codes.
+     * Returns all available currencies codes
      *
-     * @return array The currencies codes
+     * @return array  The currencies codes
      */
     public static function getCurrencies()
     {
@@ -87,7 +86,7 @@ class StubLocale extends Locale
 
     public static function getDataDirectory()
     {
-        return Intl::getDataDirectory();
+        return IcuData::getResourceDirectory();
     }
 
     private static function prepareCurrencies($locale)

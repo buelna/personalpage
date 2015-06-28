@@ -11,6 +11,10 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Command;
 
+if (!defined('JSON_PRETTY_PRINT')) {
+    define('JSON_PRETTY_PRINT', 128);
+}
+
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -29,8 +33,7 @@ class YamlLintCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('lint:yaml')
-            ->setAliases(array('yaml:lint'))
+            ->setName('yaml:lint')
             ->setDescription('Lints a file and outputs encountered errors')
             ->addArgument('filename', null, 'A file or a directory or STDIN')
             ->addOption('format', null, InputOption::VALUE_REQUIRED, 'The output format', 'txt')
@@ -40,20 +43,20 @@ the first encountered syntax error.
 
 You can validate the syntax of a file:
 
-  <info>php %command.full_name% filename</info>
+<info>php %command.full_name% filename</info>
 
 Or of a whole directory:
 
-  <info>php %command.full_name% dirname</info>
-  <info>php %command.full_name% dirname --format=json</info>
+<info>php %command.full_name% dirname</info>
+<info>php %command.full_name% dirname --format=json</info>
 
 Or all YAML files in a bundle:
 
-  <info>php %command.full_name% @AcmeDemoBundle</info>
+<info>php %command.full_name% @AcmeDemoBundle</info>
 
 You can also pass the YAML contents from STDIN:
 
-  <info>cat filename | php %command.full_name%</info>
+<info>cat filename | php %command.full_name%</info>
 
 EOF
             )
@@ -62,10 +65,6 @@ EOF
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (false !== strpos($input->getFirstArgument(), ':l')) {
-            $output->writeln('<comment>The use of "yaml:lint" command is deprecated since version 2.7 and will be removed in 3.0. Use the "lint:yaml" instead.</comment>');
-        }
-
         $filename = $input->getArgument('filename');
 
         if (!$filename) {
@@ -157,7 +156,7 @@ EOF
             }
         });
 
-        $output->writeln(json_encode($filesInfo, defined('JSON_PRETTY_PRINT') ? JSON_PRETTY_PRINT : 0));
+        $output->writeln(json_encode($filesInfo, JSON_PRETTY_PRINT));
 
         return min($errors, 1);
     }

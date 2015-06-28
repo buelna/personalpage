@@ -118,7 +118,7 @@ class InlineServiceDefinitionsPassTest extends \PHPUnit_Framework_TestCase
         $b = $container
             ->register('b')
             ->setPublic(false)
-            ->setFactory(array(new Reference('a'), 'a'))
+            ->setFactoryService('a')
         ;
 
         $container
@@ -142,7 +142,7 @@ class InlineServiceDefinitionsPassTest extends \PHPUnit_Framework_TestCase
         $container
             ->register('b')
             ->setPublic(false)
-            ->setFactory(array(new Reference('a'), 'a'))
+            ->setFactoryService('a')
         ;
 
         $container
@@ -168,12 +168,12 @@ class InlineServiceDefinitionsPassTest extends \PHPUnit_Framework_TestCase
         $container
             ->register('b')
             ->setPublic(false)
-            ->setFactory(array(new Reference('a'), 'a'))
+            ->setFactoryService('a')
         ;
 
         $inlineFactory = new Definition();
         $inlineFactory->setPublic(false);
-        $inlineFactory->setFactory(array(new Reference('b'), 'b'));
+        $inlineFactory->setFactoryService('b');
 
         $container
             ->register('foo')

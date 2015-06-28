@@ -11,7 +11,7 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-@trigger_error('The '.__NAMESPACE__.'\False class is deprecated since version 2.7 and will be removed in 3.0. Use the IsFalse class in the same namespace instead.', E_USER_DEPRECATED);
+use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
@@ -19,8 +19,9 @@ namespace Symfony\Component\Validator\Constraints;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  *
- * @deprecated since version 2.7, to be removed in 3.0. Use IsFalse instead.
+ * @api
  */
-class False extends IsFalse
+class False extends Constraint
 {
+    public $message = 'This value should be false.';
 }

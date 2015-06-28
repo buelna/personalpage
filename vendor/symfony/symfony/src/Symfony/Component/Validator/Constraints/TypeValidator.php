@@ -11,7 +11,6 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -41,24 +40,17 @@ class TypeValidator extends ConstraintValidator
         $isFunction = 'is_'.$type;
         $ctypeFunction = 'ctype_'.$type;
 
-        if (function_exists($isFunction) && $isFunction($value)) {
+        if (function_exists($isFunction) && call_user_func($isFunction, $value)) {
             return;
-        } elseif (function_exists($ctypeFunction) && $ctypeFunction($value)) {
+        } elseif (function_exists($ctypeFunction) && call_user_func($ctypeFunction, $value)) {
             return;
         } elseif ($value instanceof $constraint->type) {
             return;
         }
 
-        if ($this->context instanceof ExecutionContextInterface) {
-            $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', $this->formatValue($value))
-                ->setParameter('{{ type }}', $constraint->type)
-                ->addViolation();
-        } else {
-            $this->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', $this->formatValue($value))
-                ->setParameter('{{ type }}', $constraint->type)
-                ->addViolation();
-        }
+        $this->buildViolation($constraint->message)
+            ->setParameter('{{ value }}', $this->formatValue($value))
+            ->setParameter('{{ type }}', $constraint->type)
+            ->addViolation();
     }
 }

@@ -144,7 +144,7 @@ class InputDefinition
     /**
      * Returns an InputArgument by name or by position.
      *
-     * @param string|int $name The InputArgument name or position
+     * @param string|int     $name The InputArgument name or position
      *
      * @return InputArgument An InputArgument object
      *
@@ -166,9 +166,9 @@ class InputDefinition
     /**
      * Returns true if an InputArgument object exists by name or position.
      *
-     * @param string|int $name The InputArgument name or position
+     * @param string|int     $name The InputArgument name or position
      *
-     * @return bool true if the InputArgument object exists, false otherwise
+     * @return bool    true if the InputArgument object exists, false otherwise
      *
      * @api
      */
@@ -194,7 +194,7 @@ class InputDefinition
     /**
      * Returns the number of InputArguments.
      *
-     * @return int The number of InputArguments
+     * @return int     The number of InputArguments
      */
     public function getArgumentCount()
     {
@@ -204,7 +204,7 @@ class InputDefinition
     /**
      * Returns the number of required InputArguments.
      *
-     * @return int The number of required InputArguments
+     * @return int     The number of required InputArguments
      */
     public function getArgumentRequiredCount()
     {
@@ -310,7 +310,7 @@ class InputDefinition
      *
      * @param string $name The InputOption name
      *
-     * @return bool true if the InputOption object exists, false otherwise
+     * @return bool    true if the InputOption object exists, false otherwise
      *
      * @api
      */
@@ -336,7 +336,7 @@ class InputDefinition
      *
      * @param string $name The InputOption shortcut
      *
-     * @return bool true if the InputOption object exists, false otherwise
+     * @return bool    true if the InputOption object exists, false otherwise
      */
     public function hasShortcut($name)
     {
@@ -391,50 +391,22 @@ class InputDefinition
     /**
      * Gets the synopsis.
      *
-     * @param bool $short Whether to return the short version (with options folded) or not
-     *
      * @return string The synopsis
      */
-    public function getSynopsis($short = false)
+    public function getSynopsis()
     {
         $elements = array();
-
-        if ($short && $this->getOptions()) {
-            $elements[] = '[options]';
-        } elseif (!$short) {
-            foreach ($this->getOptions() as $option) {
-                $value = '';
-                if ($option->acceptValue()) {
-                    $value = sprintf(
-                        ' %s%s%s',
-                        $option->isValueOptional() ? '[' : '',
-                        strtoupper($option->getName()),
-                        $option->isValueOptional() ? ']' : ''
-                    );
-                }
-
-                $shortcut = $option->getShortcut() ? sprintf('-%s|', $option->getShortcut()) : '';
-                $elements[] = sprintf('[%s--%s%s]', $shortcut, $option->getName(), $value);
-            }
-        }
-
-        if (count($elements) && $this->getArguments()) {
-            $elements[] = '[--]';
+        foreach ($this->getOptions() as $option) {
+            $shortcut = $option->getShortcut() ? sprintf('-%s|', $option->getShortcut()) : '';
+            $elements[] = sprintf('['.($option->isValueRequired() ? '%s--%s="..."' : ($option->isValueOptional() ? '%s--%s[="..."]' : '%s--%s')).']', $shortcut, $option->getName());
         }
 
         foreach ($this->getArguments() as $argument) {
-            $element = '<'.$argument->getName().'>';
-            if (!$argument->isRequired()) {
-                $element = '['.$element.']';
-            } elseif ($argument->isArray()) {
-                $element = $element.' ('.$element.')';
-            }
+            $elements[] = sprintf($argument->isRequired() ? '%s' : '[%s]', $argument->getName().($argument->isArray() ? '1' : ''));
 
             if ($argument->isArray()) {
-                $element .= '...';
+                $elements[] = sprintf('... [%sN]', $argument->getName());
             }
-
-            $elements[] = $element;
         }
 
         return implode(' ', $elements);
@@ -445,12 +417,10 @@ class InputDefinition
      *
      * @return string A string representing the InputDefinition
      *
-     * @deprecated since version 2.3, to be removed in 3.0.
+     * @deprecated Deprecated since version 2.3, to be removed in 3.0.
      */
     public function asText()
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.3 and will be removed in 3.0.', E_USER_DEPRECATED);
-
         $descriptor = new TextDescriptor();
         $output = new BufferedOutput(BufferedOutput::VERBOSITY_NORMAL, true);
         $descriptor->describe($output, $this, array('raw_output' => true));
@@ -461,16 +431,14 @@ class InputDefinition
     /**
      * Returns an XML representation of the InputDefinition.
      *
-     * @param bool $asDom Whether to return a DOM or an XML string
+     * @param bool    $asDom Whether to return a DOM or an XML string
      *
      * @return string|\DOMDocument An XML string representing the InputDefinition
      *
-     * @deprecated since version 2.3, to be removed in 3.0.
+     * @deprecated Deprecated since version 2.3, to be removed in 3.0.
      */
     public function asXml($asDom = false)
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.3 and will be removed in 3.0.', E_USER_DEPRECATED);
-
         $descriptor = new XmlDescriptor();
 
         if ($asDom) {

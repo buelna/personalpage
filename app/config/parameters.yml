@@ -3,12 +3,12 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: caiidb
-    database_user: personalp
-    database_password: lectura
+    database_name: nodb
+    database_user: nouser
+    database_password: nopass
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
     locale: es
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: c2812b10adec56fd66b2567f389be98b4

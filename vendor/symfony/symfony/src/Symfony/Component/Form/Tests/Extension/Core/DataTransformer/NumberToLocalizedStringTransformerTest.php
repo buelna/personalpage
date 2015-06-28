@@ -74,7 +74,7 @@ class NumberToLocalizedStringTransformerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($to, $transformer->transform($from));
     }
 
-    public function testTransformWithScale()
+    public function testTransformWithPrecision()
     {
         $transformer = new NumberToLocalizedStringTransformer(2);
 
@@ -174,14 +174,14 @@ class NumberToLocalizedStringTransformerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider transformWithRoundingProvider
      */
-    public function testTransformWithRounding($scale, $input, $output, $roundingMode)
+    public function testTransformWithRounding($precision, $input, $output, $roundingMode)
     {
-        $transformer = new NumberToLocalizedStringTransformer($scale, null, $roundingMode);
+        $transformer = new NumberToLocalizedStringTransformer($precision, null, $roundingMode);
 
         $this->assertEquals($output, $transformer->transform($input));
     }
 
-    public function testTransformDoesNotRoundIfNoScale()
+    public function testTransformDoesNotRoundIfNoPrecision()
     {
         $transformer = new NumberToLocalizedStringTransformer(null, null, NumberToLocalizedStringTransformer::ROUND_DOWN);
 
@@ -327,14 +327,14 @@ class NumberToLocalizedStringTransformerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider reverseTransformWithRoundingProvider
      */
-    public function testReverseTransformWithRounding($scale, $input, $output, $roundingMode)
+    public function testReverseTransformWithRounding($precision, $input, $output, $roundingMode)
     {
-        $transformer = new NumberToLocalizedStringTransformer($scale, null, $roundingMode);
+        $transformer = new NumberToLocalizedStringTransformer($precision, null, $roundingMode);
 
         $this->assertEquals($output, $transformer->reverseTransform($input));
     }
 
-    public function testReverseTransformDoesNotRoundIfNoScale()
+    public function testReverseTransformDoesNotRoundIfNoPrecision()
     {
         $transformer = new NumberToLocalizedStringTransformer(null, null, NumberToLocalizedStringTransformer::ROUND_DOWN);
 
@@ -461,7 +461,6 @@ class NumberToLocalizedStringTransformerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Form\Exception\TransformationFailedException
-     *
      * @link https://github.com/symfony/symfony/issues/3161
      */
     public function testReverseTransformDisallowsNaN()

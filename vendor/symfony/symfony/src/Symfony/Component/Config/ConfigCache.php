@@ -23,14 +23,16 @@ use Symfony\Component\Filesystem\Filesystem;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ConfigCache implements ConfigCacheInterface
+class ConfigCache
 {
     private $debug;
     private $file;
 
     /**
-     * @param string $file  The absolute cache path
-     * @param bool   $debug Whether debugging is enabled or not
+     * Constructor.
+     *
+     * @param string  $file  The absolute cache path
+     * @param bool    $debug Whether debugging is enabled or not
      */
     public function __construct($file, $debug)
     {
@@ -42,21 +44,8 @@ class ConfigCache implements ConfigCacheInterface
      * Gets the cache file path.
      *
      * @return string The cache file path
-     * @deprecated since 2.7, to be removed in 3.0. Use getPath() instead.
      */
     public function __toString()
-    {
-        @trigger_error('ConfigCache::__toString() is deprecated since version 2.7 and will be removed in 3.0. Use the getPath() method instead.', E_USER_DEPRECATED);
-
-        return $this->file;
-    }
-
-    /**
-     * Gets the cache file path.
-     *
-     * @return string The cache file path
-     */
-    public function getPath()
     {
         return $this->file;
     }
@@ -67,7 +56,7 @@ class ConfigCache implements ConfigCacheInterface
      * This method always returns true when debug is off and the
      * cache file exists.
      *
-     * @return bool true if the cache is fresh, false otherwise
+     * @return bool    true if the cache is fresh, false otherwise
      */
     public function isFresh()
     {

@@ -31,7 +31,6 @@ class Profile
     private $method;
     private $url;
     private $time;
-    private $statusCode;
 
     /**
      * @var Profile
@@ -74,7 +73,7 @@ class Profile
     }
 
     /**
-     * Sets the parent token.
+     * Sets the parent token
      *
      * @param Profile $parent The parent Profile
      */
@@ -173,22 +172,6 @@ class Profile
     }
 
     /**
-     * @param int $statusCode
-     */
-    public function setStatusCode($statusCode)
-    {
-        $this->statusCode = $statusCode;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode()
-    {
-        return $this->statusCode;
-    }
-
-    /**
      * Finds children profilers.
      *
      * @return Profile[] An array of Profile
@@ -212,7 +195,7 @@ class Profile
     }
 
     /**
-     * Adds the child token.
+     * Adds the child token
      *
      * @param Profile $child The child Profile
      */

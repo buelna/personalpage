@@ -64,7 +64,7 @@ class Entity extends EntityParent implements EntityInterface
     }
 
     /**
-     * @Assert\IsTrue
+     * @Assert\True
      */
     public function isValid()
     {
@@ -72,7 +72,7 @@ class Entity extends EntityParent implements EntityInterface
     }
 
     /**
-     * @Assert\IsTrue
+     * @Assert\True
      */
     public function hasPermissions()
     {

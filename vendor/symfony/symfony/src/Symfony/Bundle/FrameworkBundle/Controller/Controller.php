@@ -24,7 +24,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
 /**
@@ -39,9 +38,9 @@ class Controller extends ContainerAware
     /**
      * Generates a URL from the given parameters.
      *
-     * @param string      $route         The name of the route
-     * @param mixed       $parameters    An array of parameters
-     * @param bool|string $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
+     * @param string         $route         The name of the route
+     * @param mixed          $parameters    An array of parameters
+     * @param bool|string    $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
      *
      * @return string The generated URL
      *
@@ -72,8 +71,8 @@ class Controller extends ContainerAware
     /**
      * Returns a RedirectResponse to the given URL.
      *
-     * @param string $url    The URL to redirect to
-     * @param int    $status The status code to use for the Response
+     * @param string  $url    The URL to redirect to
+     * @param int     $status The status code to use for the Response
      *
      * @return RedirectResponse
      */
@@ -120,16 +119,15 @@ class Controller extends ContainerAware
      * @param mixed $object     The object
      *
      * @throws \LogicException
-     *
      * @return bool
      */
     protected function isGranted($attributes, $object = null)
     {
-        if (!$this->container->has('security.authorization_checker')) {
+        if (!$this->container->has('security.context')) {
             throw new \LogicException('The SecurityBundle is not registered in your application.');
         }
 
-        return $this->container->get('security.authorization_checker')->isGranted($attributes, $object);
+        return $this->container->get('security.context')->isGranted($attributes, $object);
     }
 
     /**
@@ -251,7 +249,7 @@ class Controller extends ContainerAware
     }
 
     /**
-     * Creates and returns a form builder instance.
+     * Creates and returns a form builder instance
      *
      * @param mixed $data    The initial data for the form
      * @param array $options Options for the form
@@ -268,14 +266,12 @@ class Controller extends ContainerAware
      *
      * @return Request
      *
-     * @deprecated since version 2.4, to be removed in 3.0.
-     *             Ask Symfony to inject the Request object into your controller
+     * @deprecated Deprecated since version 2.4, to be removed in 3.0. Ask
+     *             Symfony to inject the Request object into your controller
      *             method instead by type hinting it in the method's signature.
      */
     public function getRequest()
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.4 and will be removed in 3.0. The only reliable way to get the "Request" object is to inject it in the action method.', E_USER_DEPRECATED);
-
         return $this->container->get('request_stack')->getCurrentRequest();
     }
 
@@ -296,26 +292,25 @@ class Controller extends ContainerAware
     }
 
     /**
-     * Get a user from the Security Token Storage.
+     * Get a user from the Security Context
      *
      * @return mixed
      *
      * @throws \LogicException If SecurityBundle is not available
      *
-     * @see TokenInterface::getUser()
+     * @see Symfony\Component\Security\Core\Authentication\Token\TokenInterface::getUser()
      */
     public function getUser()
     {
-        if (!$this->container->has('security.token_storage')) {
+        if (!$this->container->has('security.context')) {
             throw new \LogicException('The SecurityBundle is not registered in your application.');
         }
 
-        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
+        if (null === $token = $this->container->get('security.context')->getToken()) {
             return;
         }
 
         if (!is_object($user = $token->getUser())) {
-            // e.g. anonymous authentication
             return;
         }
 
@@ -327,7 +322,7 @@ class Controller extends ContainerAware
      *
      * @param string $id The service id
      *
-     * @return bool true if the service id is defined, false otherwise
+     * @return bool    true if the service id is defined, false otherwise
      */
     public function has($id)
     {
@@ -335,7 +330,7 @@ class Controller extends ContainerAware
     }
 
     /**
-     * Gets a container service by its id.
+     * Gets a service by id.
      *
      * @param string $id The service id
      *
@@ -343,27 +338,11 @@ class Controller extends ContainerAware
      */
     public function get($id)
     {
-        if ('request' === $id) {
-            @trigger_error('The "request" service is deprecated and will be removed in 3.0. Add a typehint for Symfony\\Component\\HttpFoundation\\Request to your controller parameters to retrieve the request instead.', E_USER_DEPRECATED);
-        }
-
         return $this->container->get($id);
     }
 
     /**
-     * Gets a container configuration parameter by its name.
-     *
-     * @param string $name The parameter name
-     *
-     * @return mixed
-     */
-    protected function getParameter($name)
-    {
-        return $this->container->getParameter($name);
-    }
-
-    /**
-     * Checks the validity of a CSRF token.
+     * Checks the validity of a CSRF token
      *
      * @param string $id    The id used when generating the token
      * @param string $token The actual token sent with the request that should be validated

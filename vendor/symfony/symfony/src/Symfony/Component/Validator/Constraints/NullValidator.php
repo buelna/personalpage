@@ -11,13 +11,30 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-@trigger_error('The '.__NAMESPACE__.'\NullValidator class is deprecated since version 2.7 and will be removed in 3.0. Use the IsNullValidator class in the same namespace instead.', E_USER_DEPRECATED);
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
  * @author Bernhard Schussek <bschussek@gmail.com>
  *
- * @deprecated since version 2.7, to be removed in 3.0. Use IsNullValidator instead.
+ * @api
  */
-class NullValidator extends IsNullValidator
+class NullValidator extends ConstraintValidator
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function validate($value, Constraint $constraint)
+    {
+        if (!$constraint instanceof Null) {
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Null');
+        }
+
+        if (null !== $value) {
+            $this->buildViolation($constraint->message)
+                ->setParameter('{{ value }}', $this->formatValue($value))
+                ->addViolation();
+        }
+    }
 }

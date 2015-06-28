@@ -13,6 +13,7 @@ namespace Symfony\Component\Intl\Tests\DateFormatter;
 
 use Symfony\Component\Intl\DateFormatter\IntlDateFormatter;
 use Symfony\Component\Intl\Globals\IntlGlobals;
+use Symfony\Component\Intl\Intl;
 
 /**
  * Test case for IntlDateFormatter implementations.
@@ -27,10 +28,8 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * When a time zone is not specified, it uses the system default however it returns null in the getter method.
-     *
+     * When a time zone is not specified, it uses the system default however it returns null in the getter method
      * @covers Symfony\Component\Intl\DateFormatter\IntlDateFormatter::getTimeZoneId
-     *
      * @see StubIntlDateFormatterTest::testDefaultTimeZoneIntl()
      */
     public function testConstructorDefaultTimeZone()
@@ -238,16 +237,19 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
             array('zzzzz', 0, 'GMT'),
         );
 
-        $dateTime = new \DateTime('@0');
+        // As of PHP 5.3.4, IntlDateFormatter::format() accepts DateTime instances
+        if (PHP_VERSION_ID >= 50304) {
+            $dateTime = new \DateTime('@0');
 
-        /* general, DateTime */
-        $formatData[] = array('y-M-d', $dateTime, '1970-1-1');
-        $formatData[] = array("EEE, MMM d, ''yy", $dateTime, "Thu, Jan 1, '70");
-        $formatData[] = array('h:mm a', $dateTime, '12:00 AM');
-        $formatData[] = array('yyyyy.MMMM.dd hh:mm aaa', $dateTime, '01970.January.01 12:00 AM');
+            /* general, DateTime */
+            $formatData[] = array('y-M-d', $dateTime, '1970-1-1');
+            $formatData[] = array("EEE, MMM d, ''yy", $dateTime, "Thu, Jan 1, '70");
+            $formatData[] = array('h:mm a', $dateTime, '12:00 AM');
+            $formatData[] = array('yyyyy.MMMM.dd hh:mm aaa', $dateTime, '01970.January.01 12:00 AM');
 
-        $formatData[] = array("yyyy.MM.dd 'at' HH:mm:ss zzz", $dateTime, '1970.01.01 at 00:00:00 GMT');
-        $formatData[] = array('K:mm a, z', $dateTime, '0:00 AM, GMT');
+            $formatData[] = array("yyyy.MM.dd 'at' HH:mm:ss zzz", $dateTime, '1970.01.01 at 00:00:00 GMT');
+            $formatData[] = array('K:mm a, z', $dateTime, '0:00 AM, GMT');
+        }
 
         return $formatData;
     }
@@ -273,7 +275,11 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
             );
         }
 
-        $message = 'datefmt_format: takes either an array or an integer timestamp value or a DateTime object: U_ILLEGAL_ARGUMENT_ERROR';
+        $message = 'datefmt_format: takes either an array  or an integer timestamp value : U_ILLEGAL_ARGUMENT_ERROR';
+
+        if (PHP_VERSION_ID >= 50304) {
+            $message = 'datefmt_format: takes either an array or an integer timestamp value or a DateTime object: U_ILLEGAL_ARGUMENT_ERROR';
+        }
 
         return array(
             array('y-M-d', '0', $message),
@@ -868,7 +874,7 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
     {
         $dateTime = new \DateTime();
         $dateTime->setTimestamp(null === $timestamp ? time() : $timestamp);
-        $dateTime->setTimezone(new \DateTimeZone($timeZone));
+        $dateTime->setTimeZone(new \DateTimeZone($timeZone));
 
         return $dateTime;
     }
@@ -899,7 +905,7 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
      * @param $datetype
      * @param $timetype
      * @param null $timezone
-     * @param int  $calendar
+     * @param int $calendar
      * @param null $pattern
      *
      * @return mixed
@@ -917,7 +923,7 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
     abstract protected function getIntlErrorCode();
 
     /**
-     * @param int $errorCode
+     * @param int     $errorCode
      *
      * @return bool
      */

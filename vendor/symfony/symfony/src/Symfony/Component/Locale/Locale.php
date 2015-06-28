@@ -11,8 +11,7 @@
 
 namespace Symfony\Component\Locale;
 
-@trigger_error('The '.__NAMESPACE__.'\Locale class is deprecated since version 2.7, to be removed in Symfony 3.0. Use the methods provided by the \Symfony\Component\Intl\Intl class instead.', E_USER_DEPRECATED);
-
+use Symfony\Component\Icu\IcuData;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -20,40 +19,37 @@ use Symfony\Component\Intl\Intl;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  *
- * @deprecated since version 2.3, to be removed in 3.0.
- *             Use {@link \Locale} and {@link \Symfony\Component\Intl\Intl} instead.
+ * @deprecated Deprecated since version 2.3, to be removed in 3.0. Use
+ *             {@link \Locale} and {@link \Symfony\Component\Intl\Intl} instead.
  */
 class Locale extends \Locale
 {
     /**
-     * Caches the countries in different locales.
-     *
+     * Caches the countries in different locales
      * @var array
      */
     protected static $countries = array();
 
     /**
-     * Caches the languages in different locales.
-     *
+     * Caches the languages in different locales
      * @var array
      */
     protected static $languages = array();
 
     /**
-     * Caches the different locales.
-     *
+     * Caches the different locales
      * @var array
      */
     protected static $locales = array();
 
     /**
-     * Returns the country names for a locale.
+     * Returns the country names for a locale
      *
      * @param string $locale The locale to use for the country names
      *
-     * @return array The country names with their codes as keys
+     * @return array              The country names with their codes as keys
      *
-     * @throws \RuntimeException When the resource bundles cannot be loaded
+     * @throws \RuntimeException  When the resource bundles cannot be loaded
      */
     public static function getDisplayCountries($locale)
     {
@@ -65,11 +61,11 @@ class Locale extends \Locale
     }
 
     /**
-     * Returns all available country codes.
+     * Returns all available country codes
      *
-     * @return array The country codes
+     * @return array              The country codes
      *
-     * @throws \RuntimeException When the resource bundles cannot be loaded
+     * @throws \RuntimeException  When the resource bundles cannot be loaded
      */
     public static function getCountries()
     {
@@ -77,13 +73,13 @@ class Locale extends \Locale
     }
 
     /**
-     * Returns the language names for a locale.
+     * Returns the language names for a locale
      *
      * @param string $locale The locale to use for the language names
      *
-     * @return array The language names with their codes as keys
+     * @return array              The language names with their codes as keys
      *
-     * @throws \RuntimeException When the resource bundles cannot be loaded
+     * @throws \RuntimeException  When the resource bundles cannot be loaded
      */
     public static function getDisplayLanguages($locale)
     {
@@ -95,11 +91,11 @@ class Locale extends \Locale
     }
 
     /**
-     * Returns all available language codes.
+     * Returns all available language codes
      *
-     * @return array The language codes
+     * @return array              The language codes
      *
-     * @throws \RuntimeException When the resource bundles cannot be loaded
+     * @throws \RuntimeException  When the resource bundles cannot be loaded
      */
     public static function getLanguages()
     {
@@ -107,13 +103,13 @@ class Locale extends \Locale
     }
 
     /**
-     * Returns the locale names for a locale.
+     * Returns the locale names for a locale
      *
      * @param string $locale The locale to use for the locale names
      *
-     * @return array The locale names with their codes as keys
+     * @return array              The locale names with their codes as keys
      *
-     * @throws \RuntimeException When the resource bundles cannot be loaded
+     * @throws \RuntimeException  When the resource bundles cannot be loaded
      */
     public static function getDisplayLocales($locale)
     {
@@ -125,11 +121,11 @@ class Locale extends \Locale
     }
 
     /**
-     * Returns all available locale codes.
+     * Returns all available locale codes
      *
-     * @return array The locale codes
+     * @return array              The locale codes
      *
-     * @throws \RuntimeException When the resource bundles cannot be loaded
+     * @throws \RuntimeException  When the resource bundles cannot be loaded
      */
     public static function getLocales()
     {
@@ -137,7 +133,7 @@ class Locale extends \Locale
     }
 
     /**
-     * Returns the ICU version as defined by the intl extension.
+     * Returns the ICU version as defined by the intl extension
      *
      * @return string|null The ICU version
      */
@@ -147,7 +143,7 @@ class Locale extends \Locale
     }
 
     /**
-     * Returns the ICU Data version as defined by the intl extension.
+     * Returns the ICU Data version as defined by the intl extension
      *
      * @return string|null The ICU Data version
      */
@@ -168,17 +164,17 @@ class Locale extends \Locale
     }
 
     /**
-     * Returns the directory path of the ICU data that ships with Symfony.
+     * Returns the directory path of the ICU data that ships with Symfony
      *
      * @return string The path to the ICU data directory
      */
     public static function getIcuDataDirectory()
     {
-        return Intl::getDataDirectory();
+        return IcuData::getResourceDirectory();
     }
 
     /**
-     * Returns the fallback locale for a given locale, if any.
+     * Returns the fallback locale for a given locale, if any
      *
      * @param string $locale The locale to find the fallback for.
      *

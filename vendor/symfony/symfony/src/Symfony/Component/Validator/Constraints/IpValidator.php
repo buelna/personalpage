@@ -11,13 +11,12 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
- * Validates whether a value is a valid IP address.
+ * Validates whether a value is a valid IP address
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -96,15 +95,9 @@ class IpValidator extends ConstraintValidator
         }
 
         if (!filter_var($value, FILTER_VALIDATE_IP, $flag)) {
-            if ($this->context instanceof ExecutionContextInterface) {
-                $this->context->buildViolation($constraint->message)
-                    ->setParameter('{{ value }}', $this->formatValue($value))
-                    ->addViolation();
-            } else {
-                $this->buildViolation($constraint->message)
-                    ->setParameter('{{ value }}', $this->formatValue($value))
-                    ->addViolation();
-            }
+            $this->buildViolation($constraint->message)
+                ->setParameter('{{ value }}', $this->formatValue($value))
+                ->addViolation();
         }
     }
 }

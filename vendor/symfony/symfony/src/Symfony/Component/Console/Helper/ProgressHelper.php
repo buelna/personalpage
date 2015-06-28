@@ -20,8 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Chris Jones <leeked@gmail.com>
  * @author Fabien Potencier <fabien@symfony.com>
  *
- * @deprecated since version 2.5, to be removed in 3.0
- *             Use {@link ProgressBar} instead.
+ * @deprecated Deprecated since 2.5, to be removed in 3.0; use ProgressBar instead.
  */
 class ProgressHelper extends Helper
 {
@@ -49,28 +48,28 @@ class ProgressHelper extends Helper
     private $output;
 
     /**
-     * Current step.
+     * Current step
      *
      * @var int
      */
     private $current;
 
     /**
-     * Maximum number of steps.
+     * Maximum number of steps
      *
      * @var int
      */
     private $max;
 
     /**
-     * Start time of the progress bar.
+     * Start time of the progress bar
      *
      * @var int
      */
     private $startTime;
 
     /**
-     * List of formatting variables.
+     * List of formatting variables
      *
      * @var array
      */
@@ -83,14 +82,14 @@ class ProgressHelper extends Helper
     );
 
     /**
-     * Available formatting variables.
+     * Available formatting variables
      *
      * @var array
      */
     private $formatVars;
 
     /**
-     * Stored format part widths (used for padding).
+     * Stored format part widths (used for padding)
      *
      * @var array
      */
@@ -102,7 +101,7 @@ class ProgressHelper extends Helper
     );
 
     /**
-     * Various time formats.
+     * Various time formats
      *
      * @var array
      */
@@ -117,13 +116,6 @@ class ProgressHelper extends Helper
         array(129600, '1 day'),
         array(604800, 'days', 86400),
     );
-
-    public function __construct($triggerDeprecationError = true)
-    {
-        if ($triggerDeprecationError) {
-            @trigger_error('The '.__CLASS__.' class is deprecated since version 2.5 and will be removed in 3.0. Use the Symfony\Component\Console\Helper\ProgressBar class instead.', E_USER_DEPRECATED);
-        }
-    }
 
     /**
      * Sets the progress bar width.
@@ -233,8 +225,8 @@ class ProgressHelper extends Helper
     /**
      * Advances the progress output X steps.
      *
-     * @param int  $step   Number of steps to advance
-     * @param bool $redraw Whether to redraw or not
+     * @param int     $step   Number of steps to advance
+     * @param bool    $redraw Whether to redraw or not
      *
      * @throws \LogicException
      */
@@ -246,8 +238,8 @@ class ProgressHelper extends Helper
     /**
      * Sets the current progress.
      *
-     * @param int  $current The current progress
-     * @param bool $redraw  Whether to redraw or not
+     * @param int     $current The current progress
+     * @param bool    $redraw  Whether to redraw or not
      *
      * @throws \LogicException
      */
@@ -267,11 +259,11 @@ class ProgressHelper extends Helper
             $redraw = true;
         }
 
-        $prevPeriod = (int) ($this->current / $this->redrawFreq);
+        $prevPeriod = intval($this->current / $this->redrawFreq);
 
         $this->current = $current;
 
-        $currPeriod = (int) ($this->current / $this->redrawFreq);
+        $currPeriod = intval($this->current / $this->redrawFreq);
         if ($redraw || $prevPeriod !== $currPeriod || $this->max === $this->current) {
             $this->display();
         }
@@ -280,7 +272,7 @@ class ProgressHelper extends Helper
     /**
      * Outputs the current progress string.
      *
-     * @param bool $finish Forces the end result
+     * @param bool    $finish Forces the end result
      *
      * @throws \LogicException
      */
@@ -353,7 +345,7 @@ class ProgressHelper extends Helper
     /**
      * Generates the array map of format variables to values.
      *
-     * @param bool $finish Forces the end result
+     * @param bool    $finish Forces the end result
      *
      * @return array Array of format vars and values
      */
@@ -411,7 +403,7 @@ class ProgressHelper extends Helper
     /**
      * Converts seconds into human-readable format.
      *
-     * @param int $secs Number of seconds
+     * @param int     $secs Number of seconds
      *
      * @return string Time in readable format
      */
@@ -436,8 +428,8 @@ class ProgressHelper extends Helper
     /**
      * Overwrites a previous message to the output.
      *
-     * @param OutputInterface $output  An Output instance
-     * @param string          $message The message
+     * @param OutputInterface $output   An Output instance
+     * @param string          $message  The message
      */
     private function overwrite(OutputInterface $output, $message)
     {

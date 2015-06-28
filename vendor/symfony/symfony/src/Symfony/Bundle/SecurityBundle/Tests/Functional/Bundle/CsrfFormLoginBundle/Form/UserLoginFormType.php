@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Security;
 
 /**
@@ -40,7 +40,7 @@ class UserLoginFormType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @see Symfony\Component\Form\AbstractType::buildForm()
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -75,9 +75,9 @@ class UserLoginFormType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @see Symfony\Component\Form\AbstractType::setDefaultOptions()
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         /* Note: the form's intention must correspond to that for the form login
          * listener in order for the CSRF token to validate successfully.
@@ -89,7 +89,7 @@ class UserLoginFormType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @see Symfony\Component\Form\FormTypeInterface::getName()
      */
     public function getName()
     {

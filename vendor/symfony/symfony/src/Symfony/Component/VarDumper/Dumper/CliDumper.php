@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\VarDumper\Dumper;
 
+use Symfony\Component\VarDumper\Cloner\Data;
 use Symfony\Component\VarDumper\Cloner\Cursor;
 
 /**
@@ -47,11 +48,11 @@ class CliDumper extends AbstractDumper
     /**
      * {@inheritdoc}
      */
-    public function __construct($output = null, $charset = null)
+    public function __construct($output = null)
     {
-        parent::__construct($output, $charset);
+        parent::__construct($output);
 
-        if ('\\' === DIRECTORY_SEPARATOR && false !== @getenv('ANSICON')) {
+        if (defined('PHP_WINDOWS_VERSION_MAJOR') && false !== @getenv('ANSICON')) {
             // Use only the base 16 xterm colors when using ANSICON
             $this->setStyles(array(
                 'default' => '31',
@@ -139,8 +140,8 @@ class CliDumper extends AbstractDumper
                 break;
 
             default:
-                $attr['value'] = isset($value[0]) && !preg_match('//u', $value) ? $this->utf8Encode($value) : $value;
-                $value = isset($type[0]) && !preg_match('//u', $type) ? $this->utf8Encode($type) : $type;
+                $attr['value'] = isset($value[0]) && !preg_match('//u', $value) ? Data::utf8Encode($value) : $value;
+                $value = isset($type[0]) && !preg_match('//u', $type) ? Data::utf8Encode($type) : $type;
                 break;
         }
 
@@ -156,9 +157,6 @@ class CliDumper extends AbstractDumper
     {
         $this->dumpKey($cursor);
 
-        if ($bin) {
-            $str = $this->utf8Encode($str);
-        }
         if ('' === $str) {
             $this->line .= '""';
             $this->dumpLine($cursor->depth);
@@ -222,9 +220,6 @@ class CliDumper extends AbstractDumper
     {
         $this->dumpKey($cursor);
 
-        if (!preg_match('//u', $class)) {
-            $class = $this->utf8Encode($class);
-        }
         if (Cursor::HASH_OBJECT === $type) {
             $prefix = 'stdClass' !== $class ? $this->style('note', $class).' {' : '{';
         } elseif (Cursor::HASH_RESOURCE === $type) {
@@ -284,9 +279,6 @@ class CliDumper extends AbstractDumper
     protected function dumpKey(Cursor $cursor)
     {
         if (null !== $key = $cursor->hashKey) {
-            if ($cursor->hashKeyIsBinary) {
-                $key = $this->utf8Encode($key);
-            }
             $attr = array('binary' => $cursor->hashKeyIsBinary);
             $bin = $cursor->hashKeyIsBinary ? 'b' : '';
             $style = 'key';
@@ -402,7 +394,7 @@ class CliDumper extends AbstractDumper
             }
         }
 
-        if ('\\' === DIRECTORY_SEPARATOR) {
+        if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
             static::$defaultColors = @(false !== getenv('ANSICON') || 'ON' === getenv('ConEmuANSI'));
         } elseif (function_exists('posix_isatty')) {
             $h = stream_get_meta_data($this->outputStream) + array('wrapper_type' => null);

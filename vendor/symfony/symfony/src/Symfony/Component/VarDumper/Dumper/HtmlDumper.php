@@ -31,7 +31,7 @@ class HtmlDumper extends CliDumper
     protected $headerIsDumped = false;
     protected $lastDepth = -1;
     protected $styles = array(
-        'default' => 'background-color:#18171B; color:#FF8400; line-height:1.2em; font:12px Menlo, Monaco, Consolas, monospace; word-wrap: break-word; white-space: pre-wrap; position:relative; z-index:100000',
+        'default' => 'background-color:#18171B; color:#FF8400; line-height:1.2em; font:12px Menlo, Monaco, Consolas, monospace',
         'num' => 'font-weight:bold; color:#1299DA',
         'const' => 'font-weight:bold',
         'str' => 'font-weight:bold; color:#56DB3A',
@@ -115,51 +115,21 @@ Sfdump = window.Sfdump || (function (doc) {
 
 var refStyle = doc.createElement('style'),
     rxEsc = /([.*+?^${}()|\[\]\/\\])/g,
-    idRx = /\bsf-dump-\d+-ref[012]\w+\b/,
-    keyHint = 0 <= navigator.platform.toUpperCase().indexOf('MAC') ? 'Cmd' : 'Ctrl',
-    addEventListener = function (e, n, cb) {
-        e.addEventListener(n, cb, false);
-    };
+    idRx = /\bsf-dump-\d+-ref[012]\w+\b/;
 
 doc.documentElement.firstChild.appendChild(refStyle);
 
-if (!doc.addEventListener) {
-    addEventListener = function (element, eventName, callback) {
-        element.attachEvent('on' + eventName, function (e) {
-            e.preventDefault = function () {e.returnValue = false;};
-            e.target = e.srcElement;
-            callback(e);
-        });
-    };
-}
+function toggle(a) {
+    var s = a.nextSibling || {};
 
-function toggle(a, recursive) {
-    var s = a.nextSibling || {}, oldClass = s.className, arrow, newClass;
-
-    if ('sf-dump-compact' == oldClass) {
-        arrow = '▼';
-        newClass = 'sf-dump-expanded';
-    } else if ('sf-dump-expanded' == oldClass) {
-        arrow = '▶';
-        newClass = 'sf-dump-compact';
+    if ('sf-dump-compact' == s.className) {
+        a.lastChild.innerHTML = '▼';
+        s.className = 'sf-dump-expanded';
+    } else if ('sf-dump-expanded' == s.className) {
+        a.lastChild.innerHTML = '▶';
+        s.className = 'sf-dump-compact';
     } else {
         return false;
-    }
-
-    a.lastChild.innerHTML = arrow;
-    s.className = newClass;
-
-    if (recursive) {
-        try {
-            a = s.querySelectorAll('.'+oldClass);
-            for (s = 0; s < a.length; ++s) {
-                if (a[s].className !== newClass) {
-                    a[s].className = newClass;
-                    a[s].previousSibling.lastChild.innerHTML = arrow;
-                }
-            }
-        } catch (e) {
-        }
     }
 
     return true;
@@ -169,7 +139,7 @@ return function (root) {
     root = doc.getElementById(root);
 
     function a(e, f) {
-        addEventListener(root, e, function (e) {
+        root.addEventListener(e, function (e) {
             if ('A' == e.target.tagName) {
                 f(e.target, e);
             } else if ('A' == e.target.parentNode.tagName) {
@@ -177,26 +147,20 @@ return function (root) {
             }
         });
     };
-    function isCtrlKey(e) {
-        return e.ctrlKey || e.metaKey;
-    }
-    addEventListener(root, 'mouseover', function (e) {
+    root.addEventListener('mouseover', function (e) {
         if ('' != refStyle.innerHTML) {
             refStyle.innerHTML = '';
         }
     });
     a('mouseover', function (a) {
         if (a = idRx.exec(a.className)) {
-            try {
-                refStyle.innerHTML = 'pre.sf-dump .'+a[0]+'{background-color: #B729D9; color: #FFF !important; border-radius: 2px}';
-            } catch (e) {
-            }
+            refStyle.innerHTML = 'pre.sf-dump .'+a[0]+'{background-color: #B729D9; color: #FFF !important; border-radius: 2px}';
         }
     });
     a('click', function (a, e) {
         if (/\bsf-dump-toggle\b/.test(a.className)) {
             e.preventDefault();
-            if (!toggle(a, isCtrlKey(e))) {
+            if (!toggle(a)) {
                 var r = doc.getElementById(a.getAttribute('href').substr(1)),
                     s = r.previousSibling,
                     f = r.parentNode,
@@ -210,18 +174,8 @@ return function (root) {
                     r.innerHTML = r.innerHTML.replace(new RegExp('^'+f[0].replace(rxEsc, '\\$1'), 'mg'), t[0]);
                 }
                 if ('sf-dump-compact' == r.className) {
-                    toggle(s, isCtrlKey(e));
+                    toggle(s);
                 }
-            }
-
-            if (doc.getSelection) {
-                try {
-                    doc.getSelection().removeAllRanges();
-                } catch (e) {
-                    doc.getSelection().empty();
-                }
-            } else {
-                doc.selection.empty();
             }
         }
     });
@@ -256,7 +210,6 @@ return function (root) {
             } else {
                 a.innerHTML += ' ';
             }
-            a.title = (a.title ? a.title+'\n[' : '[')+keyHint+'+click] Expand all children';
             a.innerHTML += '<span>▼</span>';
             a.className += ' sf-dump-toggle';
             if ('sf-dump' != elt.parentNode.className) {
@@ -389,7 +342,7 @@ EOHTML;
             $style .= sprintf(' title="%s%s characters"', $attr['length'], $attr['binary'] ? ' binary or non-UTF-8' : '');
         } elseif ('note' === $style) {
             if (false !== $c = strrpos($v, '\\')) {
-                return sprintf('<abbr title="%s" class=sf-dump-%s>%s</abbr>', $v, $style, substr($v, $c + 1));
+                return sprintf('<abbr title="%s" class=sf-dump-%s>%s</abbr>', $v, $style, substr($v, $c+1));
             } elseif (':' === $v[0]) {
                 return sprintf('<abbr title="`%s` resource" class=sf-dump-%s>%s</abbr>', substr($v, 1), $style, $v);
             }

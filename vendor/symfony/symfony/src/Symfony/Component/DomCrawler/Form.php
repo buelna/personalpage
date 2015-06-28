@@ -197,18 +197,9 @@ class Form extends Link implements \ArrayAccess
     {
         $uri = parent::getUri();
 
-        if (!in_array($this->getMethod(), array('POST', 'PUT', 'DELETE', 'PATCH'))) {
-            $query = parse_url($uri, PHP_URL_QUERY);
-            $currentParameters = array();
-            if ($query) {
-                parse_str($query, $currentParameters);
-            }
-
-            $queryString = http_build_query(array_merge($currentParameters, $this->getValues()), null, '&');
-
-            $pos = strpos($uri, '?');
-            $base = false === $pos ? $uri : substr($uri, 0, $pos);
-            $uri = rtrim($base.'?'.$queryString, '?');
+        if (!in_array($this->getMethod(), array('POST', 'PUT', 'DELETE', 'PATCH')) && $queryString = http_build_query($this->getValues(), null, '&')) {
+            $sep = false === strpos($uri, '?') ? '?' : '&';
+            $uri .= $sep.$queryString;
         }
 
         return $uri;
@@ -242,7 +233,7 @@ class Form extends Link implements \ArrayAccess
      *
      * @param string $name The field name
      *
-     * @return bool true if the field exists, false otherwise
+     * @return bool    true if the field exists, false otherwise
      *
      * @api
      */
@@ -310,7 +301,7 @@ class Form extends Link implements \ArrayAccess
      *
      * @param string $name The field name
      *
-     * @return bool true if the field exists, false otherwise
+     * @return bool    true if the field exists, false otherwise
      */
     public function offsetExists($name)
     {

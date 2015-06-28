@@ -18,8 +18,8 @@ namespace Symfony\Component\Validator;
  *
  * @api
  *
- * @deprecated since version 2.5, to be removed in 3.0.
- *             Use {@link \Symfony\Component\Validator\Validator\ValidatorInterface} instead.
+ * @deprecated Deprecated since version 2.5, to be removed in Symfony 3.0.
+ *             Use {@link Validator\ValidatorInterface} instead.
  */
 interface ValidatorInterface
 {
@@ -93,9 +93,8 @@ interface ValidatorInterface
      *
      * @api
      *
-     * @deprecated since version 2.5, to be removed in 3.0.
-     *             Renamed to {@link Validator\ValidatorInterface::validate()}
-     *             in Symfony 2.5.
+     * @deprecated Renamed to {@link Validator\ValidatorInterface::validate()}
+     *             in Symfony 2.5. Will be removed in Symfony 3.0.
      */
     public function validateValue($value, $constraints, $groups = null);
 
@@ -106,7 +105,7 @@ interface ValidatorInterface
      *
      * @api
      *
-     * @deprecated since version 2.5, to be removed in 3.0.
+     * @deprecated Deprecated since version 2.5, to be removed in Symfony 3.0.
      *             Use {@link Validator\ValidatorInterface::getMetadataFor()} or
      *             {@link Validator\ValidatorInterface::hasMetadataFor()}
      *             instead.

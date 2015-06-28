@@ -38,8 +38,7 @@ class AuthenticationUtils
 
     /**
      * @param bool $clearSession
-     *
-     * @return AuthenticationException|null
+     * @return null|AuthenticationException
      */
     public function getLastAuthenticationError($clearSession = true)
     {

@@ -17,9 +17,7 @@ class ValidatorExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function test2Dot5ValidationApi()
     {
-        $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator\RecursiveValidator')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $validator = $this->getMock('Symfony\Component\Validator\Validator\ValidatorInterface');
         $metadata = $this->getMockBuilder('Symfony\Component\Validator\Mapping\ClassMetadata')
             ->disableOriginalConstructor()
             ->getMock();
@@ -37,10 +35,6 @@ class ValidatorExtensionTest extends \PHPUnit_Framework_TestCase
         $metadata->expects($this->once())
             ->method('addPropertyConstraint')
             ->with('children', $this->isInstanceOf('Symfony\Component\Validator\Constraints\Valid'));
-
-        $validator
-            ->expects($this->never())
-            ->method('getMetadataFactory');
 
         $extension = new ValidatorExtension($validator);
         $guesser = $extension->loadTypeGuesser();

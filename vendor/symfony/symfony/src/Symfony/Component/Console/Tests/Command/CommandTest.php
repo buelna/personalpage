@@ -154,8 +154,8 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     {
         $command = new \TestCommand();
         $command->addOption('foo');
-        $command->addArgument('bar');
-        $this->assertEquals('namespace:name [--foo] [--] [<bar>]', $command->getSynopsis(), '->getSynopsis() returns the synopsis');
+        $command->addArgument('foo');
+        $this->assertEquals('namespace:name [--foo] [foo]', $command->getSynopsis(), '->getSynopsis() returns the synopsis');
     }
 
     public function testGetHelper()
@@ -165,6 +165,15 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $command->setApplication($application);
         $formatterHelper = new FormatterHelper();
         $this->assertEquals($formatterHelper->getName(), $command->getHelper('formatter')->getName(), '->getHelper() returns the correct helper');
+    }
+
+    public function testGet()
+    {
+        $application = new Application();
+        $command = new \TestCommand();
+        $command->setApplication($application);
+        $formatterHelper = new FormatterHelper();
+        $this->assertEquals($formatterHelper->getName(), $command->getHelper('formatter')->getName(), '->__get() returns the correct helper');
     }
 
     public function testMergeApplicationDefinition()
@@ -202,7 +211,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $m = $r->getMethod('mergeApplicationDefinition');
         $m->setAccessible(true);
         $m->invoke($command, false);
-        $this->assertTrue($command->getDefinition()->hasOption('bar'), '->mergeApplicationDefinition(false) merges the application and the command options');
+        $this->assertTrue($command->getDefinition()->hasOption('bar'), '->mergeApplicationDefinition(false) merges the application and the commmand options');
         $this->assertFalse($command->getDefinition()->hasArgument('foo'), '->mergeApplicationDefinition(false) does not merge the application arguments');
 
         $m->invoke($command, true);
@@ -234,7 +243,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
      * @expectedException        \LogicException
      * @expectedExceptionMessage You must override the execute() method in the concrete command class.
      */
-    public function testExecuteMethodNeedsToBeOverridden()
+    public function testExecuteMethodNeedsToBeOverriden()
     {
         $command = new Command('foo');
         $command->run(new StringInput(''), new NullOutput());
@@ -309,13 +318,8 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $output->writeln('from the code...');
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLegacyAsText()
+    public function testAsText()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         $command = new \TestCommand();
         $command->setApplication(new Application());
         $tester = new CommandTester($command);
@@ -323,13 +327,8 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $this->assertStringEqualsFile(self::$fixturesPath.'/command_astext.txt', $command->asText(), '->asText() returns a text representation of the command');
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLegacyAsXml()
+    public function testAsXml()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         $command = new \TestCommand();
         $command->setApplication(new Application());
         $tester = new CommandTester($command);

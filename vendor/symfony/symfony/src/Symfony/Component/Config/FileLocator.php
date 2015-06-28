@@ -47,15 +47,15 @@ class FileLocator implements FileLocatorInterface
             return $name;
         }
 
-        $paths = $this->paths;
-
-        if (null !== $currentPath) {
-            array_unshift($paths, $currentPath);
+        $filepaths = array();
+        if (null !== $currentPath && file_exists($file = $currentPath.DIRECTORY_SEPARATOR.$name)) {
+            if (true === $first) {
+                return $file;
+            }
+            $filepaths[] = $file;
         }
 
-        $filepaths = array();
-
-        foreach ($paths as $path) {
+        foreach ($this->paths as $path) {
             if (file_exists($file = $path.DIRECTORY_SEPARATOR.$name)) {
                 if (true === $first) {
                     return $file;
@@ -65,7 +65,7 @@ class FileLocator implements FileLocatorInterface
         }
 
         if (!$filepaths) {
-            throw new \InvalidArgumentException(sprintf('The file "%s" does not exist (in: %s).', $name, implode(', ', $paths)));
+            throw new \InvalidArgumentException(sprintf('The file "%s" does not exist (in: %s%s).', $name, null !== $currentPath ? $currentPath.', ' : '', implode(', ', $this->paths)));
         }
 
         return array_values(array_unique($filepaths));

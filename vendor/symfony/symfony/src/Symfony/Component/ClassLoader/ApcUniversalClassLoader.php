@@ -11,8 +11,6 @@
 
 namespace Symfony\Component\ClassLoader;
 
-@trigger_error('The '.__NAMESPACE__.'\ApcUniversalClassLoader class is deprecated since version 2.7 and will be removed in 3.0. Use the Symfony\Component\ClassLoader\ApcClassLoader class instead.', E_USER_DEPRECATED);
-
 /**
  * ApcUniversalClassLoader implements a "universal" autoloader cached in APC for PHP 5.3.
  *
@@ -61,9 +59,6 @@ namespace Symfony\Component\ClassLoader;
  * @author Kris Wallsmith <kris@symfony.com>
  *
  * @api
- *
- * @deprecated since version 2.4, to be removed in 3.0.
- *             Use the {@link ClassLoader} class instead.
  */
 class ApcUniversalClassLoader extends UniversalClassLoader
 {

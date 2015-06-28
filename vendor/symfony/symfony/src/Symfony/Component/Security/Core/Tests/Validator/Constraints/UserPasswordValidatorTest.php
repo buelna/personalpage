@@ -11,26 +11,27 @@
 
 namespace Symfony\Component\Security\Core\Tests\Validator\Constraints;
 
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPasswordValidator;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
+use Symfony\Component\Validator\Validation;
 
 /**
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-abstract class UserPasswordValidatorTest extends AbstractConstraintValidatorTest
+class UserPasswordValidatorTest extends AbstractConstraintValidatorTest
 {
     const PASSWORD = 's3Cr3t';
 
     const SALT = '^S4lt$';
 
     /**
-     * @var TokenStorageInterface
+     * @var SecurityContextInterface
      */
-    protected $tokenStorage;
+    protected $securityContext;
 
     /**
      * @var PasswordEncoderInterface
@@ -42,15 +43,20 @@ abstract class UserPasswordValidatorTest extends AbstractConstraintValidatorTest
      */
     protected $encoderFactory;
 
+    protected function getApiVersion()
+    {
+        return Validation::API_VERSION_2_5;
+    }
+
     protected function createValidator()
     {
-        return new UserPasswordValidator($this->tokenStorage, $this->encoderFactory);
+        return new UserPasswordValidator($this->securityContext, $this->encoderFactory);
     }
 
     protected function setUp()
     {
         $user = $this->createUser();
-        $this->tokenStorage = $this->createTokenStorage($user);
+        $this->securityContext = $this->createSecurityContext($user);
         $this->encoder = $this->createPasswordEncoder();
         $this->encoderFactory = $this->createEncoderFactory($this->encoder);
 
@@ -97,7 +103,7 @@ abstract class UserPasswordValidatorTest extends AbstractConstraintValidatorTest
     {
         $user = $this->getMock('Foo\Bar\User');
 
-        $this->tokenStorage = $this->createTokenStorage($user);
+        $this->securityContext = $this->createSecurityContext($user);
         $this->validator = $this->createValidator();
         $this->validator->initialize($this->context);
 
@@ -141,11 +147,11 @@ abstract class UserPasswordValidatorTest extends AbstractConstraintValidatorTest
         return $mock;
     }
 
-    protected function createTokenStorage($user = null)
+    protected function createSecurityContext($user = null)
     {
         $token = $this->createAuthenticationToken($user);
 
-        $mock = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface');
+        $mock = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $mock
             ->expects($this->any())
             ->method('getToken')

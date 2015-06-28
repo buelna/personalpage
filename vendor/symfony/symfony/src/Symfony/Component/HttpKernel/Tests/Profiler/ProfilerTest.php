@@ -26,15 +26,14 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request();
         $request->query->set('foo', 'bar');
-        $response = new Response('', 204);
+        $response = new Response();
         $collector = new RequestDataCollector();
 
         $profiler = new Profiler($this->storage);
         $profiler->add($collector);
         $profile = $profiler->collect($request, $response);
 
-        $this->assertSame(204, $profile->getStatusCode());
-        $this->assertSame('GET', $profile->getMethod());
+        $profile = $profiler->loadProfile($profile->getToken());
         $this->assertEquals(array('foo' => 'bar'), $profiler->get('request')->getRequestQuery()->all());
     }
 
@@ -61,6 +60,10 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        if (!class_exists('Symfony\Component\HttpFoundation\Request')) {
+            $this->markTestSkipped('The "HttpFoundation" component is not available');
+        }
+
         if (!class_exists('SQLite3') && (!class_exists('PDO') || !in_array('sqlite', \PDO::getAvailableDrivers()))) {
             $this->markTestSkipped('This test requires SQLite support in your environment');
         }

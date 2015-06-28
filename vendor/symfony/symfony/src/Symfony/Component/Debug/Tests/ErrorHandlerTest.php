@@ -16,13 +16,36 @@ use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 
 /**
- * ErrorHandlerTest.
+ * ErrorHandlerTest
  *
  * @author Robert Schönthal <seroscho@googlemail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
 class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var int Error reporting level before running tests.
+     */
+    protected $errorReporting;
+
+    /**
+     * @var string Display errors setting before running tests.
+     */
+    protected $displayErrors;
+
+    public function setUp()
+    {
+        $this->errorReporting = error_reporting(E_ALL | E_STRICT);
+        $this->displayErrors = ini_get('display_errors');
+        ini_set('display_errors', '1');
+    }
+
+    public function tearDown()
+    {
+        ini_set('display_errors', $this->displayErrors);
+        error_reporting($this->errorReporting);
+    }
+
     public function testRegister()
     {
         $handler = ErrorHandler::register();
@@ -141,19 +164,19 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
             $loggers = array(
                 E_DEPRECATED => array(null, LogLevel::INFO),
                 E_USER_DEPRECATED => array(null, LogLevel::INFO),
-                E_NOTICE => array($logger, LogLevel::WARNING),
+                E_NOTICE => array($logger, LogLevel::NOTICE),
                 E_USER_NOTICE => array($logger, LogLevel::CRITICAL),
-                E_STRICT => array(null, LogLevel::WARNING),
+                E_STRICT => array(null, LogLevel::NOTICE),
                 E_WARNING => array(null, LogLevel::WARNING),
                 E_USER_WARNING => array(null, LogLevel::WARNING),
                 E_COMPILE_WARNING => array(null, LogLevel::WARNING),
                 E_CORE_WARNING => array(null, LogLevel::WARNING),
-                E_USER_ERROR => array(null, LogLevel::CRITICAL),
-                E_RECOVERABLE_ERROR => array(null, LogLevel::CRITICAL),
-                E_COMPILE_ERROR => array(null, LogLevel::CRITICAL),
-                E_PARSE => array(null, LogLevel::CRITICAL),
-                E_ERROR => array(null, LogLevel::CRITICAL),
-                E_CORE_ERROR => array(null, LogLevel::CRITICAL),
+                E_USER_ERROR => array(null, LogLevel::ERROR),
+                E_RECOVERABLE_ERROR => array(null, LogLevel::ERROR),
+                E_COMPILE_ERROR => array(null, LogLevel::EMERGENCY),
+                E_PARSE => array(null, LogLevel::EMERGENCY),
+                E_ERROR => array(null, LogLevel::EMERGENCY),
+                E_CORE_ERROR => array(null, LogLevel::EMERGENCY),
             );
             $this->assertSame($loggers, $handler->setLoggers(array()));
 
@@ -169,8 +192,6 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandleError()
     {
-        $this->iniSet('error_reporting', -1);
-
         try {
             $handler = ErrorHandler::register();
             $handler->throwAt(0, true);
@@ -336,7 +357,7 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
             $logArgCheck = function ($level, $message, $context) use ($that) {
                 $that->assertEquals('Fatal Parse Error: foo', $message);
                 $that->assertArrayHasKey('type', $context);
-                $that->assertEquals($context['type'], E_PARSE);
+                $that->assertEquals($context['type'], E_ERROR);
             };
 
             $logger
@@ -345,7 +366,7 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
                 ->will($this->returnCallback($logArgCheck))
             ;
 
-            $handler->setDefaultLogger($logger, E_PARSE);
+            $handler->setDefaultLogger($logger, E_ERROR);
 
             $handler->handleFatalError($error);
 
@@ -359,13 +380,8 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLegacyInterface()
+    public function testDeprecatedInterface()
     {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
         try {
             $handler = ErrorHandler::register(0);
             $this->assertFalse($handler->handle(0, 'foo', 'foo.php', 12, array()));
@@ -389,7 +405,7 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
             ;
 
             $handler = ErrorHandler::register(E_NOTICE);
-            @$handler->setLogger($logger, 'scream');
+            $handler->setLogger($logger, 'scream');
             unset($undefVar);
             @$undefVar++;
 

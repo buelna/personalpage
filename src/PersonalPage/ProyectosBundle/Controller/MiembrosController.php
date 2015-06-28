@@ -15,7 +15,7 @@ class MiembrosController extends Controller
 	public function AreasAction($id)//carga la pagina personal del miembro en la vista de areas de interes
 	{
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'http://caii.itmexicali.edu.mx/'.locale_get_default().'/'.$id.'/info/json/');
+		curl_setopt($ch, CURLOPT_URL, 'caii.itmexicali.edu.mx/'.locale_get_default().'/'.$id.'/info/json/');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$response = curl_exec($ch);

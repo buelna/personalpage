@@ -25,7 +25,6 @@ class TestClass
     private $publicAccessorWithMoreRequiredParameters;
     private $publicIsAccessor;
     private $publicHasAccessor;
-    private $publicGetter;
 
     public function __construct($value)
     {
@@ -38,7 +37,6 @@ class TestClass
         $this->publicAccessorWithMoreRequiredParameters = $value;
         $this->publicIsAccessor = $value;
         $this->publicHasAccessor = $value;
-        $this->publicGetter = $value;
     }
 
     public function setPublicAccessor($value)
@@ -167,10 +165,5 @@ class TestClass
     private function hasPrivateHasAccessor()
     {
         return 'foobar';
-    }
-
-    public function getPublicGetter()
-    {
-        return $this->publicGetter;
     }
 }

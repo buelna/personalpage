@@ -19,16 +19,8 @@ use Symfony\Component\Validator\Constraints\GroupSequenceProvider;
 use Symfony\Component\Validator\Exception\MappingException;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
-/**
- * Loads validation metadata using a Doctrine annotation {@link Reader}.
- *
- * @author Bernhard Schussek <bschussek@gmail.com>
- */
 class AnnotationLoader implements LoaderInterface
 {
-    /**
-     * @var Reader
-     */
     protected $reader;
 
     public function __construct(Reader $reader)
@@ -43,7 +35,7 @@ class AnnotationLoader implements LoaderInterface
     {
         $reflClass = $metadata->getReflectionClass();
         $className = $reflClass->name;
-        $success = false;
+        $loaded = false;
 
         foreach ($this->reader->getClassAnnotations($reflClass) as $constraint) {
             if ($constraint instanceof GroupSequence) {
@@ -54,23 +46,23 @@ class AnnotationLoader implements LoaderInterface
                 $metadata->addConstraint($constraint);
             }
 
-            $success = true;
+            $loaded = true;
         }
 
         foreach ($reflClass->getProperties() as $property) {
-            if ($property->getDeclaringClass()->name === $className) {
+            if ($property->getDeclaringClass()->name == $className) {
                 foreach ($this->reader->getPropertyAnnotations($property) as $constraint) {
                     if ($constraint instanceof Constraint) {
                         $metadata->addPropertyConstraint($property->name, $constraint);
                     }
 
-                    $success = true;
+                    $loaded = true;
                 }
             }
         }
 
         foreach ($reflClass->getMethods() as $method) {
-            if ($method->getDeclaringClass()->name === $className) {
+            if ($method->getDeclaringClass()->name ==  $className) {
                 foreach ($this->reader->getMethodAnnotations($method) as $constraint) {
                     if ($constraint instanceof Callback) {
                         $constraint->callback = $method->getName();
@@ -85,11 +77,11 @@ class AnnotationLoader implements LoaderInterface
                         }
                     }
 
-                    $success = true;
+                    $loaded = true;
                 }
             }
         }
 
-        return $success;
+        return $loaded;
     }
 }

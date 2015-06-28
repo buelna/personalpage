@@ -30,12 +30,11 @@ class RequestHelper extends Helper
      *
      * @param Request|RequestStack $requestStack A RequestStack instance or a Request instance
      *
-     * @deprecated since version 2.5, passing a Request instance is deprecated and support for it will be removed in 3.0.
+     * @deprecated since 2.5, passing a Request instance is deprecated and support for it will be removed in 3.0
      */
     public function __construct($requestStack)
     {
         if ($requestStack instanceof Request) {
-            @trigger_error('Since version 2.5, passing a Request instance into the '.__METHOD__.' is deprecated and support for it will be removed in 3.0. Inject a Symfony\Component\HttpFoundation\RequestStack instance instead.', E_USER_DEPRECATED);
             $this->request = $requestStack;
         } elseif ($requestStack instanceof RequestStack) {
             $this->requestStack = $requestStack;
@@ -52,7 +51,7 @@ class RequestHelper extends Helper
      *
      * @return mixed
      *
-     * @see Request::get()
+     * @see Symfony\Component\HttpFoundation\Request::get()
      */
     public function getParameter($key, $default = null)
     {
@@ -60,7 +59,7 @@ class RequestHelper extends Helper
     }
 
     /**
-     * Returns the locale.
+     * Returns the locale
      *
      * @return string
      */
@@ -83,7 +82,9 @@ class RequestHelper extends Helper
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the canonical name of this helper.
+     *
+     * @return string The canonical name
      */
     public function getName()
     {

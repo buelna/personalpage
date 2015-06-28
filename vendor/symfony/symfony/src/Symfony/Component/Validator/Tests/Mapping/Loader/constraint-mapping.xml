@@ -103,10 +103,10 @@
       <constraint name="NotNull" />
     </getter>
     <getter property="valid">
-      <constraint name="IsTrue" />
+      <constraint name="True" />
     </getter>
     <getter property="permissions">
-      <constraint name="IsTrue" />
+      <constraint name="True" />
     </getter>
   </class>
 

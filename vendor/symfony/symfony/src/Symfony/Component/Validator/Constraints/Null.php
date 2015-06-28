@@ -11,7 +11,7 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-@trigger_error('The '.__NAMESPACE__.'\Null class is deprecated since version 2.7 and will be removed in 3.0. Use the IsNull class in the same namespace instead.', E_USER_DEPRECATED);
+use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
@@ -19,8 +19,9 @@ namespace Symfony\Component\Validator\Constraints;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  *
- * @deprecated since version 2.7, to be removed in 3.0. Use IsNull instead.
+ * @api
  */
-class Null extends IsNull
+class Null extends Constraint
 {
+    public $message = 'This value should be null.';
 }
