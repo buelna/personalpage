@@ -12,20 +12,22 @@ class MiembrosController extends Controller
 		$miembros = $em->getRepository('PersonalPageProyectosBundle:Miembro')->findAll();
 		return $this->render('PersonalPageProyectosBundle:Default:Catalogo.html.twig',array('miembros' => $miembros));
 	}
-	public function AreasAction($id)//carga la pagina personal del miembro en la vista de areas de interes
+	public function AreasAction($id,Request $request)//carga la pagina personal del miembro en la vista de areas de interes
 	{
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'caii.itmexicali.edu.mx/'.locale_get_default().'/'.$id.'/info/json/');
+		$ch = curl_init(); 
+        $localeLang = $request->attributes->get('_locale', $request->getLocale());
+		curl_setopt($ch, CURLOPT_URL, 'caii.itmexicali.edu.mx/'.$localeLang.'/'.$id.'/info/json/');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$response = curl_exec($ch);
 		$data = (Array)json_decode($response);
 		return $this->render('PersonalPageProyectosBundle:Default:Areas.html.twig',array('miembro' => $data));
 	}
-	public function ProyectosAction($id)//carga la pagina personal del miembro en la vista de proyectos
+	public function ProyectosAction($id,Request $request)//carga la pagina personal del miembro en la vista de proyectos
 	{
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'caii.itmexicali.edu.mx/'.locale_get_default().'/'.$id.'/proyectos/json/');
+        $localeLang = $request->attributes->get('_locale', $request->getLocale());
+		curl_setopt($ch, CURLOPT_URL, 'caii.itmexicali.edu.mx/'.$localeLang.'/'.$id.'/proyectos/json/');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$response = curl_exec($ch);
