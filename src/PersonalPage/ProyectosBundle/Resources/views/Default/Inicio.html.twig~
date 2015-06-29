@@ -1,6 +1,0 @@
-{# src/PersonalPage/ProyectosBundle/Resources/views/Default/Inicio.html.twig #}
-{% extends '::base.html.twig' %}
-{% block Imagen %}aqui va una imagen{% endblock %}
-{% block Informacion %}aqui va la informacion basica{% endblock %}
-{% block Menu %}aqui va el menu{% endblock %}
-{% block Contenido %}aqui va el contenido{% endblock %}
